@@ -1,0 +1,8 @@
+[2024-02-18 16:07:04] local.ERROR: Illuminate\Filesystem\Filesystem::requireOnce(): Failed opening required '/home/u508442757/domains/tndphpm.com/public_html/admportal/database/migrations/2024_02_18_151344_add_column_table_configuration.php' (include_path='.:/opt/alt/php74/usr/share/pear') {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Illuminate\\Filesystem\\Filesystem::requireOnce(): Failed opening required '/home/u508442757/domains/tndphpm.com/public_html/admportal/database/migrations/2024_02_18_151344_add_column_table_configuration.php' (include_path='.:/opt/alt/php74/usr/share/pear') at /home/u508442757/domains/tndphpm.com/public_html/admportal/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:98)
+[stacktrace]
+#0 {main}
+"} 
+[2024-02-18 16:07:51] local.ERROR: Illuminate\Filesystem\Filesystem::requireOnce(): Failed opening required '/home/u508442757/domains/tndphpm.com/public_html/admportal//database/migrations/2024_02_18_151344_add_column_table_configuration.php' (include_path='.:/opt/alt/php74/usr/share/pear') {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Illuminate\\Filesystem\\Filesystem::requireOnce(): Failed opening required '/home/u508442757/domains/tndphpm.com/public_html/admportal//database/migrations/2024_02_18_151344_add_column_table_configuration.php' (include_path='.:/opt/alt/php74/usr/share/pear') at /home/u508442757/domains/tndphpm.com/public_html/admportal/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:98)
+[stacktrace]
+#0 {main}
+"} 
