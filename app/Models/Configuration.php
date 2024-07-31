@@ -32,6 +32,12 @@ class Configuration extends Model
         'homepage_banner_five_status',
         'mini_banner_one_status',
         'mini_banner_two_status',
+        'header_logo_one',
+        'header_logo_two',
+        'header_logo_three',
+        'header_logo_four',
+        'header_logo_five',
+        'header_logo_six',
        
     ];
 

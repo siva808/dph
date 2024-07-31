@@ -196,6 +196,15 @@ class ConfigurationController extends Controller
         } else {
             $input['homepage_banner_five'] = $notification->homepage_banner_five;
         }
+
+        if($request->hasFile('header_logo_one') && $file = $request->file('header_logo_one')) {
+            if($file->isValid()) {
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $input['header_logo_one'] = $storedFileArray['stored_file_path'] ?? '';
+            }
+        } else {
+            $input['header_logo_one'] = $notification->header_logo_one;
+        }
          
         $result = $notification->update($input);
 
@@ -240,7 +249,13 @@ class ConfigurationController extends Controller
         $rules['homepage_banner_three'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
         $rules['homepage_banner_four'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
         $rules['homepage_banner_five'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
-
+        $rules['header_logo_one'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
+        $rules['header_logo_two'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
+        $rules['header_logo_three'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
+        $rules['header_logo_four'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
+        $rules['header_logo_five'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
+        $rules['header_logo_six'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
+        
         return $rules;
     }
 
