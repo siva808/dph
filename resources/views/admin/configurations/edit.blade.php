@@ -18,11 +18,11 @@
             </div>
         </div>
 
-         @if ($errors->any())
-      <div class="row">
-        <div class="col-md-12">
-            <div class="card card-body">
-                
+        @if ($errors->any())
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body">
+
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -30,47 +30,503 @@
                             @endforeach
                         </ul>
                     </div>
-               
+
+                </div>
             </div>
         </div>
-     </div>
-      @endif
+        @endif
         <div class="row">
 
             <div class="col-md-12">
 
-                <form action="{{ url('configurations/update/'.$result->id) }}" enctype="multipart/form-data" method="post">
-                {{ csrf_field() }}
+                <form action="{{ url('configurations/update/'.$result->id) }}" enctype="multipart/form-data"
+                    method="post">
+                    {{ csrf_field() }}
+
+
+
 
                     <!-- Card Section 1 -->
                     <div class="card">
                         <div class="card-header alert-info">
-                            <h4 class="m-b-0 font-weight-normal">Scroller Notification Settings</h4>
+                            <h4 class="m-b-0 font-weight-normal">DPH Header Texts Settings</h4>
                         </div>
-                        <div class="card-body">                        
-                                
-                                <!-- Scroller Notification Content -->
-                                <div class="form-group">
-                                    <label for="notification_content">Scroller Notification Content</label>
-                                    <textarea name="notification_content" class="form-control" id="notification_content" placeholder="Enter Notification Content" rows="5">{{ old('notification_content', $result->notification_content) }}</textarea>
-                                </div>
-
-                                <!-- Scroller Notification Status -->
+                        <div class="card-body">
+                            <!-- DPH Header Texts -->
+                            <form>
                                 <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="notification_status" class="required">Scroller Notification Status</label>
-                                        <select name="notification_status" id="notification_status" class="form-control">
-                                            <option value="1" {{ old("notification_status", $result->notification_status) == '1' ? 'selected' : '' }}>Active</option>
-                                            <option value="0" {{ old("notification_status", $result->notification_status) == '0' ? 'selected' : '' }}>In-Active</option>
-                                        </select>
+                                    <div class="form-group col-md-6">
+                                        <label for="address">TamilNadu Arasu title (Tamil)</label>
+                                        <input type="text" class="form-control" id="TNGovtnametamil"
+                                            placeholder="Tamil Text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="country">TamilNadu Arasu title (English)</label>
+                                        <input type="text" class="form-control" id="TNGovtnameEnglish"
+                                            placeholder="English Text">
                                     </div>
                                 </div>
-
-                            
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="apartment">DPH Full Form (Tamil)</label>
+                                        <input type="text" class="form-control" id="DPHfullformtamil"
+                                            placeholder="Tamil Text">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="postal_code">DPH full form (English)</label>
+                                        <input type="text" class="form-control" id="DPHfullformenglish"
+                                            placeholder="English Text">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
+
+                    <!-- home page logo's -->
+
                     <!-- Card Section 2 -->
+                    <div class="card">
+                        <div class="card-header alert-info">
+                            <h4 class="m-b-0 font-weight-normal">Homepage Header Logo Settings</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:50%;">Title</th>
+                                            <th style="width:40%;">Image Upload</th>
+                                            <th style="width:10%;">Image</th>
+                                            <th style="width:10%;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_Logo_one_title">Logo 1 Title</label>
+                                                <input type="text" name="homepage_Logo_one_title"
+                                                    id="homepage_Logo_one_title" class="form-control"
+                                                    value="{{ old('homepage_Logo_one_title', $result->homepage_Logo_one_title) }}"
+                                                    placeholder="Enter Logo One Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_Logo_one">Logo 1</label>
+                                                <input type="file" name="homepage_banner_one" id="homepage_Logo_one"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_Logo_one)
+                                                <img src="{{ fileLink($result->homepage_Logo_one) }}" alt="Logo One"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Logo Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_Logo_one_status"
+                                                    id="homepage_Logo_one_status" value="1"
+                                                    {{CHECKBOX('homepage_Logo_one_status',
+                                                    $result->homepage_Logo_one_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <!-- Repeat the structure for logo 2, 3, 4, 5 and 6 -->
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_Logo_two_title">Logo 2 Title</label>
+                                                <input type="text" name="homepage_Logo_two_title"
+                                                    id="homepage_Logo_two_title" class="form-control"
+                                                    value="{{ old('homepage_Logo_two_title', $result->homepage_Logo_two_title) }}"
+                                                    placeholder="Enter Logo Two Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_Logo_two">Logo 2</label>
+                                                <input type="file" name="homepage_Logo_two" id="homepage_Logo_two"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_Logo_two)
+                                                <img src="{{ fileLink($result->homepage_Logo_two) }}" alt="Logo Two"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Logo Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_Logo_two_status"
+                                                    id="homepage_Logo_two_status" value="1"
+                                                    {{CHECKBOX('homepage_Logo_two_status',
+                                                    $result->homepage_Logo_two_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_Logo_three_title">Logo 3 Title</label>
+                                                <input type="text" name="homepage_Logo_three_title"
+                                                    id="homepage_Logo_three_title" class="form-control"
+                                                    value="{{ old('homepage_Logo_three_title', $result->homepage_Logo_three_title) }}"
+                                                    placeholder="Enter Logo Three Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_Logo_three">Logo 3</label>
+                                                <input type="file" name="homepage_Logo_three" id="homepage_Logo_three"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_Logo_three)
+                                                <img src="{{ fileLink($result->homepage_Logo_three) }}" alt="Logo Three"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Logo Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_Logo_three_status"
+                                                    id="homepage_Logo_three_status" value="1"
+                                                    {{CHECKBOX('homepage_Logo_three_status',
+                                                    $result->homepage_Logo_three_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <!-- logo 4 -->
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_Logo_four_title">Logo 4 Title</label>
+                                                <input type="text" name="homepage_Logo_four_title"
+                                                    id="homepage_Logo_four_title" class="form-control"
+                                                    value="{{ old('homepage_Logo_four_title', $result->homepage_Logo_four_title) }}"
+                                                    placeholder="Enter Logo Four Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_Logo_four">Logo 4</label>
+                                                <input type="file" name="homepage_Logo_four" id="homepage_Logo_four"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_Logo_four)
+                                                <img src="{{ fileLink($result->homepage_Logo_four) }}" alt="Logo Four"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Logo Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_Logo_four_status"
+                                                    id="homepage_Logo_four_status" value="1"
+                                                    {{CHECKBOX('homepage_Logo_four_status',
+                                                    $result->homepage_Logo_four_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <!-- logo 5 -->
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_Logo_five_title">Logo 5 Title</label>
+                                                <input type="text" name="homepage_Logo_five_title"
+                                                    id="homepage_Logo_five_title" class="form-control"
+                                                    value="{{ old('homepage_Logo_five_title', $result->homepage_Logo_five_title) }}"
+                                                    placeholder="Enter Logo Five Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_Logo_five">Banner 5</label>
+                                                <input type="file" name="homepage_Logo_five" id="homepage_Logo_five"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_Logo_five)
+                                                <img src="{{ fileLink($result->homepage_Logo_five) }}" alt="Logo Five"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Logo Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_Logo_five_status"
+                                                    id="homepage_Logo_five_status" value="1"
+                                                    {{CHECKBOX('homepage_Logo_five_status',
+                                                    $result->homepage_Logo_five_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <!-- logo 6 -->
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_Logo_six_title">Logo 6 Title</label>
+                                                <input type="text" name="homepage_Logo_six_title"
+                                                    id="homepage_Logo_six_title" class="form-control"
+                                                    value="{{ old('homepage_Logo_six_title', $result->homepage_Logo_six_title) }}"
+                                                    placeholder="Enter Logo six Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_Logo_six">Banner 6</label>
+                                                <input type="file" name="homepage_Logo_six" id="homepage_Logo_six"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_Logo_six)
+                                                <img src="{{ fileLink($result->homepage_Logo_six) }}" alt="Logo six"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Logo Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_Logo_six_status"
+                                                    id="homepage_Logo_six_status" value="1"
+                                                    {{CHECKBOX('homepage_Logo_six_status',
+                                                    $result->homepage_Logo_six_status)}} >
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- home page logo's end -->
+
+                    <!-- Card Section 3 -->
+                    <div class="card">
+                        <div class="card-header alert-info">
+                            <h4 class="m-b-0 font-weight-normal">Scroller Notification Settings</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <!-- Scroller Notification Content -->
+                            <div class="form-group">
+                                <label for="notification_content">Scroller Notification Content</label>
+                                <textarea name="notification_content" class="form-control" id="notification_content"
+                                    placeholder="Enter Notification Content"
+                                    rows="5">{{ old('notification_content', $result->notification_content) }}</textarea>
+                            </div>
+
+                            <!-- Scroller Notification Status -->
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="notification_status" class="required">Scroller Notification
+                                        Status</label>
+                                    <select name="notification_status" id="notification_status" class="form-control">
+                                        <option value="1" {{ old("notification_status", $result->notification_status) ==
+                                            '1' ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ old("notification_status", $result->notification_status) ==
+                                            '0' ? 'selected' : '' }}>In-Active</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <!-- Card Section 4 -->
+                    <div class="card">
+                        <div class="card-header alert-info">
+                            <h4 class="m-b-0 font-weight-normal">Homepage Banner Settings</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:50%;">Title</th>
+                                            <th style="width:40%;">Image Upload</th>
+                                            <th style="width:10%;">Image</th>
+                                            <th style="width:10%;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_banner_one_title">Banner 1 Title</label>
+                                                <input type="text" name="homepage_banner_one_title"
+                                                    id="homepage_banner_one_title" class="form-control"
+                                                    value="{{ old('homepage_banner_one_title', $result->homepage_banner_one_title) }}"
+                                                    placeholder="Enter Banner One Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_banner_one">Banner 1</label>
+                                                <input type="file" name="homepage_banner_one" id="homepage_banner_one"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_banner_one)
+                                                <img src="{{ fileLink($result->homepage_banner_one) }}" alt="Banner One"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Banner Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_banner_one_status"
+                                                    id="homepage_banner_one_status" value="1"
+                                                    {{CHECKBOX('homepage_banner_one_status',
+                                                    $result->homepage_banner_one_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <!-- Repeat the structure for banners 2, 3, 4, and 5 -->
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_banner_two_title">Banner 2 Title</label>
+                                                <input type="text" name="homepage_banner_two_title"
+                                                    id="homepage_banner_two_title" class="form-control"
+                                                    value="{{ old('homepage_banner_two_title', $result->homepage_banner_two_title) }}"
+                                                    placeholder="Enter Banner Two Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_banner_two">Banner 2</label>
+                                                <input type="file" name="homepage_banner_two" id="homepage_banner_two"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_banner_two)
+                                                <img src="{{ fileLink($result->homepage_banner_two) }}" alt="Banner Two"
+                                                    class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Banner Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_banner_two_status"
+                                                    id="homepage_banner_two_status" value="1"
+                                                    {{CHECKBOX('homepage_banner_two_status',
+                                                    $result->homepage_banner_two_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_banner_three_title">Banner 3 Title</label>
+                                                <input type="text" name="homepage_banner_three_title"
+                                                    id="homepage_banner_three_title" class="form-control"
+                                                    value="{{ old('homepage_banner_three_title', $result->homepage_banner_three_title) }}"
+                                                    placeholder="Enter Banner Three Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_banner_three">Banner 3</label>
+                                                <input type="file" name="homepage_banner_three"
+                                                    id="homepage_banner_three" class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_banner_three)
+                                                <img src="{{ fileLink($result->homepage_banner_three) }}"
+                                                    alt="Banner Three" class="img-thumbnail"
+                                                    style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Banner Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_banner_three_status"
+                                                    id="homepage_banner_three_status" value="1"
+                                                    {{CHECKBOX('homepage_banner_three_status',
+                                                    $result->homepage_banner_three_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <!-- Banner 4 -->
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_banner_four_title">Banner 4 Title</label>
+                                                <input type="text" name="homepage_banner_four_title"
+                                                    id="homepage_banner_four_title" class="form-control"
+                                                    value="{{ old('homepage_banner_four_title', $result->homepage_banner_four_title) }}"
+                                                    placeholder="Enter Banner Four Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_banner_four">Banner 4</label>
+                                                <input type="file" name="homepage_banner_four" id="homepage_banner_four"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_banner_four)
+                                                <img src="{{ fileLink($result->homepage_banner_four) }}"
+                                                    alt="Banner Four" class="img-thumbnail"
+                                                    style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Banner Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_banner_four_status"
+                                                    id="homepage_banner_four_status" value="1"
+                                                    {{CHECKBOX('homepage_banner_four_status',
+                                                    $result->homepage_banner_four_status)}} >
+                                            </td>
+                                        </tr>
+
+                                        <!-- Banner 5 -->
+                                        <tr>
+                                            <td>
+                                                <label for="homepage_banner_five_title">Banner 5 Title</label>
+                                                <input type="text" name="homepage_banner_five_title"
+                                                    id="homepage_banner_five_title" class="form-control"
+                                                    value="{{ old('homepage_banner_five_title', $result->homepage_banner_five_title) }}"
+                                                    placeholder="Enter Banner Five Title">
+                                            </td>
+                                            <td>
+                                                <label for="homepage_banner_five">Banner 5</label>
+                                                <input type="file" name="homepage_banner_five" id="homepage_banner_five"
+                                                    class="form-control">
+                                                <small class="form-control-feedback text-danger"> Accepted
+                                                    .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            </td>
+                                            <td>
+                                                @if($result->homepage_banner_five)
+                                                <img src="{{ fileLink($result->homepage_banner_five) }}"
+                                                    alt="Banner Five" class="img-thumbnail"
+                                                    style="max-width: 200px; max-height: 200px;">
+                                                @else
+                                                No Banner Available
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="homepage_banner_five_status"
+                                                    id="homepage_banner_five_status" value="1"
+                                                    {{CHECKBOX('homepage_banner_five_status',
+                                                    $result->homepage_banner_five_status)}} >
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Card Section 5 -->
                     <div class="card">
                         <div class="card-header alert-info">
                             <h4 class="m-b-0 font-weight-normal">Announcement Banner Settings</h4>
@@ -91,22 +547,32 @@
                                     <tr>
                                         <td>
                                             <label for="mini_banner_one_title">Announcement Banner One Title</label>
-                                            <input type="text" name="mini_banner_one_title" id="mini_banner_one_title" class="form-control" value="{{ old('mini_banner_one_title', $result->mini_banner_one_title) }}" placeholder="Enter Banner One Title">
+                                            <input type="text" name="mini_banner_one_title" id="mini_banner_one_title"
+                                                class="form-control"
+                                                value="{{ old('mini_banner_one_title', $result->mini_banner_one_title) }}"
+                                                placeholder="Enter Banner One Title">
                                         </td>
                                         <td>
                                             <label for="mini_banner_one">Announcement Banner One</label>
-                                            <input type="file" name="mini_banner_one" id="mini_banner_one" class="form-control">
-                                            <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            <input type="file" name="mini_banner_one" id="mini_banner_one"
+                                                class="form-control">
+                                            <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png
+                                                format & allowed max size is 5MB </small>
                                         </td>
                                         <td>
                                             @if($result->mini_banner_one)
-                                                <img src="{{ fileLink($result->mini_banner_one) }}" alt="Announcement Banner One" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                            <img src="{{ fileLink($result->mini_banner_one) }}"
+                                                alt="Announcement Banner One" class="img-thumbnail"
+                                                style="max-width: 200px; max-height: 200px;">
                                             @else
-                                                No Banner Available
+                                            No Banner Available
                                             @endif
                                         </td>
                                         <td>
-                                            <input type="checkbox"  name="mini_banner_one_status" id="mini_banner_one_status" value="1" {{CHECKBOX('mini_banner_one_status', $result->mini_banner_one_status)}} >
+                                            <input type="checkbox" name="mini_banner_one_status"
+                                                id="mini_banner_one_status" value="1"
+                                                {{CHECKBOX('mini_banner_one_status', $result->mini_banner_one_status)}}
+                                            >
                                         </td>
                                     </tr>
 
@@ -114,174 +580,109 @@
                                     <tr>
                                         <td>
                                             <label for="mini_banner_two_title">Announcement Banner Two Title</label>
-                                            <input type="text" name="mini_banner_two_title" id="mini_banner_two_title" class="form-control" value="{{ old('mini_banner_two_title', $result->mini_banner_two_title) }}" placeholder="Enter Banner Two Title">
+                                            <input type="text" name="mini_banner_two_title" id="mini_banner_two_title"
+                                                class="form-control"
+                                                value="{{ old('mini_banner_two_title', $result->mini_banner_two_title) }}"
+                                                placeholder="Enter Banner Two Title">
                                         </td>
                                         <td>
                                             <label for="mini_banner_two">Announcement Banner Two</label>
-                                            <input type="file" name="mini_banner_two" id="mini_banner_two" class="form-control">
-                                            <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png format & allowed max size is 5MB </small>
+                                            <input type="file" name="mini_banner_two" id="mini_banner_two"
+                                                class="form-control">
+                                            <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png
+                                                format & allowed max size is 5MB </small>
                                         </td>
                                         <td>
                                             @if($result->mini_banner_two)
-                                                <img src="{{ fileLink($result->mini_banner_two) }}" alt="Announcement Banner Two" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                            <img src="{{ fileLink($result->mini_banner_two) }}"
+                                                alt="Announcement Banner Two" class="img-thumbnail"
+                                                style="max-width: 200px; max-height: 200px;">
                                             @else
-                                                No Banner Available
+                                            No Banner Available
                                             @endif
                                         </td>
                                         <td>
-                                            <input type="checkbox"  name="mini_banner_two_status" id="mini_banner_two_status" value="1" {{CHECKBOX('mini_banner_two_status', $result->mini_banner_two_status)}} >
+                                            <input type="checkbox" name="mini_banner_two_status"
+                                                id="mini_banner_two_status" value="1"
+                                                {{CHECKBOX('mini_banner_two_status', $result->mini_banner_two_status)}}
+                                            >
                                         </td>
-                                    </tr>  
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
 
-                    <!-- Card Section 3 -->
+
+                    <!-- Card Section 6 -->
                     <div class="card">
                         <div class="card-header alert-info">
-                            <h4 class="m-b-0 font-weight-normal">Homepage Banner Settings</h4>
+                            <h4 class="m-b-0 font-weight-normal">Office Address Settings</h4>
                         </div>
-
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                        <th style="width:50%;">Title</th>
-                                        <th style="width:40%;">Image Upload</th>
-                                        <th style="width:10%;">Image</th>
-                                        <th style="width:10%;">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <label for="homepage_banner_one_title">Banner 1 Title</label>
-                                                <input type="text" name="homepage_banner_one_title" id="homepage_banner_one_title" class="form-control" value="{{ old('homepage_banner_one_title', $result->homepage_banner_one_title) }}" placeholder="Enter Banner One Title">
-                                            </td>
-                                            <td>
-                                                <label for="homepage_banner_one">Banner 1</label>
-                                                <input type="file" name="homepage_banner_one" id="homepage_banner_one" class="form-control">
-                                                <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png format & allowed max size is 5MB </small>
-                                            </td>
-                                            <td>
-                                                @if($result->homepage_banner_one)
-                                                    <img src="{{ fileLink($result->homepage_banner_one) }}" alt="Banner One" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-                                                @else
-                                                    No Banner Available
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <input type="checkbox"  name="homepage_banner_one_status" id="homepage_banner_one_status" value="1" {{CHECKBOX('homepage_banner_one_status', $result->homepage_banner_one_status)}} >
-                                            </td>
-                                        </tr>
-
-                                        <!-- Repeat the structure for banners 2, 3, 4, and 5 -->
-                                        <tr>
-                                            <td>
-                                                <label for="homepage_banner_two_title">Banner 2 Title</label>
-                                                <input type="text" name="homepage_banner_two_title" id="homepage_banner_two_title" class="form-control" value="{{ old('homepage_banner_two_title', $result->homepage_banner_two_title) }}" placeholder="Enter Banner Two Title">
-                                            </td>
-                                            <td>
-                                                <label for="homepage_banner_two">Banner 2</label>
-                                                <input type="file" name="homepage_banner_two" id="homepage_banner_two" class="form-control">
-                                                <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png format & allowed max size is 5MB </small>
-                                            </td>
-                                            <td>
-                                                @if($result->homepage_banner_two)
-                                                    <img src="{{ fileLink($result->homepage_banner_two) }}" alt="Banner Two" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-                                                @else
-                                                    No Banner Available
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <input type="checkbox"  name="homepage_banner_two_status" id="homepage_banner_two_status" value="1" {{CHECKBOX('homepage_banner_two_status', $result->homepage_banner_two_status)}} >
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <label for="homepage_banner_three_title">Banner 3 Title</label>
-                                                <input type="text" name="homepage_banner_three_title" id="homepage_banner_three_title" class="form-control" value="{{ old('homepage_banner_three_title', $result->homepage_banner_three_title) }}" placeholder="Enter Banner Three Title">
-                                            </td>
-                                            <td>
-                                                <label for="homepage_banner_three">Banner 3</label>
-                                                <input type="file" name="homepage_banner_three" id="homepage_banner_three" class="form-control">
-                                                <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png format & allowed max size is 5MB </small>
-                                            </td>
-                                            <td>
-                                                @if($result->homepage_banner_three)
-                                                    <img src="{{ fileLink($result->homepage_banner_three) }}" alt="Banner Three" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-                                                @else
-                                                    No Banner Available
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <input type="checkbox"  name="homepage_banner_three_status" id="homepage_banner_three_status" value="1" {{CHECKBOX('homepage_banner_three_status', $result->homepage_banner_three_status)}} >
-                                            </td>
-                                        </tr>
-
-                                        <!-- Banner 4 -->
-                                        <tr>
-                                            <td>
-                                                <label for="homepage_banner_four_title">Banner 4 Title</label>
-                                                <input type="text" name="homepage_banner_four_title" id="homepage_banner_four_title" class="form-control" value="{{ old('homepage_banner_four_title', $result->homepage_banner_four_title) }}" placeholder="Enter Banner Four Title">
-                                            </td>
-                                            <td>
-                                                <label for="homepage_banner_four">Banner 4</label>
-                                                <input type="file" name="homepage_banner_four" id="homepage_banner_four" class="form-control">
-                                                <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png format & allowed max size is 5MB </small>
-                                            </td>
-                                            <td>
-                                                @if($result->homepage_banner_four)
-                                                    <img src="{{ fileLink($result->homepage_banner_four) }}" alt="Banner Four" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-                                                @else
-                                                    No Banner Available
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <input type="checkbox"  name="homepage_banner_four_status" id="homepage_banner_four_status" value="1" {{CHECKBOX('homepage_banner_four_status', $result->homepage_banner_four_status)}} >
-                                            </td>
-                                        </tr>
-
-                                        <!-- Banner 5 -->
-                                        <tr>
-                                            <td>
-                                                <label for="homepage_banner_five_title">Banner 5 Title</label>
-                                                <input type="text" name="homepage_banner_five_title" id="homepage_banner_five_title" class="form-control" value="{{ old('homepage_banner_five_title', $result->homepage_banner_five_title) }}" placeholder="Enter Banner Five Title">
-                                            </td>
-                                            <td>
-                                                <label for="homepage_banner_five">Banner 5</label>
-                                                <input type="file" name="homepage_banner_five" id="homepage_banner_five" class="form-control">
-                                                <small class="form-control-feedback text-danger"> Accepted .jpg/.jpeg/.png format & allowed max size is 5MB </small>
-                                            </td>
-                                            <td>
-                                                @if($result->homepage_banner_five)
-                                                    <img src="{{ fileLink($result->homepage_banner_five) }}" alt="Banner Five" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
-                                                @else
-                                                    No Banner Available
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <input type="checkbox"  name="homepage_banner_five_status" id="homepage_banner_five_status" value="1" {{CHECKBOX('homepage_banner_five_status', $result->homepage_banner_five_status)}} >
-                                            </td>
-                                        </tr>
-
-
-                                    </tbody>
-                                </table>
+                            <div class="text-center mb-4">
+                                <h4>Directorate of Public Health and Preventive Medicine</h4>
                             </div>
+                            <!-- DPH office Address -->
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" id="address" placeholder="Address">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="postal_code">Zip/Postal Code</label>
+                                        <input type="text" class="form-control" id="postal_code"
+                                            placeholder="Zip/Postal Code">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" id="city" placeholder="City">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="state">State</label>
+                                        <input type="text" class="form-control" id="state" placeholder="State">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" class="form-control" id="phone" placeholder="Phone">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Web Information Manager, Joint Director-HEB -->
+                        <div class="card-body">
+                            <div class="text-center mb-4">
+                                <h4>Web Information Manager, Joint Director-HEB</h4>
+                            </div>
+                            <!-- Scroller Notification Content -->
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="address">Email</label>
+                                        <input type="email" class="form-control" id="address" placeholder="Address">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="country">Phone</label>
+                                        <input type="text" class="form-control" id="country" placeholder="Country">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
 
-
-
                     <!-- Common Action Buttons -->
                     <div class="mt-3 float-right">
-                        <button type="submit" class="btn btn-success waves-effect waves-light"><i class="fa fa-check"></i> Save</button>
+                        <button type="submit" class="btn btn-success waves-effect waves-light"><i
+                                class="fa fa-check"></i> Save</button>
                     </div>
                 </form>
             </div>
