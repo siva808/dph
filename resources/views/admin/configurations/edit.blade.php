@@ -53,32 +53,30 @@
                         </div>
                         <div class="card-body">
                             <!-- DPH Header Texts -->
-                            <form>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="address">TamilNadu Arasu title (Tamil)</label>
-                                        <input type="text" class="form-control" id="TNGovtnametamil"
+                                        <input type="text" class="form-control" id="TNGovtnametamil" value="{{ old('tamilnadu_government_title_tamil', $result->tamilnadu_government_title_tamil) }}" name="tamilnadu_government_title_tamil"
                                             placeholder="Tamil Text">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="country">TamilNadu Arasu title (English)</label>
-                                        <input type="text" class="form-control" id="TNGovtnameEnglish"
+                                        <input type="text" class="form-control" id="TNGovtnameEnglish" value="{{ old('tamilnadu_government_title_english', $result->tamilnadu_government_title_english) }}" name="tamilnadu_government_title_english"
                                             placeholder="English Text">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="apartment">DPH Full Form (Tamil)</label>
-                                        <input type="text" class="form-control" id="DPHfullformtamil"
+                                        <input type="text" class="form-control" id="DPHfullformtamil" value="{{ old('dph_full_form_tamil', $result->dph_full_form_tamil) }}" name="dph_full_form_tamil"
                                             placeholder="Tamil Text">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="postal_code">DPH full form (English)</label>
-                                        <input type="text" class="form-control" id="DPHfullformenglish"
+                                        <input type="text" class="form-control" id="DPHfullformenglish" value="{{ old('dph_full_form_english', $result->dph_full_form_english) }}" name="dph_full_form_english"
                                             placeholder="English Text">
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
 
@@ -105,191 +103,191 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <label for="homepage_Logo_one_title">Logo 1 Title</label>
-                                                <input type="text" name="homepage_Logo_one_title"
-                                                    id="homepage_Logo_one_title" class="form-control"
-                                                    value="{{ old('homepage_Logo_one_title', $result->homepage_Logo_one_title) }}"
+                                                <label for="header_logo_one_title">Logo 1 Title</label>
+                                                <input type="text" name="header_logo_one_title"
+                                                    id="header_logo_one_title" class="form-control"
+                                                    value="{{ old('header_Logo_one_title', $result->header_logo_one_title) }}"
                                                     placeholder="Enter Logo One Title">
                                             </td>
                                             <td>
-                                                <label for="homepage_Logo_one">Logo 1</label>
-                                                <input type="file" name="homepage_banner_one" id="homepage_Logo_one"
+                                                <label for="header_logo_one">Logo 1</label>
+                                                <input type="file" name="header_logo_one" id="header_logo_one"
                                                     class="form-control">
                                                 <small class="form-control-feedback text-danger"> Accepted
                                                     .jpg/.jpeg/.png format & allowed max size is 5MB </small>
                                             </td>
                                             <td>
-                                                @if($result->homepage_Logo_one)
-                                                <img src="{{ fileLink($result->homepage_Logo_one) }}" alt="Logo One"
+                                                @if($result->header_logo_one)
+                                                <img src="{{ fileLink($result->header_logo_one) }}" alt="Logo One"
                                                     class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                                 @else
                                                 No Logo Available
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="homepage_Logo_one_status"
-                                                    id="homepage_Logo_one_status" value="1"
-                                                    {{CHECKBOX('homepage_Logo_one_status',
-                                                    $result->homepage_Logo_one_status)}} >
+                                                <input type="checkbox" name="header_logo_one_status"
+                                                    id="header_logo_one_status" value="1"
+                                                    {{CHECKBOX('header_logo_one_status',
+                                                    $result->header_logo_one_status)}} >
                                             </td>
                                         </tr>
 
                                         <!-- Repeat the structure for logo 2, 3, 4, 5 and 6 -->
                                         <tr>
                                             <td>
-                                                <label for="homepage_Logo_two_title">Logo 2 Title</label>
-                                                <input type="text" name="homepage_Logo_two_title"
-                                                    id="homepage_Logo_two_title" class="form-control"
-                                                    value="{{ old('homepage_Logo_two_title', $result->homepage_Logo_two_title) }}"
+                                                <label for="header_logo_two_title">Logo 2 Title</label>
+                                                <input type="text" name="header_logo_two_title"
+                                                    id="header_logo_two_title" class="form-control"
+                                                    value="{{ old('header_logo_two_title', $result->header_logo_two_title) }}"
                                                     placeholder="Enter Logo Two Title">
                                             </td>
                                             <td>
-                                                <label for="homepage_Logo_two">Logo 2</label>
-                                                <input type="file" name="homepage_Logo_two" id="homepage_Logo_two"
+                                                <label for="header_logo_two">Logo 2</label>
+                                                <input type="file" name="header_logo_two" id="header_logo_two"
                                                     class="form-control">
                                                 <small class="form-control-feedback text-danger"> Accepted
                                                     .jpg/.jpeg/.png format & allowed max size is 5MB </small>
                                             </td>
                                             <td>
-                                                @if($result->homepage_Logo_two)
-                                                <img src="{{ fileLink($result->homepage_Logo_two) }}" alt="Logo Two"
+                                                @if($result->header_logo_two)
+                                                <img src="{{ fileLink($result->header_logo_two) }}" alt="Logo Two"
                                                     class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                                 @else
                                                 No Logo Available
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="homepage_Logo_two_status"
-                                                    id="homepage_Logo_two_status" value="1"
-                                                    {{CHECKBOX('homepage_Logo_two_status',
-                                                    $result->homepage_Logo_two_status)}} >
+                                                <input type="checkbox" name="header_logo_two_status"
+                                                    id="header_Logo_two_status" value="1"
+                                                    {{CHECKBOX('header_logo_two_status',
+                                                    $result->header_logo_two_status)}} >
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>
-                                                <label for="homepage_Logo_three_title">Logo 3 Title</label>
-                                                <input type="text" name="homepage_Logo_three_title"
-                                                    id="homepage_Logo_three_title" class="form-control"
-                                                    value="{{ old('homepage_Logo_three_title', $result->homepage_Logo_three_title) }}"
+                                                <label for="header_Logo_three_title">Logo 3 Title</label>
+                                                <input type="text" name="header_logo_three_title"
+                                                    id="header_logo_three_title" class="form-control"
+                                                    value="{{ old('header_logo_three_title', $result->header_logo_three_title) }}"
                                                     placeholder="Enter Logo Three Title">
                                             </td>
                                             <td>
-                                                <label for="homepage_Logo_three">Logo 3</label>
-                                                <input type="file" name="homepage_Logo_three" id="homepage_Logo_three"
+                                                <label for="header_Logo_three">Logo 3</label>
+                                                <input type="file" name="header_logo_three" id="header_logo_three"
                                                     class="form-control">
                                                 <small class="form-control-feedback text-danger"> Accepted
                                                     .jpg/.jpeg/.png format & allowed max size is 5MB </small>
                                             </td>
                                             <td>
-                                                @if($result->homepage_Logo_three)
-                                                <img src="{{ fileLink($result->homepage_Logo_three) }}" alt="Logo Three"
+                                                @if($result->header_logo_three)
+                                                <img src="{{ fileLink($result->header_logo_three) }}" alt="Logo Three"
                                                     class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                                 @else
                                                 No Logo Available
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="homepage_Logo_three_status"
-                                                    id="homepage_Logo_three_status" value="1"
-                                                    {{CHECKBOX('homepage_Logo_three_status',
-                                                    $result->homepage_Logo_three_status)}} >
+                                                <input type="checkbox" name="header_logo_three_status"
+                                                    id="header_logo_three_status" value="1"
+                                                    {{CHECKBOX('header_logo_three_status',
+                                                    $result->header_logo_three_status)}} >
                                             </td>
                                         </tr>
 
                                         <!-- logo 4 -->
                                         <tr>
                                             <td>
-                                                <label for="homepage_Logo_four_title">Logo 4 Title</label>
-                                                <input type="text" name="homepage_Logo_four_title"
-                                                    id="homepage_Logo_four_title" class="form-control"
-                                                    value="{{ old('homepage_Logo_four_title', $result->homepage_Logo_four_title) }}"
+                                                <label for="header_Logo_four_title">Logo 4 Title</label>
+                                                <input type="text" name="header_logo_four_title"
+                                                    id="header_logo_four_title" class="form-control"
+                                                    value="{{ old('header_logo_four_title', $result->header_logo_four_title) }}"
                                                     placeholder="Enter Logo Four Title">
                                             </td>
                                             <td>
-                                                <label for="homepage_Logo_four">Logo 4</label>
-                                                <input type="file" name="homepage_Logo_four" id="homepage_Logo_four"
+                                                <label for="header_Logo_four">Logo 4</label>
+                                                <input type="file" name="header_logo_four" id="header_logo_four"
                                                     class="form-control">
                                                 <small class="form-control-feedback text-danger"> Accepted
                                                     .jpg/.jpeg/.png format & allowed max size is 5MB </small>
                                             </td>
                                             <td>
-                                                @if($result->homepage_Logo_four)
-                                                <img src="{{ fileLink($result->homepage_Logo_four) }}" alt="Logo Four"
+                                                @if($result->header_logo_four)
+                                                <img src="{{ fileLink($result->header_logo_four) }}" alt="Logo Four"
                                                     class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                                 @else
                                                 No Logo Available
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="homepage_Logo_four_status"
-                                                    id="homepage_Logo_four_status" value="1"
-                                                    {{CHECKBOX('homepage_Logo_four_status',
-                                                    $result->homepage_Logo_four_status)}} >
+                                                <input type="checkbox" name="header_logo_four_status"
+                                                    id="header_Logo_four_status" value="1"
+                                                    {{CHECKBOX('header_logo_four_status',
+                                                    $result->header_logo_four_status)}} >
                                             </td>
                                         </tr>
 
                                         <!-- logo 5 -->
                                         <tr>
                                             <td>
-                                                <label for="homepage_Logo_five_title">Logo 5 Title</label>
-                                                <input type="text" name="homepage_Logo_five_title"
-                                                    id="homepage_Logo_five_title" class="form-control"
-                                                    value="{{ old('homepage_Logo_five_title', $result->homepage_Logo_five_title) }}"
+                                                <label for="header_Logo_five_title">Logo 5 Title</label>
+                                                <input type="text" name="header_logo_five_title"
+                                                    id="header_Logo_five_title" class="form-control"
+                                                    value="{{ old('header_logo_five_title', $result->header_logo_five_title) }}"
                                                     placeholder="Enter Logo Five Title">
                                             </td>
                                             <td>
-                                                <label for="homepage_Logo_five">Banner 5</label>
-                                                <input type="file" name="homepage_Logo_five" id="homepage_Logo_five"
+                                                <label for="header_Logo_five">Banner 5</label>
+                                                <input type="file" name="header_logo_five" id="header_Logo_five"
                                                     class="form-control">
                                                 <small class="form-control-feedback text-danger"> Accepted
                                                     .jpg/.jpeg/.png format & allowed max size is 5MB </small>
                                             </td>
                                             <td>
-                                                @if($result->homepage_Logo_five)
-                                                <img src="{{ fileLink($result->homepage_Logo_five) }}" alt="Logo Five"
+                                                @if($result->header_logo_five)
+                                                <img src="{{ fileLink($result->header_logo_five) }}" alt="Logo Five"
                                                     class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                                 @else
                                                 No Logo Available
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="homepage_Logo_five_status"
-                                                    id="homepage_Logo_five_status" value="1"
-                                                    {{CHECKBOX('homepage_Logo_five_status',
-                                                    $result->homepage_Logo_five_status)}} >
+                                                <input type="checkbox" name="header_logo_five_status"
+                                                    id="header_Logo_five_status" value="1"
+                                                    {{CHECKBOX('header_logo_five_status',
+                                                    $result->header_logo_five_status)}} >
                                             </td>
                                         </tr>
 
                                         <!-- logo 6 -->
                                         <tr>
                                             <td>
-                                                <label for="homepage_Logo_six_title">Logo 6 Title</label>
-                                                <input type="text" name="homepage_Logo_six_title"
-                                                    id="homepage_Logo_six_title" class="form-control"
-                                                    value="{{ old('homepage_Logo_six_title', $result->homepage_Logo_six_title) }}"
+                                                <label for="header_Logo_six_title">Logo 6 Title</label>
+                                                <input type="text" name="header_logo_six_title"
+                                                    id="header_Logo_six_title" class="form-control"
+                                                    value="{{ old('header_logo_six_title', $result->header_logo_six_title) }}"
                                                     placeholder="Enter Logo six Title">
                                             </td>
                                             <td>
-                                                <label for="homepage_Logo_six">Banner 6</label>
-                                                <input type="file" name="homepage_Logo_six" id="homepage_Logo_six"
+                                                <label for="header_Logo_six">Banner 6</label>
+                                                <input type="file" name="header_logo_six" id="header_Logo_six"
                                                     class="form-control">
                                                 <small class="form-control-feedback text-danger"> Accepted
                                                     .jpg/.jpeg/.png format & allowed max size is 5MB </small>
                                             </td>
                                             <td>
-                                                @if($result->homepage_Logo_six)
-                                                <img src="{{ fileLink($result->homepage_Logo_six) }}" alt="Logo six"
+                                                @if($result->header_logo_six)
+                                                <img src="{{ fileLink($result->header_logo_six) }}" alt="Logo six"
                                                     class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                                 @else
                                                 No Logo Available
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="checkbox" name="homepage_Logo_six_status"
-                                                    id="homepage_Logo_six_status" value="1"
-                                                    {{CHECKBOX('homepage_Logo_six_status',
-                                                    $result->homepage_Logo_six_status)}} >
+                                                <input type="checkbox" name="header_logo_six_status"
+                                                    id="header_Logo_six_status" value="1"
+                                                    {{CHECKBOX('header_logo_six_status',
+                                                    $result->header_logo_six_status)}} >
                                             </td>
                                         </tr>
 
@@ -625,16 +623,15 @@
                                 <h4>Directorate of Public Health and Preventive Medicine</h4>
                             </div>
                             <!-- DPH office Address -->
-                            <form>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="address">Address</label>
-                                        <input type="text" class="form-control" id="address" placeholder="Address">
+                                        <input type="text" class="form-control" id="address" value="{{ old('dph_address', $result->dph_address) }}" name="dph_address" placeholder="Address">
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="postal_code">Zip/Postal Code</label>
-                                        <input type="text" class="form-control" id="postal_code"
+                                        <input type="text" class="form-control" id="postal_code" value="{{ old('dph_zip_code', $result->dph_zip_code) }}" name="dph_zip_code"
                                             placeholder="Zip/Postal Code">
                                     </div>
                                 </div>
@@ -642,41 +639,37 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="city">City</label>
-                                        <input type="text" class="form-control" id="city" placeholder="City">
+                                        <input type="text" class="form-control" id="city" value="{{ old('dph_city', $result->dph_city) }}" name="dph_city" placeholder="City">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="state">State</label>
-                                        <input type="text" class="form-control" id="state" placeholder="State">
+                                        <input type="text" class="form-control" id="state" value="{{ old('dph_state', $result->dph_state) }}" name="dph_state" placeholder="State">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="phone">Phone</label>
-                                        <input type="text" class="form-control" id="phone" placeholder="Phone">
+                                        <input type="text" class="form-control" id="phone" value="{{ old('dph_phone', $result->dph_phone) }}" name="dph_phone" placeholder="Phone Number">
                                     </div>
                                 </div>
-                            </form>
                         </div>
                         <!-- Web Information Manager, Joint Director-HEB -->
                         <div class="card-body">
                             <div class="text-center mb-4">
                                 <h4>Web Information Manager, Joint Director-HEB</h4>
                             </div>
-                            <!-- Scroller Notification Content -->
-                            <form>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="address">Email</label>
-                                        <input type="email" class="form-control" id="address" placeholder="Address">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" value="{{ old('joint_director_email', $result->joint_director_email) }}" name="joint_director_email" placeholder="Email Address">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="country">Phone</label>
-                                        <input type="text" class="form-control" id="country" placeholder="Country">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" class="form-control" id="phone" value="{{ old('joint_director_phone', $result->joint_director_phone) }}" name="joint_director_phone" placeholder="Phone Number">
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
 
 
                     <!-- Common Action Buttons -->

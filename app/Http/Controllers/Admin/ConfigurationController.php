@@ -131,6 +131,29 @@ class ConfigurationController extends Controller
                 'homepage_banner_five_status' => $request->homepage_banner_five_status ?? '0',
                 'mini_banner_one_status' => $request->mini_banner_one_status ?? '0',
                 'mini_banner_two_status' => $request->mini_banner_two_status ?? '0',
+                'header_logo_one_title' => $request->header_logo_one_title,
+                'header_logo_two_title' => $request->header_logo_two_title,
+                'header_logo_three_title' => $request->header_logo_three_title,
+                'header_logo_four_title' => $request->header_logo_four_title,
+                'header_logo_five_title' => $request->header_logo_five_title,
+                'header_logo_six_title' => $request->header_logo_six_title,
+                'header_logo_one_status' => $request->header_logo_one_status ?? '0',
+                'header_logo_two_status' => $request->header_logo_two_status ?? '0',
+                'header_logo_three_status' => $request->header_logo_three_status ?? '0',
+                'header_logo_four_status' => $request->header_logo_four_status ?? '0',
+                'header_logo_five_status' => $request->header_logo_five_status ?? '0',
+                'header_logo_six_status' => $request->header_logo_six_status ?? '0',
+                'tamilnadu_government_title_tamil' => $request->tamilnadu_government_title_tamil,
+                'tamilnadu_government_title_english' => $request->tamilnadu_government_title_english,
+                'dph_full_form_tamil' => $request->dph_full_form_tamil,
+                'dph_full_form_english' => $request->dph_full_form_english,
+                'dph_address' => $request->dph_address,
+                'dph_zip_code' => $request->dph_zip_code,
+                'dph_city' => $request->dph_city,
+                'dph_state' => $request->dph_state,
+                'dph_phone' => $request->dph_phone,
+                'joint_director_email' => $request->joint_director_email,
+                'joint_director_phone' => $request->joint_director_phone,
             ];
 
         if($request->hasFile('mini_banner_one') && $file = $request->file('mini_banner_one')) {
@@ -205,6 +228,51 @@ class ConfigurationController extends Controller
         } else {
             $input['header_logo_one'] = $notification->header_logo_one;
         }
+
+        if($request->hasFile('header_logo_two') && $file = $request->file('header_logo_two')) {
+            if($file->isValid()) {
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $input['header_logo_two'] = $storedFileArray['stored_file_path'] ?? '';
+            }
+        } else {
+            $input['header_logo_two'] = $notification->header_logo_one;
+        }
+
+        if($request->hasFile('header_logo_three') && $file = $request->file('header_logo_three')) {
+            if($file->isValid()) {
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $input['header_logo_three'] = $storedFileArray['stored_file_path'] ?? '';
+            }
+        } else {
+            $input['header_logo_three'] = $notification->header_logo_one;
+        }
+
+        if($request->hasFile('header_logo_four') && $file = $request->file('header_logo_four')) {
+            if($file->isValid()) {
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $input['header_logo_four'] = $storedFileArray['stored_file_path'] ?? '';
+            }
+        } else {
+            $input['header_logo_four'] = $notification->header_logo_one;
+        }
+
+        if($request->hasFile('header_logo_five') && $file = $request->file('header_logo_five')) {
+            if($file->isValid()) {
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $input['header_logo_five'] = $storedFileArray['stored_file_path'] ?? '';
+            }
+        } else {
+            $input['header_logo_five'] = $notification->header_logo_one;
+        }
+
+        if($request->hasFile('header_logo_six') && $file = $request->file('header_logo_six')) {
+            if($file->isValid()) {
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $input['header_logo_six'] = $storedFileArray['stored_file_path'] ?? '';
+            }
+        } else {
+            $input['header_logo_six'] = $notification->header_logo_one;
+        }
          
         $result = $notification->update($input);
 
@@ -255,6 +323,12 @@ class ConfigurationController extends Controller
         $rules['header_logo_four'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
         $rules['header_logo_five'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
         $rules['header_logo_six'] = 'sometimes|mimes:png,jpg,jpeg|max:1024*5';
+        $rules['header_logo_one_title'] = 'sometimes|nullable|min:3|max:100';
+        $rules['header_logo_two_title'] = 'sometimes|nullable|min:3|max:100';
+        $rules['header_logo_three_title'] = 'sometimes|nullable|min:3|max:100';
+        $rules['header_logo_four_title'] = 'sometimes|nullable|min:3|max:100';
+        $rules['header_logo_five_title'] = 'sometimes|nullable|min:3|max:100';
+        $rules['header_logo_six_title'] = 'sometimes|nullable|min:3|max:100';
         
         return $rules;
     }
