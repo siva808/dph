@@ -2,7 +2,7 @@
 
 
 function siteName() {	
-    return "TNDPHPM";
+    return "DPH-ADMIN";
 }
 
 function logo() {
