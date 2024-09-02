@@ -48,12 +48,12 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="testimonial_create.html">
+                                <a href={{url('/testimonials/create')}}>
                                     <span class="sub-item">Create</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="testimonial_list.html">
+                                <a href={{url('/testimonials')}}>
                                     <span class="sub-item">List</span>
                                 </a>
                             </li>

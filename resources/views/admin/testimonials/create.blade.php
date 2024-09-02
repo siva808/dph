@@ -1,109 +1,173 @@
 @extends('admin.layouts.layout')
-@section('title', 'Create Testimonial')
+@section('title', 'Create Director Message')
 @section('content')
 
-<head>
-    <link rel="stylesheet" href="{{asset('packa/theme/assets/node_modules/html5-editor/bootstrap-wysihtml5.css')}}"/>
-</head>
-   
-<div class="page-wrapper">
-   <div class="container-fluid">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Create Testimonial</h4>          
+    <head>
+        <link rel="stylesheet" href="{{ asset('packa/theme/assets/node_modules/html5-editor/bootstrap-wysihtml5.css') }}" />
+    </head>
+    <div class="container" style="margin-top: 90px;">
+        <div class="container-fluid p-2" style="background-color:#f2f2f2;">
+            <h5 style="margin-left: 20px;">Create Director Message</h5>
         </div>
+        <div class="container-fluid">
+            <div class="page-inner">
+                <!-- insert the contents Here start -->
 
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('testimonials.index')}}">Testimonial</a></li>
-                    <li class="breadcrumb-item active">Create Testimonial</li>
-                      
-                </ol>
-            </div>
-         </div>
+                <div class="container">
+                    <div class="row">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                            <form action="{{ route('testimonials.store') }}" enctype="multipart/form-data" method="post"
+                                id="myForm">
+                                {{ csrf_field() }}
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <!-- Name -->
+                                            <tr>
+                                                <td>
+                                                    <label for="name" class="form-label">Name <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" id="name"
+                                                        placeholder="Enter your name" name="name" required>
+                                                </td>
+                                            </tr>
 
-    </div>
+                                            <!-- Designation -->
+                                            <tr>
+                                                <td>
+                                                    <label for="designation" class="form-label">Designation <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" id="designation"
+                                                        name="designation" placeholder="Enter your designation" required>
+                                                </td>
+                                            </tr>
 
-      <div class="row">
-        <div class="col-md-12">
-            <div class="card card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                                            <!-- Content -->
+                                            <tr>
+                                                <td>
+                                                    <label for="content" class="form-label">Content <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <textarea class="textarea_editor form-control" style="width: 100%" name="content" id="content" rows="15"
+                                                        placeholder="Enter content here" required></textarea>
+                                                </td>
+                                            </tr>
 
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <form action="{{route('testimonials.store')}}" enctype="multipart/form-data" method="post">
-                        {{csrf_field()}}
+                                            <!-- Profile Image and Preview -->
+                                            <tr>
+                                                <td>
+                                                    <label for="profileImage" class="form-label">Profile Image <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" class="form-control" name="testimonial_image"
+                                                        id="profileImage" accept="image/*" required>
+                                                    <small style="color: red;">Accepted .jpg/.jpeg/.png format & allowed max
+                                                        size is 5MB</small>
+                                                </td>
+                                                <td>
+                                                    <img id="imagePreview" src="#" alt="Image Preview"
+                                                        class="img-fluid"
+                                                        style="max-width: 100px; display: none; border: 1px solid #ccc; border-radius: 10px; padding: 5px;">
+                                                </td>
+                                            </tr>
 
-                    <div class="row pt-3">
-                        <div class="form-group col-sm-6 col-xs-6">
-                            <label for="name" class="required">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{old('name')}}">
-                        </div>
+                                            <!-- Select Profile Document -->
+                                            <tr>
+                                                <td>
+                                                    <label for="profileDocument" class="form-label">Select Profile Document
+                                                        <span style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="testimonial_document" class="form-control"
+                                                        id="profileDocument" accept=".pdf,.doc,.docx">
+                                                </td>
 
-                        <div class="form-group col-sm-6 col-xs-6">
-                            <label for="designation" class="">Designation</label>
-                            <input type="text" name="designation" class="form-control" id="designation" placeholder="Enter Designation" value="{{old('designation')}}">
-                        </div>
 
-                        <div class="form-group col-sm-12 col-xs-12">
-                            <label for="content" class="required">Content</label>
-                             <textarea  class="textarea_editor form-control" rows="15" name="content" id="content" placeholder="Enter Content" value="{{old('content')}}"></textarea>
-                        </div>
-                        
-                         <div class="form-group col-sm-4 col-xs-4">
-                            <label for="testimonial_image" class="">Select Profile Image</label>
-                            <input type="file" name="testimonial_image" class="form-control" id="testimonial_image" accept="image/png,image/jpg,image/jpeg">
-                            <small class="form-control-feedback text-danger"> Accepted only .png/.jpg/.jpeg format & allowed max size is 1MB </small>
-                        </div>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="publicVisibility" class="form-label">Visible to
+                                                        Public</label>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="status"
+                                                            id="publicVisibility" checked>
+                                                        <label class="form-check-label" for="publicVisibility">Yes</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="testimonial_document" class="">Select Profile Document</label>
-                            <input type="file" name="testimonial_document" class="form-control" id="testimonial_document" accept=".pdf">
-                            <small class="form-control-feedback text-danger"> Accepted only .pdf format & allowed max size is 5MB </small>
-                        </div>
-                     
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="status" class="required">Status </label>
-                            <select name="status" id="status" class="form-control">
-                                @foreach($statuses as $key => $value)
-                                <option value="{{$value}}" {{SELECT($value,old('status'))}}>{{$key}}</option>
-                                @endforeach
-                            </select>
+                                <!-- Buttons -->
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-danger"
+                                        href="{{ route('testimonials.index') }}">Cancel</button>
+                                </div>
+                            </form>
+
+                            <!-- Confirmation Modal -->
+                            <div class="modal fade" id="confirmationModal" tabindex="-1"
+                                aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center position-relative">
+                                            <h5 class="modal-title" id="confirmationModalLabel">Confirm Submission</h5>
+                                            <button type="button" class="btn-close position-absolute end-0 me-3"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div class="confirmation-icon mb-4">
+                                                <i class="fas fa-check-circle fa-4x text-success"></i>
+                                            </div>
+                                            <p class="mb-4">Are you sure you want to submit the form?</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-success" onclick="submitForm()">Yes,
+                                                Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Confirmation Modal end -->
                         </div>
                     </div>
-
-                        <hr>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                        <a type="reset" class="btn btn-inverse waves-effect waves-light" href="{{route('testimonials.index')}}"> Cancel </a>
-                    </form>
                 </div>
+
+                <!-- insert the contents Here end -->
             </div>
+            <!-- page inner end-->
         </div>
-          </div>
-        </div>
-   </div>
-</div>
+        <!-- database table end -->
+    </div>
+    <script src="{{ asset('packa/theme/assets/node_modules/html5-editor/wysihtml5-0.3.0.js') }}"></script>
+    <script src="{{ asset('packa/theme/assets/node_modules/html5-editor/bootstrap-wysihtml5.js') }}"></script>
+    <script>
+        $(document).ready(function() {
 
-<script src="{{asset('packa/theme/assets/node_modules/html5-editor/wysihtml5-0.3.0.js')}}"></script>
-<script src="{{asset('packa/theme/assets/node_modules/html5-editor/bootstrap-wysihtml5.js')}}"></script>
-<script>
-    $(document).ready(function() {
-
-        $('.textarea_editor').wysihtml5();
-
-
-    });
-</script>
+            $('.textarea_editor').wysihtml5();
+        });
+    </script>
 @endsection
-
- 

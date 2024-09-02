@@ -44,19 +44,20 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
          $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
 
         if($validator->fails()) {
             return redirect()->back()->withErrors($validator)
                         ->withInput();
         }
-
+        
         $input = [
                 'name' => $request->name,
                 'designation' => $request->designation,
                 'content' => $request->content,
                 'unique_key' => $unique_key = Str::uuid()->toString(),
-                'status' => $request->status,
+                'status' => $request->status === 'true' ? 1 : 0,
             ];
 
           
