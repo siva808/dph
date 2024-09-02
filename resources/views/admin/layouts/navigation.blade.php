@@ -1,86 +1,387 @@
-<aside class="left-sidebar">
-   <!-- Sidebar scroll-->
-   <div class="scroll-sidebar">
-      <!-- Sidebar navigation-->
-      <nav class="sidebar-nav">
-         <ul id="sidebarnav">
-            <li> <a class="waves-effect waves-dark" href="{{url('/dashboard')}}"><i class="fa fa-home" aria-hidden="true"></i><span class="hide-menu">&nbsp;Dashboard</span></a>
-            </li>
+<div class="sidebar" data-background-color="white">
+    <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="white">
+            <a href="index.html" class="logo">
+                <img src="{{logo()}}" alt="navbar brand" class="navbar-brand"
+                    height="60" />
+            </a>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i style="color: black;" class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                    <i style="color: black;" class="gg-menu-left"></i>
+                </button>
+            </div>
+            <button class="topbar-toggler more">
+                <i style="color: black;" class="gg-more-vertical-alt"></i>
+            </button>
+        </div>
+        <!-- End Logo Header -->
+    </div>
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+                <li class="nav-section">
+                    <h4 class="text-section">Menu</h4>
+                </li>
 
-          <!--  <li> <a class="waves-effect waves-dark" href="{{url('/bulk-mailers')}}"><i class="fa fa-envelope" aria-hidden="true"></i><span class="hide-menu">&nbsp;Bulk Mailer</span></a>
-            </li> -->
-
-            
-
-
-            @if(isAdmin())
-            <li class="nav-small-cap">--- Manage</li>
-            <li> <a class="waves-effect waves-dark" href="{{url('/users')}}"><i class="fa fa-users" aria-hidden="true"></i><span class="hide-menu">&nbsp;User</span></a>
-            </li>
-            @endif
-
-            <li> <a class="waves-effect waves-dark" href="{{url('/documents')}}"><i class="fa fa-book" aria-hidden="true"></i><span class="hide-menu">&nbsp;Documents</span></a>
-            </li>
-
-            @if(isAdmin() || isHud())
-             <li> <a class="waves-effect waves-dark" href="{{url('/contacts')}}"><i class="fa fa-users" aria-hidden="true"></i><span class="hide-menu">&nbsp;Contact</span></a>
-            </li>
-            @endif
-
-             @if(isAdmin() || isHud())
-            <li class="nav-small-cap">--- Masters</li>
-
-            @if(isAdmin())
-            <li> <a class="waves-effect waves-dark" href="{{url('/designations')}}"><i class="fa fa-user" aria-hidden="true"></i><span class="hide-menu">&nbsp;Designation</span></a>
-            </li>
-
-            <li> <a class="waves-effect waves-dark" href="{{url('/districts')}}"><i class="fa fa-database" aria-hidden="true"></i><span class="hide-menu">&nbsp;District</span></a>
-            </li>
-
-            <li> <a class="waves-effect waves-dark" href="{{url('/hw-location')}}"><i class="fa fa-heart" aria-hidden="true"></i><span class="hide-menu">&nbsp;Health Walk</span></a>
-            </li>
-            
-            @endif
-            
-
-
-             <li> <a class="waves-effect waves-dark" href="{{url('/huds')}}"><i class="fa fa-database" aria-hidden="true"></i><span class="hide-menu">&nbsp;HUD</span></a>
-            </li>
-
-             <li> <a class="waves-effect waves-dark" href="{{url('/blocks')}}"><i class="fa fa-database" aria-hidden="true"></i><span class="hide-menu">&nbsp;Block</span></a>
-            </li>
-
-             <li> <a class="waves-effect waves-dark" href="{{url('/phc')}}"><i class="fa fa-database" aria-hidden="true"></i><span class="hide-menu">&nbsp;PHC</span></a>
-            </li>
-
-             <li> <a class="waves-effect waves-dark" href="{{url('/hsc')}}"><i class="fa fa-database" aria-hidden="true"></i><span class="hide-menu">&nbsp;HSC</span></a>
-            </li>
-            @endif
-
-
-            @if(isAdmin())
-             <li> <a class="waves-effect waves-dark" href="{{url('/facilitytypes')}}"><i class="fa fa-database" aria-hidden="true"></i><span class="hide-menu">&nbsp;Facility Type</span></a>
-            </li>
-           
-            <li> <a class="waves-effect waves-dark" href="{{url('/testimonials')}}"><i class="fa fa-user" aria-hidden="true"></i><span class="hide-menu">&nbsp;Testimonial</span></a>
-            </li> 
-
-            <li> <a class="waves-effect waves-dark" href="{{url('/configurations')}}"><i class="fa fa-cog" aria-hidden="true"></i><span class="hide-menu">&nbsp;Configuration</span></a>
-            </li> 
-            @endif
-
-            @if(isAdmin() || isHud())
-            <li class="nav-small-cap">--- Reports</li>
-
-            <li> <a class="waves-effect waves-dark" href="{{url('/reports')}}"><i class="fa fa-book" aria-hidden="true"></i><span class="hide-menu">&nbsp;Reports</span></a>
-            </li>
-            @endif
-
-
-
-         </ul>
-      </nav>
-      <!-- End Sidebar navigation -->
-   </div>
-   <!-- End Sidebar scroll-->
-</aside>
+                <!-- dashboard------------------ -->
+                <li class="nav-item active">
+                    <a data-bs-toggle="collapse" href="index2.html" class="collapsed" aria-expanded="false">
+                        <i class="bi bi-house"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <!-- Website Management------------------ -->
+                <li class="nav-section">
+                    <h4 class="text-section">Website Management</h4>
+                </li>
+                <!-- Testimonial------------------ -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#base">
+                        <i class="bi bi-bar-chart"></i>
+                        <p>Director Message</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="base">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="testimonial_create.html">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="testimonial_list.html">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Config------------------ -->
+                <li class="nav-item">
+                  <a data-bs-toggle="collapse" href="#config">
+                    <i class="bi bi-gear"></i>
+                      <p>Configuration</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse" id="config">
+                      <ul class="nav nav-collapse">
+                          <li>
+                              <a  href="configuration_header_edit.html">
+                                  <span class="sub-item">Header</span>
+                                  <!-- <span class="caret"></span> -->
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+                <!-- Documents------------------ -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#forms">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <p>Documents</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="forms">
+                        <ul class="nav nav-collapse">
+                          <li>
+                            <a href="#">
+                              <span class="sub-item">GO's</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <span class="sub-item">Circulars</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <span class="sub-item">Announcement</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <span class="sub-item">What's New</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Contacts------------------ -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#tables">
+                        <i class="bi bi-person-lines-fill"></i>
+                        <p>Contacts</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="tables">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Masters------------------ -->
+                <li class="nav-section">
+                    <h4 class="text-section">Masters</h4>
+                </li>
+                <!-- Designation------------------ -->
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#maps">
+                        <i class="bi bi-person-badge"></i>
+                        <p>Designation</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="maps">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-heart"></i>
+                        <p>Health Walk</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#districts">
+                        <i class="bi bi-map"></i>
+                        <p>District</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="districts">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="charts/charts.html">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="charts/sparkline.html">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#HUD">
+                        <i class="bi bi-hospital"></i>
+                        <p>HUD</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="HUD">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#block">
+                        <i class="bi bi-grid-3x3"></i>
+                        <p>Block</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="block">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#PHC">
+                        <i class="bi bi-building"></i>
+                        <p>PHC</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="PHC">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#HSC">
+                        <i class="bi bi-shield-plus"></i>
+                        <p>HSC</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="HSC">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#facility">
+                        <i class="bi bi-chat"></i>
+                        <p>Facility Type</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="facility">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Create</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">List</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-section">
+                    <h4 class="text-section">Reports</h4>
+                </li>
+                <li class="nav-item">
+                    <a href="#">
+                        <i class="bi bi-bookmarks"></i>
+                        <p>Report</p>
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <!-- Account------------------ -->
+                <li class="nav-section">
+                    <h4 class="text-section">USER Management</h4>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#accounts">
+                        <i class="bi bi-people"></i>
+                        <p>Users</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="accounts">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Add User</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">All User</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">User Roles</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#submenu">
+                        <i class="fas fa-bars"></i>
+                        <p>Menu Levels</p>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="collapse" id="submenu">
+                        <ul class="nav nav-collapse">
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subnav1">
+                                    <span class="sub-item">Level 1</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="subnav1">
+                                    <ul class="nav nav-collapse subnav">
+                                        <li>
+                                            <a href="#">
+                                                <span class="sub-item">Level 2</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="sub-item">Level 2</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="collapse" href="#subnav2">
+                                    <span class="sub-item">Level 1</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="subnav2">
+                                    <ul class="nav nav-collapse subnav">
+                                        <li>
+                                            <a href="#">
+                                                <span class="sub-item">Level 2</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="sub-item">Level 1</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -13,66 +13,77 @@
       <!-- Favicon icon -->
       <link rel="icon" type="image/png" sizes="16x16" href="{{favicon()}}">
       <title>{{ siteName() }}</title>
+
+      <!-- Fonts -->
+      <script src="{{asset('packa/theme/dist/js/pages/webfont.min.js')}}"></script>
+      <script>
+         WebFont.load({
+               google: { families: ["Public Sans:300,400,500,600,700"] },
+               custom: {
+                  families: [
+                     "Font Awesome 5 Solid",
+                     "Font Awesome 5 Regular",
+                     "Font Awesome 5 Brands",
+                     "simple-line-icons",
+                  ],
+                  urls: ["{{ asset('packa/theme/dist/css/fonts.min.css') }}"],
+               },
+               active: function () {
+                  sessionStorage.fonts = true;
+               },
+         });
+      </script>
+
       <!-- Custom CSS -->
-      <link href="{{asset('packa/theme/dist/css/style.min.css')}}" rel="stylesheet">
-      <script src="{{asset('packa/theme/assets/node_modules/jquery/jquery-3.2.1.min.js')}}"></script>
+      <script src="{{asset('packa/theme/assets/node_modules/jquery/jquery-3.7.1.min.js')}}"></script>
+      <link rel="stylesheet" href="{{asset('packa/theme/dist/css/bootstrap.min.css')}}" />
+      <link rel="stylesheet" href="{{asset('packa/theme/dist/css/plugins.min.css')}}" />
+      <link rel="stylesheet" href="{{asset('packa/theme/dist/css/dphadmin.min.css')}}" />
       <!-- Bootstrap tether Core JavaScript -->
-      <script src="{{asset('packa/theme/assets/node_modules/popper/popper.min.js')}}"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/bootstrap/dist/js/bootstrap.min.js')}}"></script>      
+      <script src="{{asset('packa/theme/dist/js/pages/popper.min.js')}}"></script>
+      <script src="{{asset('packa/theme/dist/js/pages/bootstrap.min.js')}}"></script>      
       <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
-       
-    <script type="text/javascript" src="{{asset('packa/theme/dist/js/pages/toastr.js')}}"></script>
-      <link href="{{asset('packa/theme/dist/css/pages/file-upload.css')}}" rel="stylesheet">
-      <link href="{{asset('packa/theme/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('packa/theme/assets/node_modules/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('packa/theme/assets/node_modules/switchery/dist/switchery.min.css')}}" rel="stylesheet" />
-      <link href="{{asset('packa/theme/assets/node_modules/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" />
-      <link href="{{asset('packa/theme/assets/node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
-      <link href="{{asset('packa/theme/assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
-      <link href="{{asset('packa/theme/assets/node_modules/multiselect/css/multi-select.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('packa/theme/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('packa/theme/assets/node_modules/timepicker/bootstrap-timepicker.min.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('css/custom.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('packa/theme/dist/css/pages/other-pages.css')}}" rel="stylesheet">
-      <link href="{{asset('packa/custom/custom.css')}}" rel="stylesheet" type="text/css" />
-          <link href="{{asset('packa/theme/dist/css/toastr.css')}}" rel="stylesheet" type="text/css" />
+      <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+      <link href="{{asset('packa/theme/dist/css/toastr.css')}}" rel="stylesheet" type="text/css" />
+      
+
    </head>
-   <body class="skin-megna fixed-layout">
+   <body>
       <!-- ============================================================== -->
       <!-- Preloader - style you can find in spinners.css -->
       <!-- ============================================================== -->
-      <div class="preloader">
+      {{-- <div class="preloader">
          <div class="loader">
             <div class="loader__figure"></div>
             <p class="loader__label">{{ env('APP_GLOBAL_NAME') }}</p>
          </div>
-      </div>
+      </div> --}}
       <!-- ============================================================== -->
       <!-- Main wrapper - style you can find in pages.scss -->
       <!-- ============================================================== -->      
-      <div id="main-wrapper">
+      <div class="wrapper">
          <a href="" id="searchField" style="display:none;"></a>
-         <!-- ============================================================== -->
-         <!-- Topbar header - style you can find in pages.scss -->
-         <!-- ============================================================== -->
-         @include('admin.layouts.header')
-         <!-- ============================================================== -->
-         <!-- End Topbar header -->
          <!-- ============================================================== -->
          <!-- ============================================================== -->
          <!-- Left Sidebar - style you can find in sidebar.scss  -->
          <!-- ============================================================== -->
-         
          @include('admin.layouts.navigation')
          <!-- ============================================================== -->
          <!-- End Left Sidebar - style you can find in sidebar.scss  -->
          <!-- ============================================================== -->
-         <!-- ============================================================== -->
-         <!-- Page wrapper  -->
-         <!-- ============================================================== -->
-
-         @yield('content')
+         <div class="main-panel">
+            <!-- Topbar header - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+            @include('admin.layouts.header')
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Page wrapper  -->
+            @yield('content')
+            <!-- ============================================================== -->  
+         </div>
          <!-- ============================================================= -->
          @include('admin.common.modal')
          @include('admin.common.toastr')
@@ -92,48 +103,19 @@
       <!-- ============================================================== -->
       <!-- All Jquery -->
       <!-- ============================================================== -->
-      <!-- slimscrollbar scrollbar JavaScript -->
-      <script src="{{asset('packa/theme/dist/js/perfect-scrollbar.jquery.min.js')}}"></script>
-      <!--Wave Effects -->
-      <script src="{{asset('packa/theme/dist/js/waves.js')}}"></script>
-      <!--Menu sidebar -->
-      <script src="{{asset('packa/theme/dist/js/sidebarmenu.js')}}"></script>
-      <!--stickey kit -->
-      <script src="{{asset('packa/theme/assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/sparkline/jquery.sparkline.min.js')}}"></script>
-      <!--Custom JavaScript -->
-      <script src="{{asset('packa/theme/dist/js/custom.min.js')}}"></script>
-      <script src="{{asset('packa/theme/dist/js/pages/jasny-bootstrap.js')}}"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/switchery/dist/switchery.min.js')}}"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/bootstrap-select/bootstrap-select.min.js')}}" type="text/javascript"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js')}}" type="text/javascript"></script>
-      <script src="{{asset('packa/theme/assets/node_modules/dff/dff.js')}}" type="text/javascript"></script>
-      <script type="text/javascript" src="{{asset('packa/theme/assets/node_modules/multiselect/js/jquery.multi-select.js')}}"></script>
-      <script type="text/javascript" src="{{asset('packa/theme/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
-      <script type="text/javascript" src="{{asset('packa/theme/assets/node_modules/timepicker/bootstrap-timepicker.min.js')}}"></script>
-      <script type="text/javascript" src="{{asset('packa/theme/dist/js/waves.js')}}"></script>
-      <script type="text/javascript" src="{{asset('packa/custom/custom.js')}}"></script>
-      <script type="text/javascript" src="{{asset('packa/custom/admin.js')}}"></script>
-      <script type="text/javascript" src="{{asset('packa/custom/datatable.js')}}"></script>
-        
-      <script>
-         $(function () {
-             // Switchery
-             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-             $('.js-switch').each(function () {
-                 new Switchery($(this)[0], $(this).data());
-             });
-             // For select 2
-             $(".select2").select2();
-             $('.selectpicker').selectpicker();
-             //Bootstrap-TouchSpin
-             $(".vertical-spin").TouchSpin({
-                 verticalbuttons: true
-             });
-         });
-         
-      </script>
+      <!-- jQuery Scrollbar -->
+      <script src="{{asset('packa/theme/dist/js/pages/jquery.scrollbar.min.js')}}"></script>
+      <!-- Chart JS -->
+      <script src="{{asset('packa/theme/assets/node_modules/Chart.js/Chart.min.js')}}"></script>
+      <!-- Chart Circle -->
+      <script src="{{asset('packa/theme/dist/js/pages/circles.min.js')}}"></script>
+      <!-- Datatables -->
+      <script src="{{asset('packa/theme/dist/js/pages/datatables.min.js')}}"></script>
+      <!-- Bootstrap Notify -->
+      <script src="{{asset('packa/theme/dist/js/pages/bootstrap-notify.min.js')}}"></script>
+      <!-- Sweet Alert -->
+      <script src="{{asset('packa/theme/dist/js/pages/sweetalert.min.js')}}"></script>
+      <!-- Kaiadmin JS -->
+      <script src="{{asset('packa/theme/dist/js/pages/kaiadmin.min.js')}}"></script>
    </body>
 </html>
