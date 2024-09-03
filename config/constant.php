@@ -33,11 +33,21 @@ return [
 		3 => 'Others',
 	],
 
+	'user_role' => [
+		1 => 'admin',
+		2 => 'officer',
+		3 => 'sub_officer'
+	],
+
 	'user_type' => [
 		1 => 'super_admin',
 		2 => 'sub_admin',
 		3 => 'employee',
-		4 => 'hud',
+		4 => 'district',
+		5 => 'hud',
+		6 => 'block',
+		7 => 'phc',
+		8 => 'hsc'
 	],
 
 	'default_user_password' => "tndphpm@123",

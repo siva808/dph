@@ -25,8 +25,20 @@ class DashboardController extends Controller
 
         if(isAdmin() || isHud()) {
             $navigationDocs = Navigation::getNavigationDocument();   
-            $sectionDocs = Tag::getTagDocument();         
+            $sectionDocs = Tag::getTagDocument();
+            // dd($navigationDocs, $sectionDocs);  
         }
+        $navigationDocsJson = $navigationDocs->map(function ($doc) {
+            return [
+                'name' => $doc->name,
+                'document_count' => $doc->documents->count(),
+                'order_no' => $doc->order_no,
+                "status" => $doc->status,
+                'created_at' => $doc->created_at,
+                'updated_at' => $doc->updated_at,
+                'slug_key' => $doc->slug_key,
+            ];
+        });
 
 
         if(isEmployee()) {
@@ -44,6 +56,6 @@ class DashboardController extends Controller
         }
 
 
-    	return view('admin.dashboard',compact('totalEmployeeCount','activeEmployeeCount','inActiveEmployeeCount','documentCount','navigationDocs','sectionDocs','totalContactCount','activeContactCount','inActiveContactCount'));
+    	return view('admin.dashboard',compact('totalEmployeeCount','activeEmployeeCount','inActiveEmployeeCount','documentCount','navigationDocs','sectionDocs','totalContactCount','activeContactCount','inActiveContactCount','navigationDocsJson'));
     }
 }
