@@ -45,6 +45,9 @@ class TestimonialController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $request->merge([
+            'status' => $request->status === 'true' ? 1 : 0
+        ]);
          $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
 
         if($validator->fails()) {
@@ -57,7 +60,7 @@ class TestimonialController extends Controller
                 'designation' => $request->designation,
                 'content' => $request->content,
                 'unique_key' => $unique_key = Str::uuid()->toString(),
-                'status' => $request->status === 'true' ? 1 : 0,
+                'status' => $request->status
             ];
 
           
@@ -122,6 +125,9 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->merge([
+            'status' => $request->status === 'true' ? 1 : 0
+        ]);
         $validator = Validator::make($request->all(),$this->rules($id),$this->messages(),$this->attributes());
 
         if($validator->fails()) {

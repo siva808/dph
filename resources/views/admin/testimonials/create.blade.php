@@ -165,6 +165,16 @@
     <script src="{{ asset('packa/theme/assets/node_modules/html5-editor/wysihtml5-0.3.0.js') }}"></script>
     <script src="{{ asset('packa/theme/assets/node_modules/html5-editor/bootstrap-wysihtml5.js') }}"></script>
     <script>
+        document.getElementById('profileImage').addEventListener('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = URL.createObjectURL(file);
+                imagePreview.style.display = 'block';
+            }
+        });
+    </script>
+    <script>
         $(document).ready(function() {
 
             $('.textarea_editor').wysihtml5();

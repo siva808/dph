@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 @section('title', 'List Director Message')
 @section('content')
-    <div class="container" id="maincontent">
+    <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color:#f2f2f2;">
             <h5 style="margin-left: 20px;">List Of Director Messages</h5>
         </div>
@@ -31,27 +31,41 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Example Rows -->
-                                        <tr>
-                                            <td>DR. T.S. SELVAVINAYAGAM, M.D.., D.P.H.., D.N.B.,</td>
-                                            <td>
-                                                <p>DIRECTOR</p>
-                                            </td>
-                                            <td class="text-success" style="font-weight: bold;">Active</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <button type="button" class="btn btn-link btn-primary btn-lg"
-                                                        onclick="window.location.href='testimonial_create.html';">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" class="btn btn-link btn-danger"
-                                                        onclick="window.location.href='testimonial_view.html';">
-                                                        <i class="fa fa-eye"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
+                                        @if (!empty($results) && $results->count())
+                                            @foreach ($results as $result)
+                                                <!-- Example Rows -->
+                                                <tr>
+                                                    <td>{{ $result->name ?? '' }}</td>
+                                                    <td>
+                                                        <p>{{ $result->designation ?? '--' }}</p>
+                                                    </td>
+                                                    <td class="text-success" style="font-weight: bold;">
+                                                        @if (isset($result->status) && $result->status == 1)
+                                                            <span class="text-success">Active</span>
+                                                        @else
+                                                            <span class="text-danger">In-Active</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-button-action">
+                                                            <button type="button" class="btn btn-link btn-primary btn-lg"
+                                                                onclick="window.location.href='{{ route('testimonials.edit', $result->id) }}';">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-link btn-danger"
+                                                                onclick="window.location.href='{{ route('testimonials.show', $result->id) }}';">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
 
-                                        </tr>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td collspan="6">No Records Found..</td>
+                                            </tr>
+                                        @endif
                                         <!-- Additional rows can be added dynamically -->
                                     </tbody>
                                 </table>
