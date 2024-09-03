@@ -70,11 +70,17 @@
                   <div class="collapse" id="config">
                       <ul class="nav nav-collapse">
                           <li>
-                              <a  href="configuration_header_edit.html">
+                              <a  href="{{url('/header')}}">
                                   <span class="sub-item">Header</span>
                                   <!-- <span class="caret"></span> -->
                               </a>
                           </li>
+                          <li>
+                            <a href="{{url('/footer')}}">
+                                <span class="sub-item">Footer</span>
+                                <!-- <span class="caret"></span> -->
+                            </a>
+                        </li>
                       </ul>
                   </div>
               </li>
