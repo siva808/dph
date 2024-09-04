@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +9,7 @@ use App\Http\Resources\ConfigurationResource;
 use App\Services\FileService;
 use Illuminate\Support\Facades\Validator;
 
-class ConfigurationController extends Controller
+class HeaderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,7 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        /*
-        $statuses = _getGlobalStatus();
-        return view('admin.configurations.edit',compact('statuses'));
-        */
-         
+        //
     }
 
     /**
@@ -32,10 +28,7 @@ class ConfigurationController extends Controller
      */
     public function create()
     {
-        /*
-        $statuses = _getGlobalStatus();
-        return view('admin.configurations.create',compact('statuses'));
-        */
+        //
     }
 
     /**
@@ -46,27 +39,7 @@ class ConfigurationController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
-
-        if($validator->fails()) {
-            return redirect()->back()->withErrors($validator)
-                        ->withInput();
-        }
-
-        $input = [
-                'notification_content' => $request->notification_content,
-                'status' => $request->status
-            ];
-
-
-
-        $result = Configuration::create($input);
-
-        createdResponse("Notification Created Successfully");
-
-        return redirect()->route('configurations.index');
-        */
+        //
     }
 
     /**
@@ -91,7 +64,7 @@ class ConfigurationController extends Controller
         $result = Configuration::getLatestConfig();
         //$result = DB::table('configurations')->where('id', $id)->first();
         $statuses = _getGlobalStatus();
-        return view('admin.configurations.edit',compact('result','statuses'));
+        return view('admin.configurations.header',compact('result','statuses'));
     }
 
     /**
@@ -101,8 +74,9 @@ class ConfigurationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateConfiguration(Request $request, $id)
+    public function updateHeader(Request $request, $id)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(),$this->rules($id),$this->messages(),$this->attributes());
 
         if($validator->fails()) {
@@ -118,7 +92,7 @@ class ConfigurationController extends Controller
                 'notification_content' => $request->notification_content,
                 'notification_status' => $request->notification_status,
                 'mini_banner_one_title' => $request->mini_banner_one_title,
-                'mini_banner_two_title' => $request->mini_banner_two_title,
+                ' ' => $request->mini_banner_two_title,
                 'homepage_banner_one_title' => $request->homepage_banner_one_title,
                 'homepage_banner_two_title' => $request->homepage_banner_two_title,
                 'homepage_banner_three_title' => $request->homepage_banner_three_title,
@@ -147,13 +121,6 @@ class ConfigurationController extends Controller
                 'tamilnadu_government_title_english' => $request->tamilnadu_government_title_english,
                 'dph_full_form_tamil' => $request->dph_full_form_tamil,
                 'dph_full_form_english' => $request->dph_full_form_english,
-                'dph_address' => $request->dph_address,
-                'dph_zip_code' => $request->dph_zip_code,
-                'dph_city' => $request->dph_city,
-                'dph_state' => $request->dph_state,
-                'dph_phone' => $request->dph_phone,
-                'joint_director_email' => $request->joint_director_email,
-                'joint_director_phone' => $request->joint_director_phone,
             ];
 
         if($request->hasFile('mini_banner_one') && $file = $request->file('mini_banner_one')) {
@@ -231,57 +198,54 @@ class ConfigurationController extends Controller
 
         if($request->hasFile('header_logo_two') && $file = $request->file('header_logo_two')) {
             if($file->isValid()) {
-                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_two);
                 $input['header_logo_two'] = $storedFileArray['stored_file_path'] ?? '';
             }
         } else {
-            $input['header_logo_two'] = $notification->header_logo_one;
+            $input['header_logo_two'] = $notification->header_logo_two;
         }
 
         if($request->hasFile('header_logo_three') && $file = $request->file('header_logo_three')) {
             if($file->isValid()) {
-                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_three);
                 $input['header_logo_three'] = $storedFileArray['stored_file_path'] ?? '';
             }
         } else {
-            $input['header_logo_three'] = $notification->header_logo_one;
+            $input['header_logo_three'] = $notification->header_logo_three;
         }
 
         if($request->hasFile('header_logo_four') && $file = $request->file('header_logo_four')) {
             if($file->isValid()) {
-                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_four);
                 $input['header_logo_four'] = $storedFileArray['stored_file_path'] ?? '';
             }
         } else {
-            $input['header_logo_four'] = $notification->header_logo_one;
+            $input['header_logo_four'] = $notification->header_logo_four;
         }
 
         if($request->hasFile('header_logo_five') && $file = $request->file('header_logo_five')) {
             if($file->isValid()) {
-                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_five);
                 $input['header_logo_five'] = $storedFileArray['stored_file_path'] ?? '';
             }
         } else {
-            $input['header_logo_five'] = $notification->header_logo_one;
+            $input['header_logo_five'] = $notification->header_logo_five;
         }
 
         if($request->hasFile('header_logo_six') && $file = $request->file('header_logo_six')) {
             if($file->isValid()) {
-                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_one);
+                $storedFileArray = FileService::updateAndStoreFile($file,'/header_logo',$notification->header_logo_six);
                 $input['header_logo_six'] = $storedFileArray['stored_file_path'] ?? '';
             }
         } else {
-            $input['header_logo_six'] = $notification->header_logo_one;
+            $input['header_logo_six'] = $notification->header_logo_six;
         }
          
         $result = $notification->update($input);
 
-        updatedResponse("Notification Updated Successfully");
+        updatedResponse("Header Updated Successfully");
 
-        return redirect('/configurations');
-
-        //return redirect()->back()->with('success', 'Notification updated successfully.');
-    
+        return redirect('/header');
     }
 
     /**
@@ -294,8 +258,7 @@ class ConfigurationController extends Controller
     {
         //
     }
-
-     public function rules($id="") {
+    public function rules($id="") {
 
         $rules = array();
 
@@ -348,6 +311,4 @@ class ConfigurationController extends Controller
     
    
     }
-
-    
 }

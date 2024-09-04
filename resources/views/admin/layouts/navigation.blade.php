@@ -2,7 +2,7 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="white">
-            <a href="index.html" class="logo">
+            <a href="{{url('/dashboard')}}" class="logo">
                 <img src="{{logo()}}" alt="navbar brand" class="navbar-brand"
                     height="60" />
             </a>
@@ -29,7 +29,7 @@
 
                 <!-- dashboard------------------ -->
                 <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="index2.html" class="collapsed" aria-expanded="false">
+                    <a href="{{url('/dashboard')}}" class="collapsed" aria-expanded="false">
                         <i class="bi bi-house"></i>
                         <p>Dashboard</p>
                     </a>
