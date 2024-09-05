@@ -25,6 +25,7 @@ class DocumentController extends Controller
     public function index()
     {
         $results = Document::getQueriedResult();
+        // dd($results);
         $sections = Tag::where('status',_active())->get();
         $navigations = Navigation::where('status',_active())->get();
         $statuses = _getGlobalStatus();

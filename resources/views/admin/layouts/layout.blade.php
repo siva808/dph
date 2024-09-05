@@ -104,6 +104,8 @@
       <!-- ============================================================== -->
       <!-- All Jquery -->
       <!-- ============================================================== -->
+      <script src="{{asset('packa/custom/custom.js')}}"></script>
+      <script src="{{asset('packa/custom/datatable.js')}}"></script>
       <!-- jQuery Scrollbar -->
       <script src="{{asset('packa/theme/dist/js/pages/jquery.scrollbar.min.js')}}"></script>
       <!-- Chart JS -->

@@ -94,23 +94,73 @@
                     <div class="collapse" id="forms">
                         <ul class="nav nav-collapse">
                           <li>
-                            <a href="#">
+                            <a href="{{url('/documents')}}">
+                              <span class="sub-item">All Documents</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_govtorders.html">
                               <span class="sub-item">GO's</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#">
+                            <a href="doc_list_circulars.html">
                               <span class="sub-item">Circulars</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <span class="sub-item">Announcement</span>
+                            <a href="doc_list_instructions.html">
+                              <span class="sub-item">Instructions</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <span class="sub-item">What's New</span>
+                            <a href="doc_list_actsAndrules.html">
+                              <span class="sub-item">Acts/Rules</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_proceedings.html">
+                              <span class="sub-item">Proceedings</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_publications.html">
+                              <span class="sub-item">publications</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_others.html">
+                              <span class="sub-item">Others</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_newsAndnitification.html">
+                              <span class="sub-item">News & Notifications</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_events.html">
+                              <span class="sub-item">Events</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_importantlinks.html">
+                              <span class="sub-item">Important Links</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_rti.html">
+                              <span class="sub-item">RTI</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_announcements.html">
+                              <span class="sub-item">Announcements</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="doc_list_library.html">
+                              <span class="sub-item">Library</span>
                             </a>
                           </li>
                         </ul>
