@@ -34,8 +34,12 @@ Route::middleware(['admin'])->group(function () {
 	
 	Route::resource('/bulk-mailers','Admin\BulkMailerController');
 	Route::resource('/testimonials','Admin\TestimonialController');
-	Route::get('/configurations', 'Admin\ConfigurationController@edit');
-	Route::post('/configurations/update/{id}', 'Admin\ConfigurationController@updateConfiguration')->name('configurations.update');
+	Route::get('/header', 'Admin\HeaderController@edit');
+	Route::post('/header/update/{id}', 'Admin\HeaderController@updateHeader')->name('header.update');
+	Route::get('/footer', 'Admin\FooterController@edit');
+	Route::post('/footer/update/{id}', 'Admin\FooterController@updateFooter')->name('footer.update');
+	// Route::get('/configurations', 'Admin\ConfigurationController@edit');
+	// Route::post('/configurations/update/{id}', 'Admin\ConfigurationController@updateConfiguration')->name('configurations.update');
 	Route::get('/documents-export','Admin\DocumentController@export1')->name('documents.export');
 });
 

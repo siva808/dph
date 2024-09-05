@@ -44,6 +44,7 @@
       <script src="{{asset('packa/theme/dist/js/pages/bootstrap.min.js')}}"></script>      
       <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
       <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+      <script type="text/javascript" src="{{asset('packa/theme/dist/js/pages/toastr.js')}}"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
       <link href="{{asset('packa/theme/dist/css/toastr.css')}}" rel="stylesheet" type="text/css" />
       

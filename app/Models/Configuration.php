@@ -60,7 +60,11 @@ class Configuration extends Model
         'dph_state',
         'dph_phone',
         'joint_director_email',
-        'joint_director_phone'
+        'joint_director_phone',
+        'footer_logo_one',
+        'footer_logo_one_title',
+        'footer_logo_one_status',
+        'footer_gov_name_tamil'
        
     ];
 
