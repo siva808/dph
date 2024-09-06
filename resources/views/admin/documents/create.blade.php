@@ -1,6 +1,12 @@
 @extends('admin.layouts.layout')
 @section('title', 'Upload Document')
 @section('content')
+<style>
+    #typeofdoc.readonly {
+        pointer-events: none;
+        background-color: #e9ecef;
+    }
+</style>
     <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
@@ -8,7 +14,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Documents</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Create (Type Of Document)</li>
+                        <li class="breadcrumb-item active" aria-current="page">Create {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}</li>
                     </ol>
                 </nav>
 
@@ -21,7 +27,8 @@
                 <div class="container mt-2">
                     <div class="row">
                         <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
-                            <form id="documentForm">
+                            <form id="documentForm" form action="{{route('documents.store')}}" enctype="multipart/form-data" method="post" class="disable_submit">
+                                {{csrf_field()}}
                                 <div class="table-responsive">
                                     <h4 class="card-title mb-4 text-primary">Create
                                         {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
@@ -35,8 +42,7 @@
                                                         Type Of Document <span style="color: red;">*</span></label>
                                                 </td>
                                                 <td>
-                                                    <select class="form-select" id="typeofdoc" name="navigation_id" required
-                                                        disabled>
+                                                    <select class="form-select" id="typeofdoc" name="navigation_id">
                                                         @foreach ($navigations as $key => $value)
                                                             <option value="{{ $value->id }}"
                                                                 data-value="{{ $value->slug_key }}"
@@ -154,6 +160,25 @@
 
                                                 <td></td>
                                             </tr>
+                                            <!-- Status -->
+                                            <tr>
+                                                <td>
+                                                    <label for="status" class="form-label">Select File Visible to
+                                                        Public</label>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" name="visible_to_public"
+                                                            type="checkbox" id="toggleVisibleToPublic" value="1"
+                                                            {{ CHECKBOX('document_visible_to_public') }}
+                                                            onchange="toggleVisibleText('visibleToPublicLabel', this)">
+                                                        <label class="form-check-label" for="toggleVisibleToPublic"
+                                                            id="visibleToPublicLabel">No</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
 
                                             <!-- Status -->
                                             <tr>
@@ -162,10 +187,12 @@
                                                 </td>
                                                 <td>
                                                     <div class="form-check form-switch">
-                                                        <input class="form-check-input" name="status" type="checkbox" id="toggleStatus"
-                                                            checked onchange="toggleStatusText('statusLabel', this)">
+                                                        <input class="form-check-input" name="status" type="checkbox"
+                                                            id="toggleStatus" value="1"
+                                                            {{ CHECKBOX('document_status') }}
+                                                            onchange="toggleStatusText('statusLabel', this)">
                                                         <label class="form-check-label" for="toggleStatus"
-                                                            id="statusLabel">Active</label>
+                                                            id="statusLabel">In-Active</label>
                                                     </div>
                                                 </td>
                                                 <td></td>
@@ -176,7 +203,8 @@
                                 </div>
                                 <!-- Buttons -->
                                 <div class="d-flex mt-2">
-                                    <button type="button" class="btn btn-primary" onclick="validateForm()">Submit</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        onclick="validateForm()">Submit</button>
                                     <button type="button" style="margin-left: 10px;"
                                         class="btn btn-danger">Cancel</button>
                                 </div>
@@ -250,5 +278,6 @@
             });
         });
     </script>
+    <script>document.getElementById('typeofdoc').classList.add('readonly');</script>
     <script src="{{ asset('packa/custom/document.js') }}"></script>
 @endsection

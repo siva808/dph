@@ -335,15 +335,4 @@
         }
     </script>
 
-    <!-- JavaScript Functions for status active and in active start-->
-    <script>
-        function toggleStatusText(labelId, checkbox) {
-            const label = document.getElementById(labelId);
-            if (checkbox.checked) {
-                label.textContent = 'Active';
-            } else {
-                label.textContent = 'Inactive';
-            }
-        }
-    </script>
 @endsection

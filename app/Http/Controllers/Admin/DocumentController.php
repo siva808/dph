@@ -56,7 +56,7 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
 
         if($validator->fails()) {

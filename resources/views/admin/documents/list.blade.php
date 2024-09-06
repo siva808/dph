@@ -185,11 +185,11 @@
                                                                 <button type="button" data-bs-toggle="tooltip"
                                                                     title="" class="btn btn-link btn-primary btn-lg"
                                                                     data-original-title="Edit Task"
-                                                                    onclick="window.location.href='{{ route('documents.show', $result->id) }}">
+                                                                    onclick="window.location.href='{{ route('documents.edit', $result->id) }}'">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                                 <button type="button" class="btn btn-link btn-danger"
-                                                                    onclick="window.location.href='{{ route('documents.edit', $result->id) }}'">
+                                                                    onclick="window.location.href='{{route('documents.show',$result->id)}}'">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </div>

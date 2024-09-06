@@ -255,7 +255,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('/huds')}}">
                                     <span class="sub-item">List</span>
                                 </a>
                             </li>
