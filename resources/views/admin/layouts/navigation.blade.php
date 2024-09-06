@@ -99,7 +99,7 @@
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_govtorders.html">
+                            <a href="{{url('/documents?navigation=1')}}">
                               <span class="sub-item">GO's</span>
                             </a>
                           </li>

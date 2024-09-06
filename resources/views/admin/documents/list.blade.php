@@ -8,7 +8,13 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Documents</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">All Documents</li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            @if (request('navigation'))
+                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                            @else
+                                All Documents
+                            @endif
+                        </li>
                     </ol>
                 </nav>
 
@@ -71,9 +77,10 @@
                                             <select name="visible_to_public" class="form-control searchable"
                                                 onchange="searchFun()">
                                                 <option value="">-- Select -- </option>
-                                                <option value="yes" {{ SELECT(1, old('visible_to_public')) }}>Yes
+                                                <option value="yes" {{ SELECT('yes', request('visible_to_public')) }}>Yes
                                                 </option>
-                                                <option value="no" {{ SELECT(0, old('visible_to_public')) }}>No</option>
+                                                <option value="no" {{ SELECT('no', request('visible_to_public')) }}>No
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -84,7 +91,7 @@
                                                 <option value="">-- Select -- </option>
                                                 @foreach ($statuses as $key => $value)
                                                     <option value="{{ $key }}"
-                                                        {{ SELECT($value, old('status')) }}>{{ $key }}</option>
+                                                        {{ SELECT($key, request('status')) }}>{{ $key }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -113,11 +120,22 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
-                                        <h4 class="card-title">All Documents</h4>
-                                        <!-- <button class="btn btn-primary btn-round ms-auto"
-                                                                        onclick="window.location.href='doc_create_gos.html';">
-                                                                        <i class="fa fa-plus"></i> Add Documents
-                                                                    </button> -->
+                                        <h4 class="card-title">
+                                            @if (request('navigation'))
+                                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                                            @else
+                                                All Documents
+                                            @endif
+                                        </h4>
+                                        @if (request('navigation'))
+                                        <button class="btn btn-primary btn-round ms-auto"
+                                            onclick="window.location.href='{{ url('/documents/create') }}{{ request('navigation') ? '?navigation=' . request('navigation') : '' }}'">
+                                            <i class="fa fa-plus"></i>
+                                            
+                                                Add
+                                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Document' }}
+                                        </button>
+                                        @endif
                                     </div>
                                 </div>
 

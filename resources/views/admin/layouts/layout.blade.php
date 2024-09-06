@@ -104,6 +104,7 @@
       <!-- ============================================================== -->
       <!-- All Jquery -->
       <!-- ============================================================== -->
+      <script src="{{asset('packa/custom/status-text.js')}}"></script>
       <script src="{{asset('packa/custom/custom.js')}}"></script>
       <script src="{{asset('packa/custom/datatable.js')}}"></script>
       <!-- jQuery Scrollbar -->
