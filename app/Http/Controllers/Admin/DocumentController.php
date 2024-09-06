@@ -25,6 +25,7 @@ class DocumentController extends Controller
     public function index()
     {
         $results = Document::getQueriedResult();
+        // dd($results);
         $sections = Tag::where('status',_active())->get();
         $navigations = Navigation::where('status',_active())->get();
         $statuses = _getGlobalStatus();
@@ -55,7 +56,7 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
 
         if($validator->fails()) {

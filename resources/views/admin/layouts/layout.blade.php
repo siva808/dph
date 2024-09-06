@@ -41,6 +41,7 @@
       <link rel="stylesheet" href="{{asset('packa/theme/dist/css/dphadmin.min.css')}}" />
       <!-- Bootstrap tether Core JavaScript -->
       <script src="{{asset('packa/theme/dist/js/pages/popper.min.js')}}"></script>
+      <link href="{{asset('packa/theme/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
       <script src="{{asset('packa/theme/dist/js/pages/bootstrap.min.js')}}"></script>      
       <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
       <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
@@ -104,6 +105,10 @@
       <!-- ============================================================== -->
       <!-- All Jquery -->
       <!-- ============================================================== -->
+      <script src="{{asset('packa/custom/status-text.js')}}"></script>
+      <script src="{{asset('packa/custom/custom.js')}}"></script>
+      <script src="{{asset('packa/custom/datatable.js')}}"></script>
+      <script type="text/javascript" src="{{asset('packa/theme/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
       <!-- jQuery Scrollbar -->
       <script src="{{asset('packa/theme/dist/js/pages/jquery.scrollbar.min.js')}}"></script>
       <!-- Chart JS -->

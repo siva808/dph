@@ -1,143 +1,159 @@
 @extends('admin.layouts.layout')
 @section('title', 'Edit Document')
 @section('content')
-<div class="page-wrapper">
-   <div class="container-fluid">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Edit Document</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('documents.index')}}">Document</a></li>
+<div class="container" style="margin-top: 90px;">
+    <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+        <div class="d-flex justify-content-between align-items-center"
+            style="padding-left: 20px; padding-right: 20px;">
+            <h5 class="mb-0">Documents</h5>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                    <li class="breadcrumb-item"><a href="#">Documents</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit {{$result->navigation->name}}</li>
                 </ol>
-            </div>
+            </nav>
+
         </div>
     </div>
-      <div class="row">
-    <div class="col-md-12">
-        <div class="card card-body">
+    <div class="container-fluid">
+        <div class="page-inner">
+            <div class="container-fluid mt-2">
+                <div class="row">
+                    <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                        <!-- insert the contents Here start -->
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                        <div class="card-body">
+                            <!-- Heading -->
+                            <h4 class="card-title mb-4 text-primary">Edit {{$result->navigation->name}}</h4>
+                            <form>
+                                <div class="row mb-3 p-3">
+                                    <!-- Type of Document -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Type of Document:</div>
+                                        <select class="form-control" id="documentType" disabled required>
+                                            <option value="" selected>{{$result->navigation->name}}</option>
+                                            <!-- Add more options as needed -->
+                                        </select>
+                                    </div>
+                                    <!-- Name of Document -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Document File:</div>
+                                        <input type="text" class="form-control" id="documentName"
+                                            value="{{$result->document_url}}" readonly>
+                                    </div>
+                                </div>
 
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <form action="{{route('documents.update',$result->id)}}" enctype="multipart/form-data" method="post">
-                        {{csrf_field()}}
-                        @method('PUT')
+                                <div class="row mb-3 p-3">
+                                    <!-- File Name to Display -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Enter File Name to Display:
+                                        </div>
+                                        <input type="text" class="form-control" id="fileName" name="display_filename"
+                                        value="{{old('display_filename',$result->display_filename)}}">
+                                    </div>
+                                    <!-- Mapping Section -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Mapping Section:</div>
+                                        <select class="form-control" id="mappingSection" name="tags">
+                                            @foreach($tags as $key => $value)
+                                            <option value="{{$key}}" {{SELECT($key,old('tags',$result->tag_id))}}>{{$value}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <div class="row pt-3">
+                                <div class="row mb-3 p-3">
+                                    <!-- G.O / Letter / Reference No. -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">G.O / Letter /
+                                            Reference No.:</div>
+                                        <input type="text" class="form-control" id="referenceNumber"
+                                        value="{{old('reference_no', $result->reference_no)}}" name="reference_no">
+                                    </div>
+                                    <!-- Visible to Public -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Visible to Public:
+                                        </div>
+                                        <select class="form-control" id="visibleToPublic" required>
+                                            <option value="" disabled selected>Select Visibility</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="navigation_id" class="required">Type of Document </label>
-                            <p><a class="text-danger" href="{{showDiskImage($result->navigation_id)}}">{{$result->navigation->name}}</a></p>
+                                <div class="row mb-3 p-3">
+                                    <!-- Dated -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Dated:</div>
+                                        <input type="date" class="form-control" id="date"
+                                            value="[Date Here]" required>
+                                    </div>
+                                    <!-- Uploaded By -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Uploaded By:</div>
+                                        <input type="text" class="form-control" id="uploaderName"
+                                            value="[Uploader Name Here]" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3 p-3">
+                                    <!-- Link -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Link:</div>
+                                        <input type="url" class="form-control" id="link"
+                                            value="[Link Here]">
+                                    </div>
+                                    <!-- Link Title -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Link Title:</div>
+                                        <input type="text" class="form-control" id="linkTitle"
+                                            value="[Link Title Here]">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3 p-3">
+                                    <!-- Status -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Status:</div>
+                                        <select class="form-control" id="status" required>
+                                            <option value="" disabled selected>Select Status</option>
+                                            <option value="active" selected>Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <!-- Created At -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Created At:</div>
+                                        <input type="text" class="form-control" id="creationDate"
+                                            value="[Creation Date Here]" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="document" class="required">Document File</label>
-                            <p><a class="text-danger" href="{{showDiskImage($result->document_url)}}">{{$result->display_filename}}</a></p>
-                        </div> 
-                       
-                       
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="display_filename" class="required">Enter File Name to Display</label>
-                            <input type="text" name="display_filename" class="form-control" id="display_filename" placeholder="Enter File Name to Display" value="{{old('display_filename',$result->display_filename)}}">
-                             <small class="form-control-feedback text-danger"> No Special Characters are allowed. </small>
-                        </div>
+
+
+                        <!-- insert the contents Here end -->
                     </div>
-
-                    <div class="row pt-3">
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="tags" class="required">Select Mapping Section</label>
-
-                            <select name="tags" id="tags" class="form-control">
-                                @foreach($tags as $key => $value)
-                                <option value="{{$key}}" {{SELECT($key,old('tags',$result->tag_id))}}>{{$value}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        @if($result->navigation->slug_key != 'announcements') 
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="display_filename" class="required">Enter G.O /Letter / Reference no.</label>
-                            <input type="text" name="reference_no" class="form-control" id="reference_no" placeholder="Enter Letter / Reference no." value="{{old('reference_no', $result->reference_no)}}">
-                        </div>
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="dated" class="required">Dated</label>
-                            <input type="text" class="form-control mydatepicker"  name="dated" placeholder="mm/dd/yyyy" value="{{old('dated',$result->dated)}}" id="dated">
-                        </div>
-                        @endif
-                         <div class="form-group col-sm-4 col-xs-4">
-                            <label for="status" class="required">File Visible to Public </label>
-                            <select name="visible_to_public" id="visible_to_public" class="form-control">
-                                <option value="1" {{SELECT(1,old('visible_to_public',$result->visible_to_public))}}>Yes</option>
-                                <option value="0" {{SELECT(0,old('visible_to_public',$result->visible_to_public))}}>No</option>
-                            </select>
-                        </div>
-                       
-                       @if($result->navigation->slug_key == 'announcements') 
-                         <div class="form-group col-sm-4 col-xs-4"  id="image_div">
-                              <label for="document_image" class="">Image Upload</label>
-                              <input type="file" name="document_image" class="form-control" id="document_image" placeholder="Image " value="{{old('image_url',$result->image_url)}}" />
-                           </div>
-                        @endif
-                             
-
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="link_url" class="">Link</label>
-                            <input type="text" name="link_url" class="form-control" id="link_url" placeholder=" Enter Link" value="{{old('link_url',$result->link_url)}}" />
-                        </div>
-
-                        <div class="form-group col-sm-4 col-xs-4">
-                                <label for="link_title" class="">Link Title</label>
-                                <input type="text" name="link_title" class="form-control" id="link_title" placeholder="Enter Link Title" value="{{old('link_title',$result->link_title)}}">
-                            </div>
-
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="status" class="required">Status </label>
-                            <select name="status" id="status" class="form-control">
-                                @foreach($statuses as $key => $value)
-                                <option value="{{$value}}" {{SELECT($value,old('status',$result->status))}}>{{$key}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                        @if($result->navigation->slug_key == 'announcements') 
-                        <div class="form-group col-sm-4 col-xs-4"  id="image_div">
-                    <label for="image_url" class="required">Document Image </label>
-                    @if($result->image_url)
-                        <br>
-                        <img src="{{fileLink($result->image_url)}}" height="100" width="100" />
-                    @else
-                        <br>
-                        <span>No Image Uploaded.</span>
-                    @endif
-
-                        </div>
-                         @endif
-                         
-                    </div>
-
-                        <hr>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                       <a type="reset" class="btn btn-inverse waves-effect waves-light" href="{{route('documents.index')}}"> Cancel </a>
-                    </form>
-
                 </div>
             </div>
+
+
+
+
+
+
+
+
         </div>
+        <!-- page inner end-->
     </div>
-  </div>
-   </div>
+    <!-- database table end -->
 </div>
 
 <script type="text/javascript">

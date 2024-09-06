@@ -1,163 +1,283 @@
 @extends('admin.layouts.layout')
 @section('title', 'Upload Document')
 @section('content')
-<div class="page-wrapper">
-   <div class="container-fluid">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Upload Document</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('documents.index')}}">Documents</a></li>
-                    <li class="breadcrumb-item active">Upload Document</li>
-                </ol>
+<style>
+    #typeofdoc.readonly {
+        pointer-events: none;
+        background-color: #e9ecef;
+    }
+</style>
+    <div class="container" style="margin-top: 90px;">
+        <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+            <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
+                <h5 class="mb-0">Documents</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                        <li class="breadcrumb-item"><a href="#">Documents</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}</li>
+                    </ol>
+                </nav>
+
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="page-inner">
+                <!-- insert the contents Here start -->
+
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                            <form id="documentForm" form action="{{route('documents.store')}}" enctype="multipart/form-data" method="post" class="disable_submit">
+                                {{csrf_field()}}
+                                <div class="table-responsive">
+                                    <h4 class="card-title mb-4 text-primary">Create
+                                        {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                                    </h4>
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <!-- Select Type of Document  -->
+                                            <tr>
+                                                <td>
+                                                    <label for="typeofdoc" class="form-label">Select
+                                                        Type Of Document <span style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <select class="form-select" id="typeofdoc" name="navigation_id">
+                                                        @foreach ($navigations as $key => $value)
+                                                            <option value="{{ $value->id }}"
+                                                                data-value="{{ $value->slug_key }}"
+                                                                {{ SELECT($value->id, old('navigation_id')) }}>
+                                                                {{ $value->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            <!-- Create Document -->
+                                            <tr>
+                                                <td>
+                                                    <label for="createDocument" class="form-label">Create
+                                                        Document <span style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="file" name="document" class="form-control"
+                                                        id="createDocument" placeholder="Enter document title" required>
+                                                    <small style="color: red;">Accepted .jpg/.jpeg/.png format &
+                                                        allowed max size is
+                                                        5MB</small>
+                                                </td>
+
+
+                                                <td></td>
+                                            </tr>
+
+                                            <!-- Enter File Name to Display -->
+                                            <tr>
+                                                <td>
+                                                    <label for="fileName" class="form-label">Enter File Name to
+                                                        Display <span style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input name="display_filename" type="text" class="form-control"
+                                                        id="fileName" placeholder="Enter file name" required>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+
+                                            <!-- Select Mapping Section -->
+                                            <tr>
+                                                <td>
+                                                    <label for="mappingSection" class="form-label">Select
+                                                        Mapping Section <span style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <select name="tags" id="tags" class="form-control">
+                                                        @foreach ($tags as $key => $value)
+                                                            <option value="{{ $key }}"
+                                                                {{ SELECT($key, old('tags')) }}>{{ $value }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+
+                                            <!-- Enter GO's/Letter/Reference Number -->
+                                            <tr>
+                                                <td>
+                                                    <label for="referenceNumber" class="form-label">Enter
+                                                        GO's/Letter/Reference Number <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" id="referenceNumber"
+                                                        name="reference_no" placeholder="Enter reference number" required>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+
+                                            <!-- Date -->
+                                            <tr>
+                                                <td>
+                                                    <label for="date" class="form-label">Date <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="date" class="form-control" name="dated" id="date"
+                                                        required>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+
+
+
+                                            <!-- Link -->
+                                            <tr>
+                                                <td>
+                                                    <label for="link" class="form-label">Link <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="url" class="form-control" id="link"
+                                                        name="link_url" placeholder="Enter link URL" required>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+
+                                            <!-- Link Title -->
+                                            <tr>
+                                                <td>
+                                                    <label for="linkTitle" class="form-label">Link Title <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" id="linkTitle"
+                                                        name="link_title" placeholder="Enter link title" required>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+                                            <!-- Status -->
+                                            <tr>
+                                                <td>
+                                                    <label for="status" class="form-label">Select File Visible to
+                                                        Public</label>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" name="visible_to_public"
+                                                            type="checkbox" id="toggleVisibleToPublic" value="1"
+                                                            {{ CHECKBOX('document_visible_to_public') }}
+                                                            onchange="toggleVisibleText('visibleToPublicLabel', this)">
+                                                        <label class="form-check-label" for="toggleVisibleToPublic"
+                                                            id="visibleToPublicLabel">No</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                            <!-- Status -->
+                                            <tr>
+                                                <td>
+                                                    <label for="status" class="form-label">Status</label>
+                                                </td>
+                                                <td>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" name="status" type="checkbox"
+                                                            id="toggleStatus" value="1"
+                                                            {{ CHECKBOX('document_status') }}
+                                                            onchange="toggleStatusText('statusLabel', this)">
+                                                        <label class="form-check-label" for="toggleStatus"
+                                                            id="statusLabel">In-Active</label>
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="d-flex mt-2">
+                                    <button type="submit" class="btn btn-primary"
+                                        onclick="validateForm()">Submit</button>
+                                    <button type="button" style="margin-left: 10px;"
+                                        class="btn btn-danger">Cancel</button>
+                                </div>
+
+                            </form>
+                            <!-- popup for submitting confirmation start -->
+                            <!-- Confirmation Modal -->
+                            <div class="modal fade" id="confirmationModal" tabindex="-1"
+                                aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center position-relative">
+                                            <h5 class="modal-title" id="confirmationModalLabel">Confirm
+                                                Submission</h5>
+                                            <button type="button" class="btn-close position-absolute end-0 me-3"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div class="confirmation-icon mb-4">
+                                                <i class="fas fa-question-circle fa-4x text-danger"></i>
+                                            </div>
+                                            <p class="mb-4">Are you sure you want to submit the form?</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-outline-danger"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-success" onclick="submitForm()">Yes,
+                                                Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- popup for submitting confirmation end -->
+                            <!-- insert the contents Here end -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- page inner end-->
+        </div>
+        <!-- database table end -->
     </div>
-      <div class="row">
-        <div class="col-md-12">
-            <div class="card card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <form action="{{route('documents.store')}}" enctype="multipart/form-data" method="post" class="disable_submit">
-                        {{csrf_field()}}
-
-                    <div class="row pt-3">
-
-                         <div class="form-group col-sm-4 col-xs-4">
-                            <label for="navigation_id" class="required">Select Type of Document </label>
-                            <select name="navigation_id" id="navigation_id" class="form-control">
-                                <option > -- Select --</option>
-                                @foreach($navigations as $key => $value)
-                                <option value="{{$value->id}}" data-value="{{$value->slug_key}}" {{SELECT($value->id,old('navigation_id'))}}>{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="document" class="required">Select File</label>
-                            <input type="file" name="document" class="form-control" id="document" accept=".pdf">
-                            <small class="form-control-feedback text-danger"> Accepted only .pdf format & allowed max size is 5MB </small>
-                        </div>
-
-                       
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="display_filename" class="required">Enter File Name to Display</label>
-                            <input type="text" name="display_filename" class="form-control" id="display_filename" placeholder="Enter File Name to Display" value="{{old('display_filename')}}">
-                            <small class="form-control-feedback text-danger"> No Special Characters are allowed. </small>
-                        </div>
-                    </div>
-
-                    <div class="row pt-3">
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="tags" class="required">Select Mapping Section</label>
-                            <select name="tags" id="tags" class="form-control">
-                                @foreach($tags as $key => $value)
-                                <option value="{{$key}}" {{SELECT($key,old('tags'))}}>{{$value}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-
-                        <div class="form-group col-sm-4 col-xs-4" id="file_name_div">
-                            <label for="display_filename" class="required">Enter G.O /Letter / Reference no.</label>
-                            <input type="text" name="reference_no" class="form-control" id="reference_no" placeholder="Enter G.O /Letter / Reference no." value="{{old('reference_no')}}">
-                        </div>
-                        <div class="form-group col-sm-4 col-xs-4" id="dated_div">
-                            <label for="dated" class="required">Dated</label>
-                            <input type="text" class="form-control mydatepicker" name="dated" placeholder="mm/dd/yyyy" id="dated">
-                        </div>
-                         <div class="form-group col-sm-4 col-xs-4">
-                            <label for="status" class="required">Select File Visible to Public </label>
-                            <select name="visible_to_public" id="visible_to_public" class="form-control">
-                                <option value="1" {{SELECT(1,old('visible_to_public'))}}>Yes</option>
-                                <option value="0" {{SELECT(0,old('visible_to_public'))}}>No</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-sm-4 col-xs-4" id="image_div" style="display:none;">
-                            <label for="document" class="">Select Image</label>
-                            <input type="file" name="document_image" class="form-control" id="document_image" accept="image/png,image/jpg,image/jpeg">
-                            <small class="form-control-feedback text-danger"> Accepted only .png/.jpg/.jpeg format & allowed max size is 2MB </small>
-                        </div>
-
-                         <div class="form-group col-sm-4 col-xs-4">
-                            <label for="link_url" class=""> Link </label>
-                            <input type="text" name="link_url" class="form-control" id="link_url" placeholder="Enter Link" value="{{old('link_url')}}">
-                        </div>
-
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="link_title" class="">Link Title</label>
-                            <input type="text" name="link_title" class="form-control" id="link_title" placeholder="Enter Link Title" value="{{old('link_title')}}">
-                        </div>
-
-
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="status" class="required">Status </label>
-                            <select name="status" id="status" class="form-control">
-                                @foreach($statuses as $key => $value)
-                                <option value="{{$value}}" {{SELECT($value,old('status'))}}>{{$key}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                        <hr>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                       <a type="reset" class="btn btn-inverse waves-effect waves-light" href="{{route('documents.index')}}"> Cancel </a>
-                    </form>
-                </div>
-            </div>
-        </div>
-          </div>
-        </div>
-   </div>
-</div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.mydatepicker, #datepicker').datepicker();
-        $('.disable_submit').on('keyup keypress', function(e) {
-          var keyCode = e.keyCode || e.which;
-          if (keyCode === 13) {
-            e.preventDefault();
-            return false;
-          }
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.mydatepicker, #datepicker').datepicker();
+            $('.disable_submit').on('keyup keypress', function(e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
         });
-    });
 
-     $(function () {
-        $("#display_filename").keypress(function (e) {
-            var keyCode = e.keyCode || e.which;
+        $(function() {
+            $("#display_filename").keypress(function(e) {
+                var keyCode = e.keyCode || e.which;
 
-            $("#lblError").html("");
+                $("#lblError").html("");
 
-            //Regex for Valid Characters i.e. Alphabets and Numbers.
-            var regex = /^[a-z\d\-_\s]+$/i;
+                //Regex for Valid Characters i.e. Alphabets and Numbers.
+                var regex = /^[a-z\d\-_\s]+$/i;
 
-            //Validate TextBox value against the Regex.
-            var isValid = regex.test(String.fromCharCode(keyCode));
-            if (!isValid) {
-                $("#lblError").html("Only Alphabets and Numbers allowed.");
-            }
-            return isValid;
+                //Validate TextBox value against the Regex.
+                var isValid = regex.test(String.fromCharCode(keyCode));
+                if (!isValid) {
+                    $("#lblError").html("Only Alphabets and Numbers allowed.");
+                }
+                return isValid;
+            });
         });
-    });
-
-   
-</script>
-<script src="{{asset('packa/custom/document.js')}}"></script>
+    </script>
+    <script>document.getElementById('typeofdoc').classList.add('readonly');</script>
+    <script src="{{ asset('packa/custom/document.js') }}"></script>
 @endsection

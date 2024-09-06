@@ -55,10 +55,10 @@ class Document extends Model
             });
         }
         if ($status = request('status')) {
-            $query->when($status == 'yes',function($sub){
+            $query->when($status == 'Active',function($sub){
                 $sub->where('status', _active());
             });
-            $query->when($status == 'no',function($sub){
+            $query->when($status == 'InActive',function($sub){
                 $sub->where('status', _inactive());
             });
         }
@@ -93,7 +93,7 @@ class Document extends Model
 
         $sortfield = ($sortfield == 'display_filename') ? 'name' : $sortfield;
 
-        return $result->orderBy($sortfield, $sorttype)->paginate($page_length);
+        return $result->orderBy($sortfield, $sorttype)->get();
     }
 
     public static function getNavigationDocument($navigationId = '')
