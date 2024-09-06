@@ -160,7 +160,7 @@
 
                                                 <td></td>
                                             </tr>
-                                            <!-- Status -->
+                                            <!-- Visible to public -->
                                             <tr>
                                                 <td>
                                                     <label for="status" class="form-label">Select File Visible to
