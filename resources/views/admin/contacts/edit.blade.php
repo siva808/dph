@@ -37,29 +37,29 @@
                                 <form action="{{ route('contacts.update', $result->id) }}" enctype="multipart/form-data"
                                     method="post">
                                     {{ csrf_field() }} @method('PUT')
-                                <input type="hidden" name="contact_type" id="contact_type"
-                                    value="{{ $result->contact_type }}"
-                                    data-value="{{ $result->contactType->slug_key }}">
-                                <input type="hidden" name="hidden_hud_id" id="hidden_hud_id"
-                                    value="{{ auth()->user()->hud_id }}">
-                                @if (!empty($isProfileUpdate))
-                                    <input type="hidden" name="profile_update" value="true">
-                                    <input type="hidden" name="is_post_vacant" value="no">
-                                @endif
+                                    <input type="hidden" name="contact_type" id="contact_type"
+                                        value="{{ $result->contact_type }}"
+                                        data-value="{{ $result->contactType->slug_key }}">
+                                    <input type="hidden" name="hidden_hud_id" id="hidden_hud_id"
+                                        value="{{ auth()->user()->hud_id }}">
+                                    @if (!empty($isProfileUpdate))
+                                        <input type="hidden" name="profile_update" value="true">
+                                        <input type="hidden" name="is_post_vacant" value="no">
+                                    @endif
                                     <div class="row mb-3 p-3">
                                         <!-- Is Post Vacant -->
                                         @if (empty($isProfileUpdate))
-                                        <div class="col-md-4">
-                                            
-                                            <div class="font-weight-bold text-secondary">Is Post Vacant:</div>
-                                            <select name="is_post_vacant" id="is_post_vacant" class="form-control">
-                                                @foreach ($is_post_vacants as $key => $value)
-                                                    <option value="{{ $key }}" data-value="{{ $key }}"
-                                                        {{ SELECT($key, old('is_post_vacant', $result->is_post_vacant)) }}>
-                                                        {{ $value }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                            <div class="col-md-4">
+
+                                                <div class="font-weight-bold text-secondary">Is Post Vacant:</div>
+                                                <select name="is_post_vacant" id="is_post_vacant" class="form-control">
+                                                    @foreach ($is_post_vacants as $key => $value)
+                                                        <option value="{{ $key }}" data-value="{{ $key }}"
+                                                            {{ SELECT($key, old('is_post_vacant', $result->is_post_vacant)) }}>
+                                                            {{ $value }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         @endif
                                         <!-- Designation -->
                                         <div class="col-md-4">
@@ -189,13 +189,14 @@
                                             <!-- Status -->
                                             <div class="col-md-4">
                                                 <div class="font-weight-bold text-secondary">Status:</div>
-                                                <select name="status" id="status" class="form-control">
-                                                    @foreach ($statuses as $key => $value)
-                                                        <option value="{{ $value }}"
-                                                            {{ SELECT($value, old('status', $result->status)) }}>
-                                                            {{ $key }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input " name="status" type="checkbox"
+                                                        id="toggleStatus" value="1"
+                                                        {{ CHECKBOX('status', $result->status) }}
+                                                        onchange="toggleStatusText('statusLabel', this)">
+                                                    <label class="form-check-label" for="toggleStatus"
+                                                        id="statusLabel">{{ $result->status == 1 ? 'Active' : 'In-Active' }}</label>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif

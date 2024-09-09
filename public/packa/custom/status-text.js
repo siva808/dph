@@ -3,7 +3,7 @@ function toggleStatusText(labelId, checkbox) {
     if (checkbox.checked) {
         label.textContent = 'Active';
     } else {
-        label.textContent = 'Inactive';
+        label.textContent = 'In-Active';
     }
 }
 function toggleVisibleText(labelId, checkbox) {

@@ -238,7 +238,7 @@ class ContactController extends Controller
             'phc_id'  => $request->phc_id,
             'hsc_id'  => $request->hsc_id,
             'is_post_vacant' => $request->is_post_vacant,
-            'status' => $request->status
+            'status' => $request->status ?? 0
         ];
 
         if ($request->is_post_vacant == 'yes') {
@@ -317,7 +317,6 @@ class ContactController extends Controller
         $rules['hsc_id'] = 'required_if:contact_type,==,10';
 
         $rules['is_post_vacant'] = 'required';
-        $rules['status'] = 'required|boolean';
 
         return $rules;
     }
