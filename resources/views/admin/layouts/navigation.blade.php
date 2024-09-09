@@ -181,7 +181,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('/contacts')}}">
                                     <span class="sub-item">List</span>
                                 </a>
                             </li>
