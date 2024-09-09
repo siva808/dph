@@ -46,7 +46,7 @@
                                                         @foreach ($navigations as $key => $value)
                                                             <option value="{{ $value->id }}"
                                                                 data-value="{{ $value->slug_key }}"
-                                                                {{ SELECT($value->id, old('navigation_id')) }}>
+                                                                {{ SELECT($value->id, request('navigation')) }}>
                                                                 {{ $value->name }}</option>
                                                         @endforeach
                                                     </select>
@@ -160,7 +160,7 @@
 
                                                 <td></td>
                                             </tr>
-                                            <!-- Status -->
+                                            <!-- Visible to public -->
                                             <tr>
                                                 <td>
                                                     <label for="status" class="form-label">Select File Visible to

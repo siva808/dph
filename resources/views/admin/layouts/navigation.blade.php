@@ -104,62 +104,62 @@
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_circulars.html">
+                            <a href="{{url('/documents?navigation=2')}}">
                               <span class="sub-item">Circulars</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_instructions.html">
+                            <a href="{{url('/documents?navigation=3')}}">
                               <span class="sub-item">Instructions</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_actsAndrules.html">
+                            <a href="{{url('/documents?navigation=4')}}">
                               <span class="sub-item">Acts/Rules</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_proceedings.html">
+                            <a href="{{url('/documents?navigation=5')}}">
                               <span class="sub-item">Proceedings</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_publications.html">
+                            <a href="{{url('/documents?navigation=6')}}">
                               <span class="sub-item">publications</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_others.html">
+                            <a href="{{url('/documents?navigation=7')}}">
                               <span class="sub-item">Others</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_newsAndnitification.html">
+                            <a href="{{url('/documents?navigation=8')}}">
                               <span class="sub-item">News & Notifications</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_events.html">
+                            <a href="{{url('/documents?navigation=9')}}">
                               <span class="sub-item">Events</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_importantlinks.html">
+                            <a href="{{url('/documents?navigation=10')}}">
                               <span class="sub-item">Important Links</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_rti.html">
+                            <a href="{{url('/documents?navigation=11')}}">
                               <span class="sub-item">RTI</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_announcements.html">
+                            <a href="{{url('/documents?navigation=12')}}">
                               <span class="sub-item">Announcements</span>
                             </a>
                           </li>
                           <li>
-                            <a href="doc_list_library.html">
+                            <a href="{{url('/documents?navigation=13')}}">
                               <span class="sub-item">Library</span>
                             </a>
                           </li>
