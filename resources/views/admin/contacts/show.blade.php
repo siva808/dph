@@ -120,7 +120,7 @@
                                     <div class="border p-3 rounded bg-light">{{dateOf($result->created_at) ?? ''}}</div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='contact_list.html'" >Back</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='{{url('/contacts')}}'" >Back</button>
 
                             
                         </div>
