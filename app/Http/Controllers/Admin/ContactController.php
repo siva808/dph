@@ -11,7 +11,7 @@ use App\Models\HUD;
 use App\Models\Block;
 use App\Models\PHC;
 use App\Models\HSC;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Services\FileService;
 use App\Http\Resources\Dropdown\BlockResource as DDBlockResource;
 use App\Http\Resources\BlockResource;
@@ -130,8 +130,8 @@ class ContactController extends Controller
             'block_id'  => $request->block_id,
             'phc_id'  => $request->phc_id,
             'hsc_id'  => $request->hsc_id,
-            'is_post_vacant' => $request->is_post_vacant,
-            'status' => $request->status
+            'is_post_vacant' => $request->is_post_vacant ?? 0,
+            'status' => $request->status ?? 0
         ];
 
         if ($request->hasFile('contact_image') && $file = $request->file('contact_image')) {
@@ -238,7 +238,7 @@ class ContactController extends Controller
             'phc_id'  => $request->phc_id,
             'hsc_id'  => $request->hsc_id,
             'is_post_vacant' => $request->is_post_vacant,
-            'status' => $request->status
+            'status' => $request->status ?? 0
         ];
 
         if ($request->is_post_vacant == 'yes') {
@@ -289,7 +289,14 @@ class ContactController extends Controller
             $rules['name'] = "required_if:is_post_vacant,==,no|nullable|min:2|max:99";
         }
         $rules['contact_type'] = 'required|exists:designation_types,id,status,' . _active();        
-        $rules['designation_id'] = 'required|exists:designations,id|unique:contacts,designation_id,NULL,id,contact_type,' . request('contact_type') . ',hud_id,' . request('hud_id') . ',block_id,' . request('block_id') . ',phc_id,' . request('phc_id') . ',hsc_id,' . request('hsc_id');
+        if ($id) {
+            // Add an exception for the current contact being updated
+            $rules['designation_id'] = 'required|exists:designations,id|unique:contacts,designation_id,' . $id . ',id,contact_type,' . request('contact_type') . ',hud_id,' . request('hud_id') . ',block_id,' . request('block_id') . ',phc_id,' . request('phc_id') . ',hsc_id,' . request('hsc_id');
+        } else {
+            // Standard uniqueness rule for creating a new contact
+            $rules['designation_id'] = 'required|exists:designations,id|unique:contacts,designation_id,NULL,id,contact_type,' . request('contact_type') . ',hud_id,' . request('hud_id') . ',block_id,' . request('block_id') . ',phc_id,' . request('phc_id') . ',hsc_id,' . request('hsc_id');
+        }
+    
         $rules['mobile_number'] = 'required_if:is_post_vacant,==,no|nullable|min:10';
         $rules['landline_number'] = 'sometimes|nullable|min:5';
         $rules['email_id'] = 'required_if:is_post_vacant,==,no|nullable|email';
@@ -309,8 +316,7 @@ class ContactController extends Controller
         $rules['phc_id'] = 'required_if:contact_type,==,9';
         $rules['hsc_id'] = 'required_if:contact_type,==,10';
 
-        $rules['is_post_vacant'] = 'required';
-        $rules['status'] = 'required|boolean';
+        // $rules['is_post_vacant'] = 'required';
 
         return $rules;
     }

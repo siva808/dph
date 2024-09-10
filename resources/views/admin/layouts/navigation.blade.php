@@ -176,12 +176,12 @@
                     <div class="collapse" id="tables">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="#">
+                                <a href="{{route('contacts.create')}}">
                                     <span class="sub-item">Create</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('/contacts')}}">
                                     <span class="sub-item">List</span>
                                 </a>
                             </li>
