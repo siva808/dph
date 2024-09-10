@@ -22,9 +22,10 @@ $("#contact_type").change(function(e) {
 
 $("#is_post_vacant").change(function(e) {
     e.preventDefault();
-   
-    
-    hideAndShow($('option:selected', this).attr('data-value'))
+   console.log($(this).is(':checked'));
+    var isChecked = $(this).is(':checked');
+    hideAndShow(isChecked ? 1 : 0);
+    // hideAndShow($('option:selected', this).attr('data-value'))
     return false;
 });
 
@@ -87,7 +88,7 @@ $("#is_post_vacant").change(function(e) {
      function hideAndShow(key) {
         
 
-        if(key == 'no') {
+        if(key == '0') {
             $("#contact_type_div").show();
             $("#name_div").show();
             $("#designation_div").show();
@@ -99,7 +100,7 @@ $("#is_post_vacant").change(function(e) {
             $("#status_div").show();
         }
 
-        if(key == 'yes') {
+        if(key == '1') {
             $("#contact_type_div").show();
             $("#name_div").hide();
             $("#designation_div").show();

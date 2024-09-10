@@ -130,8 +130,8 @@ class ContactController extends Controller
             'block_id'  => $request->block_id,
             'phc_id'  => $request->phc_id,
             'hsc_id'  => $request->hsc_id,
-            'is_post_vacant' => $request->is_post_vacant,
-            'status' => $request->status
+            'is_post_vacant' => $request->is_post_vacant ?? 0,
+            'status' => $request->status ?? 0
         ];
 
         if ($request->hasFile('contact_image') && $file = $request->file('contact_image')) {
@@ -316,7 +316,7 @@ class ContactController extends Controller
         $rules['phc_id'] = 'required_if:contact_type,==,9';
         $rules['hsc_id'] = 'required_if:contact_type,==,10';
 
-        $rules['is_post_vacant'] = 'required';
+        // $rules['is_post_vacant'] = 'required';
 
         return $rules;
     }
