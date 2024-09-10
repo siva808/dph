@@ -207,7 +207,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{url('/designations')}}">
                                     <span class="sub-item">List</span>
                                 </a>
                             </li>
