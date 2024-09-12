@@ -82,6 +82,10 @@
                                         onclick="window.location.href='designation_create.html';">
                                         <i class="fa fa-plus"></i> Add Designation
                                     </button>
+
+                                    <button class="btn btn-primary btn-round ms-auto" id="btnExcel">
+                                        <i class="fa fa-plus"></i> Export
+                                    </button>
                                    
                                 </div>
                             </div>
@@ -93,16 +97,19 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Designation Type</th>
                                                 <th>Status</th>
                                                 <th class="text-center" style="width: 10%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($results as $result)
                                             <tr>
-                                                <td>John Doe</td>
-                                                <td>Manager</td>
+                                                <td>{{$result->name ?? ''}}</td>
+                                                @if(isset($result->status) && $result->status == 1)
                                                 <td class="text-success" style="font-weight: bold;">Active</td>
+                                                @else
+                                                <td class="text-danger" style="font-weight: bold;">Active</td>
+                                                @endif
                                                 <td class="text-center">
                                                     <div class="form-button-action">
                                                         <button type="button" class="btn btn-link btn-primary btn-lg"
@@ -117,26 +124,8 @@
                                                         </button>
                                                     </div>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jane Smith</td>
-                                                <td>Assistant</td>
-                                                <td class="text-danger" style="font-weight: bold;">Inactive</td>
-                                                <td class="text-center">
-                                                    <div class="form-button-action">
-                                                        <button type="button" class="btn btn-link btn-primary btn-lg"
-                                                            onclick="window.location.href='designation_edit.html';" data-bs-toggle="tooltip"
-                                                            title="Edit Designation">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-link btn-danger"
-                                                            onclick="window.location.href='designation_view.html';" data-bs-toggle="tooltip"
-                                                            title="View Designation">
-                                                            <i class="fa fa-eye"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            </tr> 
+                                            @endforeach
                                             <!-- Additional rows as needed -->
                                         </tbody>
                                     </table>
@@ -166,14 +155,28 @@
     <!-- main panel end -->
 </div>
 <script>
-$(document).ready(function () {
-    $('#add-row').DataTable({
+   $(document).ready(function () {
+    var table = $('#add-row').DataTable({
         "paging": true,
         "searching": true,
         "lengthChange": true,
         "pageLength": 10,
         "info": true,
-        "autoWidth": false
+        "autoWidth": false,
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excel',
+                className: 'buttons-excel',
+                init: function(api, node, config){
+                    $(node).hide();
+                }
+            }
+        ]
+    });
+
+    $('#btnExcel').on('click', function () {
+        table.button('.buttons-excel').trigger();
     });
 });
 </script>
