@@ -25,13 +25,14 @@
                                 <div class="col col-md-4">
                                     <div class="form-group">
                                         <label>Block</label>
-                                        <select class="form-control">
+                                        <select name="block_id" class="form-control searchable" onchange="searchFun()">
                                             <option value="">-- Select Block -- </option>
                                             @foreach ($huds as $hud)
                                                 <optgroup label="{{ $hud->name }}">
                                                     @foreach ($hud->blocks as $block)
                                                         <option value="{{ $block->id }}"
-                                                            {{ SELECT($block->id, request('block_id')) }}>{{ $block->name }}
+                                                            {{ SELECT($block->id, request('block_id')) }}>
+                                                            {{ $block->name }}
                                                         </option>
                                                     @endforeach
                                                 </optgroup>
@@ -41,10 +42,7 @@
                                 </div>
                                 <div class="col d-flex justify-content-end align-items-center mt-2">
                                     <div class="form-group d-flex">
-                                        <button type="button" class="btn btn-primary me-2" style="border-radius: 10px;">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                        <button type="reset" class="btn btn-secondary" style="border-radius: 10px;">
+                                        <button type="reset" onClick="resetSearch()" class="btn btn-secondary resetSearch" style="border-radius: 10px;">
                                             <i class="fas fa-redo"></i>
                                         </button>
                                     </div>
@@ -94,33 +92,35 @@
                                             <tbody>
                                                 @foreach ($results as $result)
                                                     <tr>
-                                                        <td>{{$result->name ?? ''}}</td>
-                                                        <td>{{$result->block->name ?? ''}}</td>
+                                                        <td>{{ $result->name ?? '' }}</td>
+                                                        <td>{{ $result->block->name ?? '' }}</td>
                                                         <td>
                                                             @if (isset($result->status) && $result->status == 1)
-                                                                <span class="text-success" style="font-weight: bold;">Active</span>
+                                                                <span class="text-success"
+                                                                    style="font-weight: bold;">Active</span>
                                                             @else
-                                                                <span class="text-danger" style="font-weight: bold;">In-Active</span>
+                                                                <span class="text-danger"
+                                                                    style="font-weight: bold;">In-Active</span>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="form-button-action">
                                                                 <button type="button"
                                                                     class="btn btn-link btn-primary btn-lg"
-                                                                    onclick="window.location.href='phc_edit.html'"
+                                                                    onclick="window.location.href='{{route('phc.edit',$result->id)}}'"
                                                                     data-bs-toggle="tooltip" title="Edit PHC">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                                 <button type="button" class="btn btn-link btn-danger"
-                                                                    onclick="window.location.href='phc_view.html'"
+                                                                    onclick="window.location.href='{{route('phc.show',$result->id)}}'"
                                                                     data-bs-toggle="tooltip" title="View PHC">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    @endforeach
-                                                    <!-- Additional rows as needed -->
+                                                @endforeach
+                                                <!-- Additional rows as needed -->
                                             </tbody>
                                         </table>
 
@@ -141,6 +141,31 @@
         <!-- content end here -->
         <!-- main panel end -->
     </div>
+    <script>
+        $(document).ready(function() {
+            var tableData = @json($results);
+            if (tableData.length > 0) {
+                $('#add-row').DataTable({
+                    "paging": true,
+                    "searching": true,
+                    "lengthChange": true,
+                    "pageLength": 10,
+                    "info": true,
+                    "autoWidth": false,
+                });
+            } else {
+                $('#add-row').DataTable({
+                    "data": [],
+                    "paging": true,
+                    "searching": true,
+                    "lengthChange": true,
+                    "pageLength": 10,
+                    "info": true,
+                    "autoWidth": false
+                });
+            }
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             setPageUrl('/phc?');

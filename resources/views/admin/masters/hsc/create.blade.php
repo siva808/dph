@@ -1,123 +1,217 @@
 @extends('admin.layouts.layout')
 @section('title', 'Create Hsc')
 @section('content')
-<div class="page-wrapper">
-   <div class="container-fluid">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Create Hsc</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('hsc.index')}}">Hsc</a></li>
-                    <li class="breadcrumb-item active">Create Hsc</li>
-                </ol>
+    <div class="container" style="margin-top: 90px;">
+        <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+            <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
+                <h5 class="mb-0">HSC</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                        <li class="breadcrumb-item"><a href="#">HSC</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create HSC</li>
+                    </ol>
+                </nav>
+
             </div>
         </div>
-    </div>
-      <div class="row">
-        <div class="col-md-12">
-            <div class="card card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        <div class="container-fluid">
+            <div class="page-inner">
+                <!-- insert the contents Here start -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <form action="{{route('hsc.store')}}" enctype="multipart/form-data" method="post">
-                        {{csrf_field()}}
+                <div class="container-fluid mt-2">
+                    <div class="row">
+                        <div class="col-lg-5 py-5 px-5" style="background-color: #ffffff; border-radius: 10px;">
+                            <form id="urbanForm" action="{{ route('hsc.store') }}" enctype="multipart/form-data"
+                                method="post">
+                                {{ csrf_field() }}
+                                <div class="container">
+                                    <h4 class="card-title mb-4 text-primary">HSC (Health Sub Center)</h4>
 
-                    <div class="row pt-3">
+                                    <!-- Is Urban (Toggle Switch) Row -->
+                                    <div class="row mb-3">
+                                        <!-- <div class="col-12 col-md-3">
+                                                <label for="isUrban" class="form-label">Is Urban? <span style="color: red;">*</span></label>
+                                            </div>
+                                            <div class="col-12 col-md-5">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="isUrban" checked
+                                                        onchange="toggleUrbanStatus('urbanLabel', this)">
+                                                    <label class="form-check-label" for="isUrban" id="urbanLabel">Yes</label>
+                                                </div>
+                                            </div> -->
+                                    </div>
 
-                        <div class="form-group col-sm-4 col-xs-4" id="is_post_vacant_div">
-                            <label for="is_urban" class="required">Is Urban </label>
-                            <select name="is_urban" id="is_urban" class="form-control">
-                                @foreach($is_urban as $key => $value)
-                                <option value="{{$key}}" data-value="{{$key}}" {{SELECT($value,old('is_urban'))}}>{{$value}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="name" class="required">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{old('name')}}">
-                        </div>
+                                    <!-- name Row -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="hscname" class="form-label">Name</label>
+                                        </div>
+                                        <div class="col-12 col-md-10">
+                                            <input type="text" class="form-control" name="name" id="hscname"
+                                                placeholder="Enter name">
+                                        </div>
+                                    </div>
 
-                        <div class="form-group col-sm-4 col-xs-4">
-                         <label for="block_id" class="required">Block</label>
-                            <select name="block_id" id="block_id" class="form-control">
-                                  <option value="" >-- Select Block -- </option>
-                                  @foreach($huds as $hud)
-                                  <optgroup label="{{$hud->name}}">
-                                    @foreach($hud->blocks as $block)
-                                    <option value="{{$block->id}}" {{SELECT($block->id,request('block_id'))}}>{{$block->name}}</option>
-                                    @endforeach
-                                  </optgroup>
-                                  @endforeach
-                            </select>
-                       
-                     </div>
+                                    <!-- Block Row as Dropdown -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="block" class="form-label">Block<span
+                                                    style="color: red;">*</span></label>
+                                        </div>
+                                        <div class="col-12 col-md-10">
+                                            <select name="block_id" id="block_id" class="form-control">
+                                                <option value="">-- Select Block -- </option>
+                                                @foreach ($huds as $hud)
+                                                    <optgroup label="{{ $hud->name }}">
+                                                        @foreach ($hud->blocks as $block)
+                                                            <option value="{{ $block->id }}"
+                                                                {{ SELECT($block->id, request('block_id')) }}>
+                                                                {{ $block->name }}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
 
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="phc_id" class="required">PHC</label>
-                            <select name="phc_id" id="phc_id" class="form-control">
-                                <option value="" >-- Select PHC -- </option>
-                                @foreach($phc as $key => $value)
-                                <option value="{{$value->id}}" {{SELECT($value->id,old('phc_id'))}}>{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                    <!-- PHC Row as Dropdown -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="phc" class="form-label">PHC<span
+                                                    style="color: red;">*</span></label>
+                                        </div>
+                                        <div class="col-12 col-md-10">
+                                            <select name="phc_id" id="phc_id" class="form-control">
+                                                <option value="">-- Select PHC -- </option>
+                                                @foreach ($phc as $key => $value)
+                                                    <option value="{{ $value->id }}"
+                                                        {{ SELECT($value->id, old('phc_id')) }}>{{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
 
-                         
-                       
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="hsc" class="">Select Image</label>
-                            <input type="file" name="hsc_image" class="form-control" id="hsc_image" accept="image/png,image/jpg,image/jpeg">
-                            <small class="form-control-feedback text-danger"> Accepted only .png/.jpg/.jpeg format & allowed max size is 1MB </small>
-                        </div>
 
-                         <div class="form-group col-sm-4 col-xs-4">
-                            <label for="video_url" class="">Video URL</label>
-                            <input type="text" name="video_url" class="form-control" id="video_url" placeholder="Enter Video URL" value="{{old('video_url')}}">
-                        </div>
 
-                          <div class="form-group col-sm-4 col-xs-4">
-                            <label for="location_url" class="">Map Location URL</label>
-                            <input type="text" name="location_url" class="form-control" id="location_url" placeholder="Enter Location" value="{{old('location_url')}}">
-                        </div>
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="property_document" class="">Select Land Document</label>
-                            <input type="file" name="property_document" class="form-control" id="property_document" accept=".pdf">
-                            <small class="form-control-feedback text-danger"> Accepted only .pdf format & allowed max size is 5mb </small>
-                        </div>
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="status" class="required">Status </label>
-                            <select name="status" id="status" class="form-control">
-                                @foreach($statuses as $key => $value)
-                                <option value="{{$value}}" {{SELECT($value,old('status'))}}>{{$key}}</option>
-                                @endforeach
-                            </select>
+                                    <!-- Status Row -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 mt-2 col-md-3">
+                                            <label for="status" class="form-label">Status</label>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" name="status" type="checkbox"
+                                                    id="toggleStatus" value="1" {{ CHECKBOX('document_status') }}
+                                                    onchange="toggleStatusText('statusLabel', this)">
+                                                <label class="form-check-label" for="toggleStatus"
+                                                    id="statusLabel">In-Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Select Image Row -->
+                                    <!-- <div class="row mb-3">
+                                            <div class="col-12 col-md-3">
+                                                <label for="selectImage" class="form-label">Select Image</label>
+                                            </div>
+                                            <div class="col-12 col-md-7">
+                                                <input type="file" class="form-control" id="selectImage" accept="image/*">
+                                            </div>
+                                        </div> -->
+
+                                    <!-- Video URL Row -->
+                                    <!-- <div class="row mb-3">
+                                            <div class="col-12 col-md-3">
+                                                <label for="videoUrl" class="form-label">Video URL</label>
+                                            </div>
+                                            <div class="col-12 col-md-7">
+                                                <input type="url" class="form-control" id="videoUrl" placeholder="Enter video URL">
+                                            </div>
+                                        </div> -->
+
+                                    <!-- Map Location URL Row -->
+                                    <!-- <div class="row mb-3">
+                                            <div class="col-12 col-md-3">
+                                                <label for="mapLocation" class="form-label">Map Location URL</label>
+                                            </div>
+                                            <div class="col-12 col-md-7">
+                                                <input type="url" class="form-control" id="mapLocation" placeholder="Enter map location URL">
+                                            </div>
+                                        </div> -->
+
+                                    <!-- Land Document Row -->
+                                    <!-- <div class="row mb-3">
+                                            <div class="col-12 col-md-3">
+                                                <label for="landDocument" class="form-label">Land Document</label>
+                                            </div>
+                                            <div class="col-12 col-md-7">
+                                                <input type="file" class="form-control" id="landDocument" accept=".pdf, .doc, .docx">
+                                            </div>
+                                        </div> -->
+
+                                    <!-- Buttons -->
+                                    <div class="d-flex mt-2">
+                                        <button type="submit" class="btn btn-primary"
+                                            onclick="validateForm()">Submit</button>
+                                        <button type="button" style="margin-left: 10px;"
+                                            class="btn btn-danger">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- Confirmation Modal -->
+                            <div class="modal fade" id="confirmationModal" tabindex="-1"
+                                aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center position-relative">
+                                            <h5 class="modal-title" id="confirmationModalLabel">Confirm
+                                                Submission</h5>
+                                            <button type="button" class="btn-close position-absolute end-0 me-3"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div class="confirmation-icon mb-4">
+                                                <i class="fas fa-question-circle fa-4x text-danger"></i>
+                                            </div>
+                                            <p class="mb-4">Are you sure you want to submit the form?</p>
+                                        </div>
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-outline-danger"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-success" onclick="submitForm()">Yes,
+                                                Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                        <hr>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                         <a type="reset" class="btn btn-inverse waves-effect waves-light" href="{{route('hsc.index')}}"> Cancel </a>
-                    </form>
                 </div>
+
+
+
+
+
+
+
+
+
+
             </div>
+            <!-- page inner end-->
         </div>
-          </div>
-        </div>
-   </div>
-</div>
-<script src="{{asset('packa/custom/hierarchy.js')}}"></script>
+        <!-- database table end -->
+    </div>
+    <script src="{{ asset('packa/custom/hierarchy.js') }}"></script>
 
 @endsection

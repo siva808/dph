@@ -65,7 +65,9 @@ class Block extends Model
         
      	
 
-     	return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+     	return $result->orderBy($sortfield,$sorttype)->get();
+     	// return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+
     }
 
     public static function getBlockData($hud_id = NULL) {

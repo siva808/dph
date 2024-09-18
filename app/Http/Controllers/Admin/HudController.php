@@ -52,6 +52,7 @@ class HudController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
 
         if($validator->fails()) {
@@ -62,10 +63,10 @@ class HudController extends Controller
         $input = [
                 'name' => $request->name,
                 'district_id' => $request->district_id,
-                'location_url' => $request->location_url,
-                'video_url' => $request->video_url,
-                'is_urban' => $request->is_urban,
-                'status' => $request->status
+                // 'location_url' => $request->location_url,
+                // 'video_url' => $request->video_url,
+                // 'is_urban' => $request->is_urban,
+                'status' => $request->status ?? 0
             ];
             
            
@@ -86,8 +87,8 @@ class HudController extends Controller
                 $input['property_document_url'] = $storedFileArray['stored_file_path'] ?? '';
             }
         }
+        
         $result = HUD::create($input);
-       
 
         createdResponse("HUD Created Successfully");
 
@@ -143,10 +144,10 @@ class HudController extends Controller
         $input = [
                 'name' => $request->name,
                 'district_id' => $request->district_id,
-                'location_url' => $request->location_url,
-                'video_url' => $request->video_url,
-                'is_urban' => $request->is_urban,
-                'status' => $request->status
+                // 'location_url' => $request->location_url,
+                // 'video_url' => $request->video_url,
+                // 'is_urban' => $request->is_urban,
+                'status' => $request->status ?? 0
             ];
 
             
@@ -207,8 +208,8 @@ class HudController extends Controller
         $rules['hud_image'] = 'sometimes|mimes:png,jpg,jpeg|max:4096';
         $rules['location_url'] = 'sometimes|nullable|url';
         $rules['video_url'] = 'sometimes|nullable|url';
-        $rules['status'] = 'required|boolean';
-        $rules['is_urban'] = 'required';
+        // $rules['status'] = 'required|boolean';
+        // $rules['is_urban'] = 'required';
         $rules['property_document'] = 'sometimes|mimes:pdf|max:8192';
 
         return $rules;
