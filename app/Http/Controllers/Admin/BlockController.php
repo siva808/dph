@@ -55,10 +55,10 @@ class BlockController extends Controller
         $input = [
                 'name' => $request->name,
                 'hud_id' => $request->hud_id,
-                'location_url' => $request->location_url,
-                'video_url' => $request->video_url,
-                'is_urban' => $request->is_urban,
-                'status' => $request->status
+                // 'location_url' => $request->location_url,
+                // 'video_url' => $request->video_url,
+                // 'is_urban' => $request->is_urban,
+                'status' => $request->status ?? 0
             ];
 
 
@@ -136,10 +136,10 @@ class BlockController extends Controller
         $input = [
                 'name' => $request->name,
                 'hud_id' => $request->hud_id,
-                'location_url' => $request->location_url,
-                'video_url' => $request->video_url,
-                'is_urban' => $request->is_urban,
-                'status' => $request->status
+                // 'location_url' => $request->location_url,
+                // 'video_url' => $request->video_url,
+                // 'is_urban' => $request->is_urban,
+                'status' => $request->status ?? 0
             ];
 
              
@@ -205,8 +205,8 @@ class BlockController extends Controller
         $rules['block_image'] = 'sometimes|mimes:png,jpg,jpeg|max:4096';
         $rules['location_url'] = 'sometimes|nullable|url';
         $rules['video_url'] = 'sometimes|nullable|url';
-        $rules['status'] = 'required|boolean';
-        $rules['is_urban'] = 'required';
+        // $rules['status'] = 'required|boolean';
+        // $rules['is_urban'] = 'required';
         $rules['property_document'] = 'sometimes|mimes:pdf|max:8192';
         
         return $rules;

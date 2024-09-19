@@ -71,7 +71,9 @@ class HSC extends Model
      	$sortfield = ($sortfield == 'name')?'name':$sortfield;
      	
 
+     	// return $result->orderBy($sortfield,$sorttype)->get();
      	return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+
     }
 
     public static function getHscData($phc_id = NULL) {

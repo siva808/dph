@@ -55,7 +55,8 @@ class HUD extends Model
      	$sortfield = ($sortfield == 'name')?'name':$sortfield;
      	
 
-     	return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+     	return $result->orderBy($sortfield,$sorttype)->get();
+     	// return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
     }
 
     public static function getHudData($district_id = NULL, $hud_id = NULL) {
