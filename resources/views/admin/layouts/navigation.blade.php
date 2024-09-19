@@ -286,7 +286,7 @@
             <div class="collapse" id="healthfac">
               <ul class="nav nav-collapse">
                 <li>
-                  <a href="facilitymaster_list.html">
+                  <a href="{{route('facility_hierarchy.index')}}">
                     <span class="sub-item">Facility Master</span>
                   </a>
                 </li>

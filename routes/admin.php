@@ -45,6 +45,7 @@ Route::middleware(['admin'])->group(function () {
 
 Route::middleware(['privilege'])->group(function () {
 	Route::resource('/contacts','Admin\ContactController');
+	Route::resource('/facility_hierarchy','Admin\FacilityHierarchyController');
 	Route::get('/profile/update','Admin\ContactController@updateSelfContact');
 	Route::resource('/huds','Admin\HudController');
 	Route::get('/huds/destroy-document/{block}', 'Admin\HudController@destroyDocument');
