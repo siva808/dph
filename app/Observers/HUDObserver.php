@@ -18,10 +18,10 @@ class HUDObserver
 		$hud->unique_code = $uniqueCode;
     	$hud->save();
 
-        $user = new User();
-        $contact = new Contact();
-        $user = $user->createHUDUser($hud);
-        $contact->createNewHUDContact($hud,$user);
+        // $user = new User();
+        // $contact = new Contact();
+        // $user = $user->createHUDUser($hud);
+        // $contact->createNewHUDContact($hud,$user);
 
     }
 }

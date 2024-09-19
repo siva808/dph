@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 @section('title', 'List Huds')
 @section('content')
-<div class="container" id="maincontent">
+<div class="container" style="margin-top: 90px;">
     <div class="container-fluid p-2" style="background-color: #f2f2f2;">
         <div class="d-flex justify-content-between align-items-center"
             style="padding-left: 20px; padding-right: 20px;">

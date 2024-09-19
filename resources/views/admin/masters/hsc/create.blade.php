@@ -161,8 +161,8 @@
                                     <!-- Buttons -->
                                     <div class="d-flex mt-2">
                                         <button type="submit" class="btn btn-primary"
-                                            onclick="validateForm()">Submit</button>
-                                        <button type="button" style="margin-left: 10px;"
+                                            onclick="validateForm()">Submit</button> 
+                                        <button type="button" style="margin-left: 10px;" onclick="window.location.href='{{url('/hsc')}}';"
                                             class="btn btn-danger">Cancel</button>
                                     </div>
                                 </div>

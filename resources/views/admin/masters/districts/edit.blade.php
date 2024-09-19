@@ -1,74 +1,131 @@
-@extends('admin.layouts.layout') @section('title', 'Edit District') @section('content') <div class="page-wrapper">
-  <div class="container-fluid">
-    <div class="row page-titles">
-      <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">Edit District</h4>
-      </div>
-      <div class="col-md-7 align-self-center text-right">
-        <div class="d-flex justify-content-end align-items-center">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="{{url('/dashboard')}}">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">
-              <a href="{{route('districts.index')}}">District</a>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card card-body"> @if ($errors->any()) <div class="alert alert-danger">
-            <ul> @foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach </ul>
-          </div> @endif <div class="row">
-            <div class="col-sm-12 col-xs-12">
-              <form action="{{route('districts.update',$result->id)}}" enctype="multipart/form-data" method="post">
-                {{csrf_field()}} @method('PUT')
+@extends('admin.layouts.layout')
+@section('title', 'Edit District')
+@section('content') <div class="page-wrapper">
+        <div class="container" style="margin-top: 90px;">
+            <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+                <div class="d-flex justify-content-between align-items-center"
+                    style="padding-left: 20px; padding-right: 20px;">
+                    <h5 class="mb-0">District</h5>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                            <li class="breadcrumb-item"><a href="#">District</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                        </ol>
+                    </nav>
 
-                <div class="row pt-3 col-md-12">
-
-                  <div class="form-group col-sm-4 col-xs-4">
-                    <label for="name" class="required">Name</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{old('name',$result->name)}}">
-                  </div>
-
-                  <div class="form-group col-sm-4 col-xs-4">
-                    <label for="district_image" class="">Image </label>
-                    <input type="file" name="district_image" class="form-control" id="district_image" placeholder="Image " value="{{old('image_url',$result->image_url)}}" />
-                  </div>
-
-                   <div class="form-group col-sm-4 col-xs-4">
-                    <label for="location_url" class="">Map Location URL</label>
-                    <input type="text" name="location_url" class="form-control" id="location_url" placeholder=" Enter Location" value="{{old('location_url',$result->location_url)}}" />
-                  </div>
-
-                  <div class="form-group col-sm-4 col-xs-4">
-                    <label for="status" class="required">Status </label>
-                    <select name="status" id="status" class="form-control"> @foreach($statuses as $key => $value) <option value="{{$value}}" {{SELECT($value,old('status',$result->status))}}>{{$key}}</option> @endforeach </select>
-                  </div>
                 </div>
-                <div class="row pt-3 col-md-12">
-                    <div class="form-group col-sm-4 col-xs-4">
-                    <label for="image_url" class="required">District Image </label>
-                    @if($result->image_url)
-                        <br>
-                        <img src="{{fileLink($result->image_url)}}" height="100" width="100" />
-                    @else
-                        <br>
-                        <span>No Image Uploaded.</span>
-                    @endif
-
-                    </div>
-                </div>
-                <hr>
-                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                 <a type="reset" class="btn btn-inverse waves-effect waves-light" href="{{route('districts.index')}}"> Cancel </a>
-              </form>
             </div>
-          </div>
+            <div class="container-fluid">
+                <div class="page-inner">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-lg-5 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                                <!-- insert the contents Here start -->
+
+                                <div class="card-body">
+                                    <!-- Heading -->
+                                    <h4 class="card-title mb-4 text-primary">Edit District Details</h4>
+
+                                    <form action="{{ route('districts.update', $result->id) }}"
+                                        enctype="multipart/form-data" method="post">
+                                        {{ csrf_field() }}
+                                        @method('PUT')
+                                        <!-- Name -->
+                                        <div class="row mb-3 p-3">
+                                            <div class="col-md-10">
+                                                <div class="font-weight-bold text-secondary">Name:</div>
+                                                <input type="text" class="form-control" id="districtName"
+                                                value="{{ old('name', $result->name) }}" name="name">
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <!-- <div class="row mb-3 p-3">
+                                                <!-- Map Location --
+                                                <div class="col-md-6">
+                                                    <div class="font-weight-bold text-secondary">Map Location</div>
+                                                    <input type="text" class="form-control" id="mapLocation" placeholder="Enter Map Location" required>
+                                                </div>
+                                                <!-- Image preview --
+                                                <div class="col-md-6">
+                                                    <div class="font-weight-bold text-secondary">Image Preview:</div>
+                                                    <img id="imagePreview" src="#" alt="District Image Preview" style="max-width: 150px; max-height: 150px; cursor: pointer; display: none;" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                                </div>
+                                            </div> -->
+
+
+
+                                        <!-- Status -->
+                                        <div class="row mb-3 p-3">
+                                            <div class="col-md-10">
+                                                <div class="font-weight-bold text-secondary">Status:</div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input " name="status" type="checkbox"
+                                                    id="toggleStatus" value="1"
+                                                    {{ CHECKBOX('status', $result->status) }}
+                                                    onchange="toggleStatusText('statusLabel', this)">
+                                                <label class="form-check-label" for="toggleStatus"
+                                                    id="statusLabel">{{ $result->status == 1 ? 'Active' : 'In-Active' }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Buttons -->
+                                        <div class="text-start mt-4">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button type="button" onclick="window.location.href='{{route('districts.index')}}'" class="btn btn-danger">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Modal for Image Preview -->
+                                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="imageModalLabel">District Image</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <img id="modalImage" src="#" alt="District Image"
+                                                    style="max-width: 100%; height: auto;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <!-- insert the contents Here end -->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+                <!-- page inner end-->
+            </div>
+            <!-- database table end -->
         </div>
-      </div>
-    </div>
-  </div>
 </div> @endsection

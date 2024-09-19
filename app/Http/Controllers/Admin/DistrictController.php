@@ -53,8 +53,8 @@ class DistrictController extends Controller
 
         $input = [
                 'name' => $request->name,
-                'status' => $request->status,
-                'location_url' => $request->location_url,
+                'status' => $request->status ?? 0,
+                // 'location_url' => $request->location_url,
                 
             ];
              if($request->hasFile('district_image') && $file = $request->file('district_image')) {
@@ -125,7 +125,7 @@ class DistrictController extends Controller
         $input = [
                 'name' => $request->name,
                 'location_url' => $request->location_url,
-                'status' => $request->status
+                'status' => $request->status ?? 0
             ];
 
         if($request->hasFile('district_image') && $file = $request->file('district_image')) {
@@ -166,7 +166,7 @@ class DistrictController extends Controller
 
         $rules['district_image'] = 'sometimes|mimes:png,jpg,jpeg|max:4096';
         $rules['location_url'] = 'sometimes|nullable|url';
-        $rules['status'] = 'required|boolean';
+        // $rules['status'] = 'required|boolean';
 
         return $rules;
     }

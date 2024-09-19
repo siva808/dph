@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 @section('title', 'Create Block')
 @section('content')
-    <div class="container" id="maincontent">
+    <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
                 <h5 class="mb-0">Block</h5>
@@ -137,7 +137,7 @@
                                     <div class="d-flex mt-2">
                                         <button type="submit" class="btn btn-primary"
                                             onclick="validateForm()">Submit</button>
-                                        <button type="button" style="margin-left: 10px;"
+                                        <button onclick="window.location.href='{{url('/blocks')}}';" type="button" style="margin-left: 10px;"
                                             class="btn btn-danger">Cancel</button>
                                     </div>
                                 </div>

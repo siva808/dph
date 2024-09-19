@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 @section('title', 'View Hud')
 @section('content')
-<div class="container" id="maincontent">
+<div class="container" style="margin-top: 90px;">
     <div class="container-fluid p-2" style="background-color: #f2f2f2;">
         <div class="d-flex justify-content-between align-items-center"
             style="padding-left: 20px; padding-right: 20px;">
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                         
-                            <button type="button" onclick="window.location.href='hud_list.html';" class="btn btn-primary mt-3" style="margin-left: 13px;">Back</button>
+                            <button type="button" onclick="window.location.href='{{url('/huds')}}';" class="btn btn-primary mt-3" style="margin-left: 13px;">Back</button>
                         </div>
                         
                         

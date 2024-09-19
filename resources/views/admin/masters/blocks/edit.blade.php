@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 @section('title', 'Edit Block')
 @section('content')
-    <div class="container" id="maincontent">
+    <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
                 <h5 class="mb-0">Block</h5>
@@ -98,7 +98,7 @@
                                     <!-- Buttons -->
                                     <div class="text-start mt-4 px-3">
                                         <button type="submit" class="btn btn-primary">Save</button>
-                                        <button type="button" class="btn btn-danger">Cancel</button>
+                                        <button type="button" onclick="window.location.href='{{url('/blocks')}}';" class="btn btn-danger">Cancel</button>
                                     </div>
                                 </form>
                             </div>

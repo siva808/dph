@@ -124,7 +124,7 @@
                                     <!-- Buttons -->
                                     <div class="text-start mt-4 px-3">
                                         <button type="submit" class="btn btn-primary">Save</button>
-                                        <button type="button" class="btn btn-danger">Cancel</button>
+                                        <button onclick="window.location.href='{{url('/hsc')}}';" type="button" class="btn btn-danger">Cancel</button>
                                     </div>
                                 </form>
                             </div>
