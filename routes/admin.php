@@ -34,6 +34,7 @@ Route::middleware(['admin'])->group(function () {
 	
 	Route::resource('/bulk-mailers','Admin\BulkMailerController');
 	Route::resource('/testimonials','Admin\TestimonialController');
+	Route::resource('/social-media','Admin\SocialMediaController');
 	Route::get('/header', 'Admin\HeaderController@edit');
 	Route::post('/header/update/{id}', 'Admin\HeaderController@updateHeader')->name('header.update');
 	Route::get('/footer', 'Admin\FooterController@edit');
