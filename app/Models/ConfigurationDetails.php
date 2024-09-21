@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ConfigurationDetails extends Model
 {
     protected $table = 'configuration_details';
-	 protected $fillable = [
+    protected $fillable = [
         'name',
         'link',
         'image_url',
@@ -30,9 +30,17 @@ class ConfigurationDetails extends Model
         return convertUTCToLocal($date);
     }
 
-    public static function getConfigurationDetailsData() {
+    public static function getConfigurationDetailsData($id)
+    {
 
-        $configuration = static::with([]);    
-        return $configuration->orderBy('id','asc')->get();
+        return static::where('configuration_content_type_id', $id)
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+    public static function getHeaderLogoConfig()
+    {
+        return static::where('configuration_content_type_id', 1)
+            ->orderBy('id', 'asc')
+            ->get();
     }
 }

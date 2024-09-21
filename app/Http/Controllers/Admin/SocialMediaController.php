@@ -19,7 +19,7 @@ class SocialMediaController extends Controller
      */
     public function index()
     {
-        $results = ConfigurationDetails::getConfigurationDetailsData();
+        $results = ConfigurationDetails::getConfigurationDetailsData($id = 5);
         //$result = DB::table('configurations')->where('id', $id)->first();
         $statuses = _getGlobalStatus();
         return view('admin.configurations.social-media.list', compact('results', 'statuses'));

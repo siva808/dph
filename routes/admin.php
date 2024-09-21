@@ -35,7 +35,11 @@ Route::middleware(['admin'])->group(function () {
 	Route::resource('/bulk-mailers','Admin\BulkMailerController');
 	Route::resource('/testimonials','Admin\TestimonialController');
 	Route::resource('/social-media','Admin\SocialMediaController');
-	Route::get('/header', 'Admin\HeaderController@edit');
+	Route::resource('/header', 'Admin\HeaderController');
+	Route::post('/header/update-logo', 'Admin\HeaderController@updateHeaderLogo')->name('header.updatelogo');
+	Route::post('/header/store-banner', 'Admin\HeaderController@storeBanner')->name('header.storebanner');
+	Route::post('/header/update-banner', 'Admin\HeaderController@updateBanner')->name('header.updatebanner');
+	Route::get('/header', 'Admin\HeaderController@edit')->name('header.edit');
 	Route::post('/header/update/{id}', 'Admin\HeaderController@updateHeader')->name('header.update');
 	Route::get('/footer', 'Admin\FooterController@edit');
 	Route::post('/footer/update/{id}', 'Admin\FooterController@updateFooter')->name('footer.update');
