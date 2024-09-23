@@ -35,6 +35,7 @@ Route::middleware(['admin'])->group(function () {
 	Route::resource('/bulk-mailers','Admin\BulkMailerController');
 	Route::resource('/testimonials','Admin\TestimonialController');
 	Route::resource('/social-media','Admin\SocialMediaController');
+	Route::resource('/partner','Admin\PartnerController');
 	Route::resource('/header', 'Admin\HeaderController');
 	Route::post('/header/update-logo', 'Admin\HeaderController@updateHeaderLogo')->name('header.updatelogo');
 	Route::post('/header/store-banner', 'Admin\HeaderController@storeBanner')->name('header.storebanner');
@@ -42,6 +43,10 @@ Route::middleware(['admin'])->group(function () {
 	Route::get('/header', 'Admin\HeaderController@edit')->name('header.edit');
 	Route::post('/header/update/{id}', 'Admin\HeaderController@updateHeader')->name('header.update');
 	Route::get('/footer', 'Admin\FooterController@edit');
+	Route::post('/footer/store-logo', 'Admin\FooterController@storeLogo')->name('footer.storelogo');
+	Route::post('/footer/store-links', 'Admin\FooterController@storeLink')->name('footer.storelink');
+	Route::post('/footer/update-logo', 'Admin\FooterController@updateFooterLogo')->name('footer.updatelogo');
+	Route::post('/footer/update-link', 'Admin\FooterController@updateFooterLink')->name('footer.updatelink');
 	Route::post('/footer/update/{id}', 'Admin\FooterController@updateFooter')->name('footer.update');
 	// Route::get('/configurations', 'Admin\ConfigurationController@edit');
 	// Route::post('/configurations/update/{id}', 'Admin\ConfigurationController@updateConfiguration')->name('configurations.update');

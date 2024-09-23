@@ -18,9 +18,11 @@ class Configuration extends Model
         'dph_city',
         'dph_state',
         'dph_phone',
+        'dph_email',
         'joint_director_email',
         'joint_director_phone',
-        'footer_gov_name_tamil'
+        'footer_gov_name_tamil',
+        'joint_director_designation'
        
     ];
 
@@ -39,10 +41,9 @@ class Configuration extends Model
         return convertUTCToLocal($date);
     }
 
-    public static function getConfigurationData() {
+    public static function getConfigurationData($id) {
 
-        $configuration = static::with([]);    
-        return $configuration->orderBy('id','asc')->get();
+        return static::where('id', $id)->first();
     }
 
     public static function getLatestConfig() {

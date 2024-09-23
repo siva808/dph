@@ -4,11 +4,11 @@
     <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
-                <h5 class="mb-0">Create Social Media</h5>
+                <h5 class="mb-0">Edit PartnerLogos</h5>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Create Social Media</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit PartnerLogos</li>
                     </ol>
                 </nav>
 
@@ -27,15 +27,18 @@
                     </div>
                 @endif
                 <div>
+
                     <!-- insert the contents Here start -->
 
                     <div class="container mt-2">
                         <div class="row">
                             <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
-                                <form action="{{ route('social-media.store') }}" enctype="multipart/form-data" method="post" id="myForm">
+                                <form id="myForm" action="{{ route('partner.update', $result->id) }}"
+                                    enctype="multipart/form-data" method="post">
                                     {{ csrf_field() }}
+                                    @method('PUT')
                                     <div class="container">
-                                        <h4 class="card-title mb-4 text-primary">Create Social Media</h4>
+                                        <h4 class="card-title mb-4 text-primary">Edit Partner Logos</h4>
 
                                         <!-- Name Row -->
                                         <div class="row mb-3">
@@ -46,8 +49,8 @@
                                             </div>
                                             <!-- Input Column -->
                                             <div class="col-12 col-md-7">
-                                                <input type="text" class="form-control" id="name"
-                                                    placeholder="Enter name" name="name">
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                    placeholder="Enter name" value="{{ old('name', $result->name) }}" required>
                                             </div>
                                         </div>
 
@@ -58,27 +61,29 @@
                                                         class="sizeoftextred">*</span></label>
                                             </div>
                                             <div class="col-12 col-md-7">
-                                                <input type="text" class="form-control" id="link"
-                                                    placeholder="Enter link URL" name="link">
+                                                <input type="url" class="form-control" id="link"
+                                                    placeholder="Enter link URL" required name="link"
+                                                    value="{{ old('link', $result->link) }}">
                                             </div>
                                         </div>
 
-                                        <!-- Logo and Preview Row -->
+                                        <!-- Logo Row -->
                                         <div class="row mb-3">
                                             <div class="col-12 col-md-3">
-                                                <label for="profileImage" class="form-label">SocialMedia Logo<span
+                                                <label for="logo" class="form-label">Logo <span
                                                         class="sizeoftextred">*</span></label>
                                             </div>
                                             <div class="col-12 col-md-7">
-                                                <input type="file" class="form-control" id="profileImage"
-                                                    accept="image/*" name="social_media_image">
+                                                <input type="file" class="form-control" id="logo" accept="image/*"
+                                                    value="{{ old('image_url', $result->image_url) }}"
+                                                    name="partner_image">
                                                 <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed max
-                                                    size is
-                                                    5MB</small>
+                                                    size is 5MB</small>
                                             </div>
                                             <div class="col-12 col-md-2">
-                                                <img id="imagePreview" src="#" alt="Image Preview" class="img-fluid"
-                                                    style="max-width: 100px; display: none; border: 1px solid #ccc; border-radius: 10px; padding: 5px; cursor: pointer;">
+                                                <img id="imagePreview" alt="Image Preview" class="img-fluid"
+                                                    src="{{ fileLink($result->image_url) }}"
+                                                    style="max-width: 100px; display: {{ fileLink($result->image_url) ? 'block' : 'none' }}; border: 1px solid #ccc; border-radius: 10px; padding: 5px; cursor: pointer;">
                                             </div>
                                         </div>
 
@@ -90,22 +95,23 @@
                                             </div>
                                             <div class="col-12 col-md-5">
                                                 <div class="form-check form-switch">
-                                                    <input class="form-check-input" name="status" type="checkbox"
-                                                            id="toggleStatus" value="1"
-                                                            {{ CHECKBOX('document_status') }}
-                                                            onchange="toggleStatusText('statusLabel', this)">
-                                                        <label class="form-check-label" for="toggleStatus"
-                                                            id="statusLabel">In-Active</label>
+                                                    <input class="form-check-input" type="checkbox" name="status"
+                                                        id="toggleProfileDocument" value="1"
+                                                        {{ CHECKBOX('status', $result->status) }}
+                                                        onchange="toggleStatusText('statusLabel', this)">
+                                                    <label class="form-check-label" for="toggleProfileDocument"
+                                                        id="statusLabel">{{ $result->status == 1 ? 'Active' : 'In-Active' }}</label>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
 
                                     <!-- Buttons -->
                                     <div class="d-flex mt-2 pl-5">
-                                        <button type="submit" class="btn btn-primary"
-                                            onclick="validateForm()">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="button" style="margin-left: 10px;"
+                                        onclick="window.location.href='{{url('/partner')}}';"
                                             class="btn btn-danger">Cancel</button>
                                     </div>
                                 </form>
@@ -113,12 +119,12 @@
 
 
                                 <!-- Image Modal -->
-                                <div class="modal fade" id="imageModal1" tabindex="-1" aria-labelledby="imageModalLabel1"
+                                <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="imageModalLabel1">Image Preview</h5>
+                                                <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
@@ -132,19 +138,35 @@
                                 <!-- Image Modal End -->
 
                                 <!-- Confirmation Modal -->
-
+                                <div class="modal fade" id="confirmationModal" tabindex="-1"
+                                    aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header justify-content-center position-relative">
+                                                <h5 class="modal-title" id="confirmationModalLabel">Confirm Submission
+                                                </h5>
+                                                <button type="button" class="btn-close position-absolute end-0 me-3"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <div class="confirmation-icon mb-4">
+                                                    <i class="fas fa-check-circle fa-4x text-success"></i>
+                                                </div>
+                                                <p class="mb-4">Are you sure you want to submit the form?</p>
+                                            </div>
+                                            <div class="modal-footer justify-content-center">
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-success"
+                                                    onclick="submitForm()">Yes, Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Confirmation Modal End -->
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
 
 
                     <!-- insert the contents Here end -->
@@ -157,22 +179,18 @@
         <!-- content end here -->
 
 
-
-
-
-
-
-
         <!-- main panel end -->
     </div>
     <script>
-        document.getElementById('profileImage').addEventListener('change', function (event) {
-          const [file] = event.target.files;
-          if (file) {
-            const imagePreview = document.getElementById('imagePreview');
-            imagePreview.src = URL.createObjectURL(file);
-            imagePreview.style.display = 'block';
-          }
-        });
-      </script>
+        // Function to show image modal
+        function showImageModal(imagePreviewId) {
+            var image = document.getElementById(imagePreviewId);
+            var modalImage = document.getElementById('modalImage');
+
+            modalImage.src = image.src;
+
+            var imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            imageModal.show();
+        }
+    </script>
 @endsection

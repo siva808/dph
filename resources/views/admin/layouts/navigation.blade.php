@@ -242,7 +242,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="Partnerlogos_list.html">
+                  <a href="{{url('/partner')}}">
                     <span class="sub-item">Partner Logos</span>
                   </a>
                 </li>

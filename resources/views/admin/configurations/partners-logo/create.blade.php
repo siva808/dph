@@ -4,11 +4,11 @@
     <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
-                <h5 class="mb-0">Create Social Media</h5>
+                <h5 class="mb-0">Create Partner Logos</h5>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Create Social Media</li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Partner Logo</li>
                     </ol>
                 </nav>
 
@@ -27,15 +27,16 @@
                     </div>
                 @endif
                 <div>
+
                     <!-- insert the contents Here start -->
 
                     <div class="container mt-2">
                         <div class="row">
                             <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
-                                <form action="{{ route('social-media.store') }}" enctype="multipart/form-data" method="post" id="myForm">
+                                <form id="myForm" action="{{ route('partner.store') }}" enctype="multipart/form-data" method="post" id="myForm">
                                     {{ csrf_field() }}
                                     <div class="container">
-                                        <h4 class="card-title mb-4 text-primary">Create Social Media</h4>
+                                        <h4 class="card-title mb-4 text-primary">Create Partner Logos</h4>
 
                                         <!-- Name Row -->
                                         <div class="row mb-3">
@@ -47,7 +48,7 @@
                                             <!-- Input Column -->
                                             <div class="col-12 col-md-7">
                                                 <input type="text" class="form-control" id="name"
-                                                    placeholder="Enter name" name="name">
+                                                    placeholder="Enter name" required name="name">
                                             </div>
                                         </div>
 
@@ -58,20 +59,20 @@
                                                         class="sizeoftextred">*</span></label>
                                             </div>
                                             <div class="col-12 col-md-7">
-                                                <input type="text" class="form-control" id="link"
-                                                    placeholder="Enter link URL" name="link">
+                                                <input type="url" class="form-control" id="link"
+                                                    placeholder="Enter link URL" name="link" required>
                                             </div>
                                         </div>
 
                                         <!-- Logo and Preview Row -->
                                         <div class="row mb-3">
                                             <div class="col-12 col-md-3">
-                                                <label for="profileImage" class="form-label">SocialMedia Logo<span
+                                                <label for="profileImage" class="form-label">Partner Logo<span
                                                         class="sizeoftextred">*</span></label>
                                             </div>
                                             <div class="col-12 col-md-7">
                                                 <input type="file" class="form-control" id="profileImage"
-                                                    accept="image/*" name="social_media_image">
+                                                    accept="image/*" name="partner_image" required>
                                                 <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed max
                                                     size is
                                                     5MB</small>
@@ -103,8 +104,7 @@
 
                                     <!-- Buttons -->
                                     <div class="d-flex mt-2 pl-5">
-                                        <button type="submit" class="btn btn-primary"
-                                            onclick="validateForm()">Submit</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
                                         <button type="button" style="margin-left: 10px;"
                                             class="btn btn-danger">Cancel</button>
                                     </div>
