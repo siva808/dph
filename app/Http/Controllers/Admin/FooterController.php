@@ -122,8 +122,8 @@ class FooterController extends Controller
         $result = Configuration::getLatestConfig();
         //$result = DB::table('configurations')->where('id', $id)->first();
         $footer_logos = ConfigurationDetails::getConfigurationDetailsData($id = 4);
-        $footer_detail = Configuration::getConfigurationData($id = 3);   // 3 - Footer details
-        $footer_jd = Configuration::getConfigurationData($id = 4);   // 4 - Footer details
+        $footer_detail = Configuration::getConfigurationDetail($id = 3);   // 3 - Footer details
+        $footer_jd = Configuration::getConfigurationDetail($id = 4);   // 4 - Footer details
         $important_links = ConfigurationDetails::getConfigurationDetailsData($id = 6);   // 6 - Important links
         $quick_links = ConfigurationDetails::getConfigurationDetailsData($id = 7);      // 7 - Quick Links
         $public_links = ConfigurationDetails::getConfigurationDetailsData($id = 8);      // 8 - Publick Links
@@ -208,7 +208,7 @@ class FooterController extends Controller
         
         $input = array();
         $input = [
-            'name' => $request->name ?? $footer_logo->name,
+            'name' => $request->name,
             'link' => $request->link,
             'status' => $request->status ?? 0
                 
@@ -267,11 +267,6 @@ class FooterController extends Controller
 
         
         
-        // dd($input);
-        $result = $notification->update($input);
-
-        // dd($input);
-        $result = $notification->update($input);
 
         $result = $footer_logo->update($input);
 

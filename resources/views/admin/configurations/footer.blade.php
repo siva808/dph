@@ -263,7 +263,7 @@
                                             </label>
                                             <input type="text" class="form-control shadow-sm" id="govNameTamilfooter"
                                                 name="footer_gov_name_tamil" placeholder="Enter government name in Tamil"
-                                                value="{{ $footer_detail->dph_full_form_tamil }}">
+                                                value="{{ $footer_detail->dph_full_form_tamil  }}">
                                         </div>
                                         <!-- Telephone Start -->
                                         <div class="col-md-6">

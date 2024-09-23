@@ -41,7 +41,14 @@ class Configuration extends Model
         return convertUTCToLocal($date);
     }
 
-    public static function getConfigurationData($id) {
+    public static function getConfigurationData() {
+
+        return static::whereIn('id', [1, 2, 3, 4])
+                 ->get()
+                 ->keyBy('id'); 
+    }
+
+    public static function getConfigurationDetail($id) {
 
         return static::where('id', $id)->first();
     }
