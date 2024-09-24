@@ -11,7 +11,7 @@
     <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
-                <h5 class="mb-0">Header</h5>
+                <h5 class="mb-0">Configuration</h5>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Configuration</a></li>
@@ -21,565 +21,549 @@
 
             </div>
         </div>
-        @if ($errors->any())
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card card-body">
-
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        @endif
 
         <div class="container-fluid">
             <div class="page-inner">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <!-- insert the contents Here start -->
 
-                <div class="container mt-5">
+                <div class="container-fluid mt-2">
                     <div class="row justify-content-center">
-                        <div class="col-lg-10"
+                        <div class="col-lg-12"
                             style="background: linear-gradient(to right, #ffffff, #ffffff); border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
-                            <form action="{{ url('header/update/'.$result->id) }}" enctype="multipart/form-data"
-                                method="post">
-                                {{ csrf_field() }}
-                                <!-- Separate div for Government and DPH Names -->
-                                <div class="mb-4 p-5">
-                                    <h2 class="mb-4">Government Name In Header</h2>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="govNameTamil" class="form-label font-weight-bold">Government Name
-                                                (Tamil)</label>
-                                            <input type="text" class="form-control shadow-sm" id="govNameTamil"
-                                                placeholder="Enter government name in Tamil"
-                                                value="{{ old('tamilnadu_government_title_tamil', $result->tamilnadu_government_title_tamil) }}"
-                                                name="tamilnadu_government_title_tamil" required>
-                                        </div>
-                                        {{-- <div class="col-md-6 d-flex align-items-center">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="statusGovNameTamil"
-                                                    checked>
-                                                <label class="form-check-label" for="statusGovNameTamil">{{ $result->notification_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                            </div>
-                                        </div> --}}
-                                    </div>
 
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="govNameEnglish" class="form-label font-weight-bold">Government Name
-                                                (English)</label>
-                                            <input type="text" class="form-control shadow-sm" id="govNameEnglish"
-                                                placeholder="Enter government name in English"
-                                                value="{{ old('tamilnadu_government_title_english', $result->tamilnadu_government_title_english) }}"
-                                                name="tamilnadu_government_title_english">
-                                        </div>
-                                        {{-- <div class="col-md-6 d-flex align-items-center">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="statusGovNameEnglish"
-                                                    checked>
-                                                <label class="form-check-label" for="statusGovNameEnglish">{{ $result->notification_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                            </div>
-                                        </div> --}}
-                                    </div>
+                            <div class="container-fluid p-1 mt-3" style="background-color: #ffffff; border-radius: 10px;">
+                                <h2 class="mb-4">Government Information</h2>
 
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="dphNameTamil" class="form-label font-weight-bold">DPH Name
-                                                (Tamil)</label>
-                                            <input type="text" class="form-control shadow-sm" id="dphNameTamil"
-                                                placeholder="Enter DPH name in Tamil"
-                                                value="{{ old('dph_full_form_tamil', $result->dph_full_form_tamil) }}"
-                                                name="dph_full_form_tamil" required>
-                                        </div>
-                                        {{-- <div class="col-md-6 d-flex align-items-center">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="statusDphNameTamil"
-                                                    checked>
-                                                <label class="form-check-label" for="statusDphNameTamil">{{ $result->notification_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                            </div>
-                                        </div> --}}
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="dphNameEnglish" class="form-label font-weight-bold">DPH Name
-                                                (English)</label>
-                                            <input type="text" class="form-control shadow-sm" id="dphNameEnglish"
-                                                placeholder="Enter DPH name in English"
-                                                value="{{ old('dph_full_form_english', $result->dph_full_form_english) }}"
-                                                name="dph_full_form_english" required required>
-                                        </div>
-                                        {{-- <div class="col-md-6 d-flex align-items-center">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="statusDphNameEnglish"
-                                                    checked>
-                                                <label class="form-check-label" for="statusDphNameEnglish">{{ $result->notification_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                            </div>
-                                        </div> --}}
-                                    </div>
-                                </div>
-                                <!-- Table Layout -->
-                                <h2>Logos In Header</h2>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Field</th>
-                                                <th>Input</th>
-                                                <th>Status</th>
-                                                <th>Image Preview</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Logo Uploads -->
-                                            <!-- logo 1 start -->
-                                            <tr>
-                                                <td><label for="logo1" class="form-label font-weight-bold">Logo 1</label>
-                                                </td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="logo1"
-                                                        accept="image/*" name="header_logo_one"
-                                                        onchange="previewLogoImage(event, 'imagePreviewLogo1')"
-                                                        value="{{ old('header_Logo_one_title', $result->header_logo_one_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="header_logo_one_status" id="header_logo_one_status"
-                                                            value="1"
-                                                            {{ CHECKBOX('header_logo_one_status', $result->header_logo_one_status) }}>
-                                                        <label class="form-check-label" for="statusLogo1">{{ $result->header_logo_one_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    @if ($result->header_logo_one)
-                                                        <img id="imagePreviewLogo1"
-                                                            src="{{ fileLink($result->header_logo_one) }}"
-                                                            alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                            style="max-width: 100px; display: {{ fileLink($result->header_logo_one) ? 'block' : 'none' }};"
-                                                            data-bs-toggle="modal" data-bs-target="#logoImageModal"
-                                                            onclick="showLogoImageModal('imagePreviewLogo1')"
-                                                            title="Click to view the image clearly">
-                                                    @else
-                                                        No Logo Available
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                            <!-- logo 1 end -->
+                                    <!-- Form for Government Names and DPH Names -->
+                                    <form id="governmentForm" action="{{ url('header/update/' . 2) }}"
+                                        enctype="multipart/form-data" method="post">
+                                        {{ csrf_field() }}
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 20%;">Field</th>
+                                                    <th style="width: 40%;">Input</th>
+                                                    <th style="width: 10%;">Last Updated</th>
+                                                    <th style="width: 10%;" id="editHeader">Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Government Name (Tamil) -->
+                                                <tr>
+                                                    <td><label for="govNameTamil"
+                                                            class="form-label font-weight-bold">Government Name
+                                                            (Tamil)</label></td>
+                                                    <td><input type="text" class="form-control shadow-sm text-dark"
+                                                            id="govNameTamil" placeholder="Enter government name in Tamil"
+                                                            value="{{ old('tamilnadu_government_title_tamil', $result->tamilnadu_government_title_tamil) }}"
+                                                            name="tamilnadu_government_title_tamil" disabled></td>
+                                                    <td>{{ $result->getOriginal('updated_at') }}</td>
+                                                    <td class="edit-column"><button class="btn btn-primary btn-sm"
+                                                            type="button" onclick="toggleEdit(this)">Edit</button></td>
+                                                </tr>
 
-                                            <!-- logo 2 start -->
-                                            <tr>
-                                                <td><label for="logo2" class="form-label font-weight-bold">Logo
-                                                        2</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="logo2"
-                                                        accept="image/*" name="header_logo_two"
-                                                        onchange="previewLogoImage(event, 'imagePreviewLogo2')"
-                                                        >
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="header_logo_two_status" id="header_Logo_two_status"
-                                                            value="1"
-                                                            {{ CHECKBOX('header_logo_two_status', $result->header_logo_two_status) }}>
-                                                        <label class="form-check-label" for="statusLogo2">{{ $result->header_logo_two_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewLogo2"
-                                                        src="{{ fileLink($result->header_logo_two) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->header_logo_two) ? 'block' : 'none' }};"
-                                                        data-bs-target="#logoImageModal"
-                                                        onclick="showLogoImageModal('imagePreviewLogo2')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- logo 2 end -->
+                                                <!-- Government Name (English) -->
+                                                <tr>
+                                                    <td><label for="govNameEnglish"
+                                                            class="form-label font-weight-bold">Government Name
+                                                            (English)</label></td>
+                                                    <td><input type="text" class="form-control shadow-sm text-dark"
+                                                            id="govNameEnglish"
+                                                            placeholder="Enter government name in English"
+                                                            name="tamilnadu_government_title_english"
+                                                            value="{{ old('tamilnadu_government_title_english', $result->tamilnadu_government_title_english) }} "
+                                                            disabled></td>
+                                                    <td>{{ $result->getOriginal('updated_at') }}</td>
+                                                    <td class="edit-column"><button class="btn btn-primary btn-sm"
+                                                            type="button" onclick="toggleEdit(this)">Edit</button></td>
+                                                </tr>
 
-                                            <!-- logo 3 start -->
-                                            <tr>
-                                                <td><label for="logo3" class="form-label font-weight-bold">Logo
-                                                        3</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="logo3"
-                                                        accept="image/*" name="header_logo_three"
-                                                        onchange="previewLogoImage(event, 'imagePreviewLogo3')"
-                                                        value="{{ old('header_Logo_one_title', $result->header_logo_three_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="header_logo_three_status" id="header_logo_three_status"
-                                                            value="1"
-                                                            {{ CHECKBOX('header_logo_three_status', $result->header_logo_three_status) }}>
-                                                        <label class="form-check-label" for="statusLogo3">{{ $result->header_logo_three_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewLogo3"
-                                                        src="{{ fileLink($result->header_logo_three) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->header_logo_three) ? 'block' : 'none' }};"
-                                                        data-bs-target="#logoImageModal"
-                                                        onclick="showLogoImageModal('imagePreviewLogo3')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- logo 3 end -->
+                                                <!-- DPH Name (Tamil) -->
+                                                <tr>
+                                                    <td><label for="dphNameTamil" class="form-label font-weight-bold">DPH
+                                                            Name (Tamil)</label>
+                                                    </td>
+                                                    <td><input type="text" class="form-control shadow-sm text-dark"
+                                                            id="dphNameTamil" placeholder="Enter DPH name in Tamil"
+                                                            name="dph_full_form_tamil"
+                                                            value="{{ old('dph_full_form_tamil', $result->dph_full_form_tamil) }}"
+                                                            disabled></td>
+                                                    <td>{{ $result->getOriginal('updated_at') }}</td>
+                                                    <td class="edit-column"><button class="btn btn-primary btn-sm"
+                                                            type="button" onclick="toggleEdit(this)">Edit</button></td>
+                                                </tr>
 
-                                            <!-- logo 4 start -->
-                                            <tr>
-                                                <td><label for="logo4" class="form-label font-weight-bold">Logo
-                                                        4</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="logo4"
-                                                        accept="image/*" name="header_logo_four"
-                                                        onchange="previewLogoImage(event, 'imagePreviewLogo4')"
-                                                        value="{{ old('header_Logo_one_title', $result->header_logo_four_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="header_logo_four_status" id="header_Logo_four_status"
-                                                            value="1"
-                                                            {{ CHECKBOX('header_logo_four_status', $result->header_logo_four_status) }}>
-                                                        <label class="form-check-label" for="statusLogo4">{{ $result->header_logo_four_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewLogo4"
-                                                        src="{{ fileLink($result->header_logo_four) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->header_logo_four) ? 'block' : 'none' }};"
-                                                        data-bs-target="#logoImageModal"
-                                                        onclick="showLogoImageModal('imagePreviewLogo4')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- logo 4 end -->
+                                                <!-- DPH Name (English) -->
+                                                <tr>
+                                                    <td><label for="dphNameEnglish" class="form-label font-weight-bold">DPH
+                                                            Name
+                                                            (English)</label></td>
+                                                    <td><input type="text" class="form-control shadow-sm text-dark"
+                                                            id="dphNameEnglish" placeholder="Enter DPH name in English"
+                                                            value="{{ old('dph_full_form_english', $result->dph_full_form_english) }}"
+                                                            name="dph_full_form_english" disabled></td>
+                                                    <td>{{ $result->getOriginal('updated_at') }}</td>
 
-                                            <!-- logo 5 start -->
-                                            <tr>
-                                                <td><label for="logo5" class="form-label font-weight-bold">Logo
-                                                        5</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="logo5"
-                                                        accept="image/*" name="header_logo_five"
-                                                        onchange="previewLogoImage(event, 'imagePreviewLogo5')"
-                                                        value="{{ old('header_Logo_one_title', $result->header_logo_five_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="header_logo_five_status" id="header_Logo_five_status"
-                                                            value="1"
-                                                            {{ CHECKBOX('header_logo_five_status', $result->header_logo_five_status) }}>
-                                                        <label class="form-check-label" for="statusLogo5">{{ $result->header_logo_five_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewLogo5"
-                                                        src="{{ fileLink($result->header_logo_five) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->header_logo_five) ? 'block' : 'none' }};"
-                                                        data-bs-target="#logoImageModal"
-                                                        onclick="showLogoImageModal('imagePreviewLogo4')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- logo 5 end -->
+                                                    <td class="edit-column"><button class="btn btn-primary btn-sm"
+                                                            type="button" onclick="toggleEdit(this)">Edit</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- Button trigger modal -->
+                                        <!-- <div class="d-flex justify-content-between align-items-center">
+                                                      <button type="button" class="btn btn-primary mt-3 mb-5" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">
+                                                        submit
+                                                      </button>
+
+                                                      <h6 class="me-5 text-muted">Last Update : <small class="">2024-05-03, 12:39:11</small></h6>
+                                                    </div> -->
 
 
-                                            <!-- logo 6 start -->
-                                            <tr>
-                                                <td><label for="logo6" class="form-label font-weight-bold">Logo
-                                                        6</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="logo6"
-                                                        accept="image/*" name="header_logo_six"
-                                                        onchange="previewLogoImage(event, 'imagePreviewLogo6')"
-                                                        value="{{ old('header_Logo_one_title', $result->header_logo_six_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="header_logo_six_status" id="header_Logo_six_status"
-                                                            value="1"
-                                                            {{ CHECKBOX('header_logo_six_status', $result->header_logo_six_status) }}>
-                                                        <label class="form-check-label" for="statusLogo6">{{ $result->header_logo_six_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewLogo6"
-                                                        src="{{ fileLink($result->header_logo_six) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->header_logo_six) ? 'block' : 'none' }};"
-                                                        data-bs-target="#logoImageModal"
-                                                        onclick="showLogoImageModal('imagePreviewLogo6')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- logo 6 end -->
-                                            <!-- Buttons -->
-                                        </tbody>
-                                    </table>
+
+
+
+                                    </form>
                                 </div>
+                            </div>
+                            <hr>
 
-                                <!-- Separate div for Scroller Notification -->
-                                <div class="mb-4 p-5">
-                                    <h2 class="mb-4">Scroller Notification</h2>
-                                    <div class="row mb-3">
-                                        <div class="col-md-10">
-                                            <label for="scrollerNotification"
-                                                class="form-label font-weight-bold">Notification
-                                                Text</label>
-                                            <textarea class="form-control shadow-sm" id="scrollerNotification" placeholder="Enter scrolling notification text"
-                                                rows="4" name="notification_content">{{ old('notification_content', $result->notification_content) }}</textarea>
+                            <!-- logos start  -->
+
+                            <div class="container-fluid p-1 mt-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="d-flex align-items-center">
+                                            <h4 class="card-title">Logos In Header</h4>
+                                            <!-- Add Logo Button -->
+                                            <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
+                                                data-bs-target="#addLogoModal">
+                                                <i class="fa fa-plus"></i> Add Logo
+                                            </button>
                                         </div>
-                                        <div class="col-md-2 d-flex align-items-center">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" value="1"
-                                                    name="notification_status"
-                                                    {{ CHECKBOX('notification_status', $result->notification_status) }}>
-                                                <label class="form-check-label"
-                                                    for="statusScrollerNotification">{{ $result->notification_status == 1 ? 'Active' : 'In-Active' }}</label>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <!-- Table Layout -->
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 20%;">Logo Title</th>
+                                                            <th style="width: 20%;">Input</th>
+                                                            <th style="width: 20%;">Last Update</th>
+                                                            <th style="width: 8%;">Status</th>
+                                                            <th style="width: 10%;" class="text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($header_logos as $header_logo)
+                                                            <!-- logo 1 start -->
+                                                            <tr>
+                                                                <td>{{ $header_logo->name ?? '' }}</td>
+                                                                <td>
+                                                                    <img src="{{ fileLink($header_logo->image_url) }}"
+                                                                        alt="Logo" style="max-width: 100px;">
+                                                                </td>
+                                                                <td>{{ $header_logo->getOriginal('updated_at') }}</td>
+                                                                <td style="font-weight: bold;">
+                                                                    @if (isset($header_logo->status) && $header_logo->status == 1)
+                                                                        <span class="text-success">Active</span>
+                                                                    @else
+                                                                        <span class="text-danger">In-Active</span>
+                                                                    @endif
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <!-- Actions with icons -->
+                                                                    <div class="form-button-action">
+                                                                        <button type="button"
+                                                                            class="btn btn-link btn-primary text-center"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#editLogoModal"
+                                                                            onclick="editLogo('{{ $header_logo->id }}', '{{ $header_logo->name }}', '{{ fileLink($header_logo->image_url) }}', '{{ $header_logo->status }}')">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                        <!-- logo 1 end -->
+                                                        <!-- Repeat similar rows for logo 2, 3, 4, etc. -->
+                                                    </tbody>
+                                                </table>
                                             </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Popup for Adding Logo -->
+                            <div class="modal fade" id="addLogoModal" tabindex="-1" aria-labelledby="addLogoModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addLogoModalLabel">Add New Logo</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="addLogoForm" action="{{ route('header.store') }}"
+                                                enctype="multipart/form-data" method="post">
+                                                {{ csrf_field() }}
+                                                <!-- Logo Title Field -->
+                                                <div class="mb-3">
+                                                    <label for="logoTitle" class="form-label">Logo Title</label>
+                                                    <input type="text" class="form-control" id="logoTitle"
+                                                        name="name" placeholder="Enter logo title" required>
+                                                </div>
+
+                                                <!-- Select Image Field with Preview -->
+                                                <div class="mb-3">
+                                                    <label for="logoImage" class="form-label">Select Logo Image</label>
+                                                    <input type="file" class="form-control" id="logoImage"
+                                                        name="header_logo_image" accept="image/*" required
+                                                        onchange="previewImage(event)">
+                                                    <small class="form-text text-danger">Accepted formats: .png, max size:
+                                                        5MB</small>
+                                                </div>
+
+                                                <!-- Image Preview -->
+                                                <div class="mb-3 text-center">
+                                                    <img id="logoPreview" src="" alt="Image Preview"
+                                                        style="display:none; max-width: 100px; margin-top: 10px;" />
+                                                </div>
+
+                                                <!-- Status Toggle -->
+                                                <div class="mb-3">
+                                                    <label for="logoStatus" class="form-label">Status</label>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" name="status" type="checkbox"
+                                                            id="toggleStatus" value="1"
+                                                            {{ CHECKBOX('document_status') }}
+                                                            onchange="toggleStatusText('statusLabel', this)">
+                                                        <label class="form-check-label" for="toggleStatus"
+                                                            id="statusLabel">In-Active</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Submit Button -->
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <!-- logos end  -->
 
 
-                                <!-- banner image start -->
-                                <h2>Banner Image</h2>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Field</th>
-                                                <th>Input</th>
-                                                <th>Status</th>
-                                                <th>Image Preview</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Repeat for each banner -->
-                                            <!-- banner 1 start -->
-                                            <tr>
-                                                <td><label for="Banner1" class="form-label font-weight-bold">Banner
-                                                        1</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="Banner1"
-                                                        accept="image/*" name="homepage_banner_one"
-                                                        onchange="previewBannerImage(event, 'imagePreviewBanner1')"
-                                                        >
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
+                            <!-- Edit Logo Modal -->
+                            <div class="modal fade" id="editLogoModal" tabindex="-1"
+                                aria-labelledby="editLogoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editLogoModalLabel">Edit Logo</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="editLogoForm" action="{{ route('header.updatelogo') }}"
+                                                enctype="multipart/form-data" method="post">
+                                                {{ csrf_field() }}
+                                                <!-- Logo Title -->
+                                                <input type="hidden" id="logoId" name="id">
+                                                <div class="mb-3">
+                                                    <label for="editLogoName" class="form-label">Logo Title</label>
+                                                    <input type="text" class="form-control" id="editLogoName"
+                                                        placeholder="Enter logo title" name="name">
+                                                </div>
+                                                <!-- Current Logo Preview -->
+                                                <div class="mb-3">
+                                                    <label class="form-label">Current Logo</label>
+                                                    <img id="editLogoImagePreview" alt="Current Logo"
+                                                        style="max-width: 100px;" class="d-block mb-2">
+                                                </div>
+                                                <!-- New Logo Image Preview -->
+                                                <div class="mb-3">
+                                                    <label for="editLogoImage" class="form-label">New Logo Image</label>
+                                                    <input type="file" class="form-control" id="editLogoImage"
+                                                        onchange="previewNewImage()" name="header_logo_image">
+                                                    <small class="text-muted">Select a new image to update.</small>
+                                                    <img id="newLogoPreview" src="" alt="New Logo Preview"
+                                                        style="max-width: 100px; display: none;" class="d-block mt-2">
+                                                </div>
+                                                <!-- Status Toggle -->
+                                                <div class="mb-3">
+                                                    <label for="editLogoStatus" class="form-label">Status</label>
                                                     <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="homepage_banner_one_status"
-                                                            id="homepage_banner_one_status" value="1"
-                                                            {{ CHECKBOX('homepage_banner_one_status', $result->homepage_banner_one_status) }}>
-                                                        <label class="form-check-label" for="statusBanner1">{{ $result->homepage_banner_one_status == 1 ? 'Active' : 'In-Active' }}</label>
+                                                        <input class="form-check-input" name="status" type="checkbox"
+                                                            id="editLogoStatus" value="1"
+                                                            {{ CHECKBOX('document_status') }}
+                                                            onchange="toggleStatusText('editStatusLabel', this)">
+                                                        <label class="form-check-label" for="toggleStatus"
+                                                            id="editStatusLabel"></label>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewBanner1"
-                                                        src="{{ fileLink($result->homepage_banner_one) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->homepage_banner_one) ? 'block' : 'none' }};"
-                                                        data-bs-toggle="modal" data-bs-target="#bannerImageModal"
-                                                        onclick="showBannerImageModal('imagePreviewBanner1')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- banner 1 end -->
-                                            <!-- banner 2 start -->
-                                            <tr>
-                                                <td><label for="Banner2" class="form-label font-weight-bold">Banner
-                                                        2</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="Banner2"
-                                                        accept="image/*" name="homepage_banner_two"
-                                                        onchange="previewBannerImage(event, 'imagePreviewBanner2')"
-                                                        value="{{ old('homepage_banner_two_title', $result->homepage_banner_two_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="homepage_banner_two_status"
-                                                            id="homepage_banner_two_status" value="1"
-                                                            {{ CHECKBOX('homepage_banner_two_status', $result->homepage_banner_two_status) }}>
-                                                        <label class="form-check-label" for="statusBanner2">{{ $result->homepage_banner_two_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewBanner2"
-                                                        src="{{ fileLink($result->homepage_banner_two) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->homepage_banner_two) ? 'block' : 'none' }};"
-                                                        data-bs-toggle="modal" data-bs-target="#bannerImageModal"
-                                                        onclick="showBannerImageModal('imagePreviewBanner2')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- banner 2 end -->
-                                            <!-- banner 3 start -->
-                                            <tr>
-                                                <td><label for="Banner3" class="form-label font-weight-bold">Banner
-                                                        3</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="Banner3"
-                                                        accept="image/*" name="homepage_banner_three"
-                                                        onchange="previewBannerImage(event, 'imagePreviewBanner3')"
-                                                        value="{{ old('homepage_banner_three_title', $result->homepage_banner_three_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="homepage_banner_three_status"
-                                                            id="homepage_banner_three_status" value="1"
-                                                            {{ CHECKBOX('homepage_banner_three_status', $result->homepage_banner_three_status) }}>
-                                                        <label class="form-check-label" for="statusBanner3">{{ $result->homepage_banner_three_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewBanner3"
-                                                        src="{{ fileLink($result->homepage_banner_three) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->homepage_banner_three) ? 'block' : 'none' }};"
-                                                        data-bs-toggle="modal" data-bs-target="#bannerImageModal"
-                                                        onclick="showBannerImageModal('imagePreviewBanner3')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- banner 3 end -->
-                                            <!-- banner 4 start -->
-                                            <tr>
-                                                <td><label for="Banner4" class="form-label font-weight-bold">Banner
-                                                        4</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="Banner4"
-                                                        accept="image/*" name="homepage_banner_four"
-                                                        onchange="previewBannerImage(event, 'imagePreviewBanner4')"
-                                                        value="{{ old('homepage_banner_four_title', $result->homepage_banner_four_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="homepage_banner_four_status"
-                                                            id="homepage_banner_four_status" value="1"
-                                                            {{ CHECKBOX('homepage_banner_four_status', $result->homepage_banner_four_status) }}>
-                                                        <label class="form-check-label" for="statusBanner4">{{ $result->homepage_banner_four_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewBanner4"
-                                                        src="{{ fileLink($result->homepage_banner_four) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->homepage_banner_four) ? 'block' : 'none' }};"
-                                                        data-bs-toggle="modal" data-bs-target="#bannerImageModal"
-                                                        onclick="showBannerImageModal('imagePreviewBanner4')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- banner 4 end -->
-                                            <!-- banner 5 start -->
-                                            <tr>
-                                                <td><label for="Banner5" class="form-label font-weight-bold">Banner
-                                                        5</label></td>
-                                                <td>
-                                                    <input type="file" class="form-control shadow-sm" id="Banner5"
-                                                        accept="image/*" name="homepage_banner_five"
-                                                        onchange="previewBannerImage(event, 'imagePreviewBanner5')"
-                                                        value="{{ old('homepage_banner_five_title', $result->homepage_banner_five_title) }}">
-                                                    <small class="sizeoftextred">Accepted .jpg/.jpeg/.png format & allowed
-                                                        max size is
-                                                        5MB</small>
-                                                </td>
-                                                <td>
-                                                    <div class="form-check form-switch">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="homepage_banner_five_status"
-                                                            id="homepage_banner_five_status" value="1"
-                                                            {{ CHECKBOX('homepage_banner_five_status', $result->homepage_banner_five_status) }}>
-                                                        <label class="form-check-label" for="statusBanner5">{{ $result->homepage_banner_five_status == 1 ? 'Active' : 'In-Active' }}</label>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <img id="imagePreviewBanner5"
-                                                        src="{{ fileLink($result->homepage_banner_five) }}"
-                                                        alt="Image Preview" class="img-fluid rounded border shadow-sm"
-                                                        style="max-width: 100px; display: {{ fileLink($result->homepage_banner_five) ? 'block' : 'none' }};"
-                                                        data-bs-toggle="modal" data-bs-target="#bannerImageModal"
-                                                        onclick="showBannerImageModal('imagePreviewBanner5')"
-                                                        title="Click to view the image clearly">
-                                                </td>
-                                            </tr>
-                                            <!-- banner 5 end -->
-                                        </tbody>
-                                    </table>
+                                                </div>
+                                                <!-- Submit Button -->
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button class="btn btn-danger">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
 
+                            <!-- banner image start=======================================================================================================-->
+                            <div class="container-fluid p-1 mt-3">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="d-flex align-items-center">
+                                            <h4 class="card-title">Banner Images</h4>
+                                            <!-- Add Banner Button -->
+                                            <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
+                                                data-bs-target="#addBannerModal">
+                                                <i class="fa fa-plus"></i> Add Banner
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <!-- Table Layout -->
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 20%;">Banner Title</th>
+                                                            <th style="width: 20%;">Image</th>
+                                                            <th style="width: 20%;">Last Update</th>
+                                                            <th style="width: 8%;">Status</th>
+                                                            <th style="width: 10%;" class="text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($banners as $banner)
+                                                            <!-- Banner 1 start -->
+                                                            <tr>
+                                                                <td>{{ $banner->name ?? '' }}</td>
+                                                                <td>
+                                                                    <img src="{{ fileLink($banner->image_url) }}"
+                                                                        alt="Logo" style="max-width: 100px;">
+                                                                </td>
+                                                                <td>{{ $banner->getOriginal('updated_at') ?? '' }}</td>
+                                                                <td style="font-weight: bold;">
+                                                                    @if (isset($banner->status) && $banner->status == 1)
+                                                                        <span class="text-success">Active</span>
+                                                                    @else
+                                                                        <span class="text-danger">In-Active</span>
+                                                                    @endif
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <!-- Actions with icons -->
+                                                                    <div class="form-button-action">
+                                                                        <button type="button"
+                                                                            class="btn btn-link btn-primary text-center"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#editBannerModal"
+                                                                            onclick="editBanner('{{ $banner->id }}', '{{ $banner->name }}', '{{ fileLink($banner->image_url) }}', '{{ $banner->status }}')">
+                                                                            <i class="fa fa-edit"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <!-- Banner 1 end -->
+                                                            <!-- Repeat similar rows for additional banners -->
+                                                    </tbody>
+                                                    @endforeach
+                                                </table>
+                                            </div>
 
-                                <!-- banner image end -->
-                                <!-- Submit Button for the Entire Form -->
-                                <div class="mt-4 mb-4">
-                                    <button type="submit" class="btn btn-primary btn-lg shadow-sm">Submit</button>
-                                    <button type="button" class="btn btn-danger btn-lg shadow-sm">Cancel</button>
+                                        </form>
+                                    </div>
                                 </div>
-                            </form>
+                            </div>
+                            <!-- banner image end=====================================================================================================-->
+
+
+
+                            <!-- modal for adding banner start -->
+                            <!-- Modal Popup for Adding Banner -->
+                            <div class="modal fade" id="addBannerModal" tabindex="-1"
+                                aria-labelledby="addBannerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="addBannerModalLabel">Add New Banner</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="addBannerForm" action="{{ route('header.storebanner') }}"
+                                                enctype="multipart/form-data" method="post">
+                                                {{ csrf_field() }}
+
+                                                <!-- Banner Title Field -->
+                                                <div class="mb-3">
+                                                    <label for="bannerTitle" class="form-label">Banner Title</label>
+                                                    <input type="text" class="form-control" id="bannerTitle"
+                                                        placeholder="Enter banner title" name="name">
+                                                </div>
+
+                                                <!-- Select Image Field with Preview -->
+                                                <div class="mb-3">
+                                                    <label for="bannerImage" class="form-label">Select Banner
+                                                        Image</label>
+                                                    <input type="file" class="form-control" id="bannerImage"
+                                                        accept="image/*" name="header_banner_image"
+                                                        onchange="previewBannerImage(event)">
+                                                    <small class="form-text text-danger">Accepted formats: .jpg, .jpeg,
+                                                        .png, max size:
+                                                        5MB</small>
+                                                </div>
+
+                                                <!-- Image Preview -->
+                                                <div class="mb-3 text-center">
+                                                    <img id="bannerPreview" src="" alt="Image Preview"
+                                                        style="display:none; max-width: 100px; margin-top: 10px;" />
+                                                </div>
+
+                                                <!-- Status Toggle -->
+                                                <div class="mb-3">
+                                                    <label for="bannerStatus" class="form-label">Status</label>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="bannerStatus"
+                                                            {{ CHECKBOX('document_status') }} value="1" name="status"
+                                                            onchange="toggleStatusText('addBannerStatusLabel', this)">
+                                                        <label class="form-check-label" for="bannerStatus"
+                                                            id="addBannerStatusLabel">In-Active</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Submit Button -->
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- modal for adding banner end -->
+
+
+                            <!-- model for edit banner start -->
+                            <!-- Edit Banner Modal -->
+                            <!-- Edit Banner Modal -->
+                            <div class="modal fade" id="editBannerModal" tabindex="-1"
+                                aria-labelledby="editBannerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editBannerModalLabel">Edit Banner</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="editBannerForm" action="{{ route('header.updatebanner') }}"
+                                            enctype="multipart/form-data" method="post">
+
+                                            {{ csrf_field() }}
+                                            <input type="hidden" id="bannerId" name="id">
+                                                <!-- Banner Title -->
+                                                <div class="mb-3">
+                                                    <label for="editBannerTitle" class="form-label">Banner Title</label>
+                                                    <input type="text" class="form-control" id="editBannerTitle"
+                                                        placeholder="Enter banner title" name="name">
+                                                </div>
+
+                                                <!-- Current Banner Preview -->
+                                                <div class="mb-3">
+                                                    <label class="form-label">Current Banner</label>
+                                                    <img id="currentBannerPreview" src="" alt="Current Banner"
+                                                        style="max-width: 100px;" class="d-block mb-2">
+                                                </div>
+
+                                                <!-- New Banner Image Preview -->
+                                                <div class="mb-3">
+                                                    <label for="editBannerImage" class="form-label">New Banner
+                                                        Image</label>
+                                                    <input type="file" class="form-control" id="editBannerImage"
+                                                        onchange="previewNewBannerImage()" name="header_banner_image">
+                                                    <small class="text-muted">Select a new image to update.</small>
+                                                    <img id="newBannerPreview" src="" alt="New Banner Preview"
+                                                        style="max-width: 100px; display: none;" class="d-block mt-2">
+                                                </div>
+
+                                                <!-- Status Toggle -->
+                                                <div class="mb-3">
+                                                    <label for="editBannerStatus" class="form-label">Status</label>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="editBannerStatus" value="1" name="status"
+                                                            onchange="toggleStatusText('bannerStatusLabel', this)">
+                                                        <label class="form-check-label" for="editBannerStatus"
+                                                            id="bannerStatusLabel"></label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Submit Button -->
+                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- model for edit banner end -->
+
+
+
+
+
+
+
+
 
 
 
                         </div>
                     </div>
                 </div>
-
-                <!-- insert the contents Here end -->
             </div>
-            <!-- page inner end-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- insert the contents Here end -->
         </div>
-        <!-- database table end -->
+        <!-- page inner end-->
     </div>
     <!-- Logo Image Modal -->
     <div class="modal fade" id="logoImageModal" tabindex="-1" aria-labelledby="logoImageModalLabel"
@@ -613,34 +597,64 @@
         </div>
     </div>
     <script>
-        // Function to preview banner image
-        function previewBannerImage(event, imagePreviewId) {
-            var input = event.target;
-            var reader = new FileReader();
+        function editLogo(id, name, imageUrl, logoStatus) {
+            document.getElementById('logoId').value = id; // Set the ID for the hidden input
+            document.getElementById('editLogoName').value = name; // Set the name
+            document.getElementById('editLogoImagePreview').src = imageUrl; // Set the image preview
+            document.getElementById('editLogoStatus').checked = logoStatus == 1; // Check if the status is active
+            document.getElementById('editStatusLabel').textContent = logoStatus == 1 ? 'Active' : 'In-Active';
 
-            reader.onload = function() {
-                var dataURL = reader.result;
-                var output = document.getElementById(imagePreviewId);
-                output.src = dataURL;
-                output.style.display = 'block';
-            };
+            console.log(logoStatus);
+            $('#editLogoModal').modal('show');
 
-            reader.readAsDataURL(input.files[0]);
+        }
+
+        function editBanner(id, name, imageUrl, logoStatus) {
+            document.getElementById('bannerId').value = id; // Set the ID for the hidden input
+            document.getElementById('editBannerTitle').value = name; // Set the name
+            document.getElementById('currentBannerPreview').src = imageUrl; // Set the image preview
+            document.getElementById('editBannerStatus').checked = logoStatus == 1; // Check if the status is active
+            document.getElementById('bannerStatusLabel').textContent = logoStatus == 1 ? 'Active' : 'In-Active';
+
+            console.log(logoStatus);
+            $('#editBannerModal').modal('show');
+
+        }
+
+        function toggleEdit(button) {
+            const row = button.closest('tr');
+            const inputs = row.querySelectorAll('input');
+
+            // If inputs are disabled, enable them for editing
+            if (inputs[0].disabled) {
+                inputs.forEach(input => input.disabled = false);
+                button.textContent = 'Save';
+            } else {
+                // If inputs are enabled, disable them and save the data
+                inputs.forEach(input => input.disabled = false);
+                button.textContent = 'Edit';
+
+                const form = document.getElementById('governmentForm');
+                form.submit();
+            }
         }
 
         // Function to preview logo image
-        function previewLogoImage(event, imagePreviewId) {
-            var input = event.target;
-            var reader = new FileReader();
+        function previewNewImage() {
+            const fileInput = document.getElementById('editLogoImage');
+            const newLogoPreview = document.getElementById('newLogoPreview');
 
-            reader.onload = function() {
-                var dataURL = reader.result;
-                var output = document.getElementById(imagePreviewId);
-                output.src = dataURL;
-                output.style.display = 'block';
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                newLogoPreview.src = e.target.result; // Update preview with new image
+                newLogoPreview.style.display = 'block'; // Show the new image preview
             };
 
-            reader.readAsDataURL(input.files[0]);
+            if (file) {
+                reader.readAsDataURL(file); // Trigger preview
+            }
         }
 
         // Function to show banner image modal
@@ -655,6 +669,16 @@
             var image = document.getElementById(imagePreviewId);
             var modalImage = document.getElementById('logoImageModalImage');
             modalImage.src = image.src;
+        }
+
+        function previewBannerImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const bannerPreview = document.getElementById('bannerPreview');
+                bannerPreview.src = reader.result;
+                bannerPreview.style.display = 'block'; // Show the preview
+            }
+            reader.readAsDataURL(event.target.files[0]);
         }
     </script>
 @endsection
