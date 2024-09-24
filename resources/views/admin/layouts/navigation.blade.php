@@ -107,7 +107,7 @@
             <div class="collapse" id="contentupload">
               <ul class="nav nav-collapse">
                 <li>
-                  <a href="testimonial_list.html">
+                  <a href="{{url('/testimonials')}}">
                     <span class="sub-item">Director Message</span>
                   </a>
                 </li>
@@ -232,7 +232,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="socialmedia_list.html">
+                  <a href="{{url('/social-media')}}">
                     <span class="sub-item">Social Media Update</span>
                   </a>
                 </li>
@@ -242,17 +242,17 @@
                   </a>
                 </li>
                 <li>
-                  <a href="Partnerlogos_list.html">
+                  <a href="{{url('/partner')}}">
                     <span class="sub-item">Partner Logos</span>
                   </a>
                 </li>
                 <li>
-                  <a href="configuration_header_edit.html">
+                  <a href="{{url('/header')}}">
                     <span class="sub-item">Header</span>
                   </a>
                 </li>
                 <li>
-                  <a href="configuration_footer_edit.html">
+                  <a href="{{url('/footer')}}">
                     <span class="sub-item">Footer</span>
                   </a>
                 </li>

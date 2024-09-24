@@ -101,14 +101,16 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="publicVisibility" class="form-label">Visible to
-                                                        Public</label>
+                                                    <label for="publicVisibility" class="form-label">Status</label>
                                                 </td>
                                                 <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="status"
-                                                            id="publicVisibility" checked>
-                                                        <label class="form-check-label" for="publicVisibility">Yes</label>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" name="status" type="checkbox"
+                                                            id="toggleStatus" value="1"
+                                                            {{ CHECKBOX('document_status') }}
+                                                            onchange="toggleStatusText('statusLabel', this)">
+                                                        <label class="form-check-label" for="toggleStatus"
+                                                            id="statusLabel">In-Active</label>
                                                     </div>
                                                 </td>
                                                 <td></td>
@@ -121,8 +123,7 @@
                                 <!-- Buttons -->
                                 <div class="d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="button" class="btn btn-danger"
-                                        href="{{ route('testimonials.index') }}">Cancel</button>
+                                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('testimonials.index') }}';">Cancel</button>
                                 </div>
                             </form>
 
@@ -143,10 +144,8 @@
                                             <p class="mb-4">Are you sure you want to submit the form?</p>
                                         </div>
                                         <div class="modal-footer justify-content-center">
-                                            <button type="button" class="btn btn-outline-secondary"
-                                                data-bs-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success" onclick="submitForm()">Yes,
-                                                Submit</button>
+                                            <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('testimonials.index') }}';">Cancel</button>
+                                            <button type="button" class="btn btn-success" onclick="submitForm()">Yes,Submit</button>
                                         </div>
                                     </div>
                                 </div>

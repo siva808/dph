@@ -37,6 +37,7 @@
       <!-- Custom CSS -->
       <script src="{{asset('packa/theme/assets/node_modules/jquery/jquery-3.7.1.min.js')}}"></script>
       <link rel="stylesheet" href="{{asset('packa/theme/dist/css/bootstrap.min.css')}}" />
+      <link rel="stylesheet" href="{{asset('css/custom.css')}}" />
       <link rel="stylesheet" href="{{asset('packa/theme/dist/css/plugins.min.css')}}" />
       <link rel="stylesheet" href="{{asset('packa/theme/dist/css/dphadmin.min.css')}}" />
       <!-- Bootstrap tether Core JavaScript -->
