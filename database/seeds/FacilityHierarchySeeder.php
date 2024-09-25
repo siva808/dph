@@ -13,19 +13,21 @@ class FacilityHierarchySeeder extends Seeder
      */
     public function run()
     {
-        $hscs = hsc::all();
+        // $hscs = hsc::all();
 
-        foreach ($hscs as $hsc) {
+        // foreach ($hscs as $hsc) {
             // Insert into the facility_master table
             FacilityHierarchy::create([
-                'facility_name' => $hsc->name,
+                'facility_name' => 'Ariyalur',
+                'country_id' => 1,
+                'state_id' => 1,
                 'facility_level_id' => 3,
-                'district_id' => null,
+                'district_id' => 3,
+                'hud_id' => null, 
                 'block_id' => null,
                 'phc_id' => null,
-                'hsc_id' => $hsc->id,
-                'hud_id' => null, 
+                'hsc_id' => null,
             ]);
-        }
+        // }
     }
 }
