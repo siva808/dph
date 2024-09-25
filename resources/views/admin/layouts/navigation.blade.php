@@ -318,7 +318,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="section_list.html">
+                  <a href="{{url('/sections')}}">
                     <span class="sub-item">Sections</span>
                   </a>
                 </li>
