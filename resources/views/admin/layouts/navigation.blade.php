@@ -323,7 +323,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="program_list.html">
+                  <a href="{{url('/programs')}}">
                     <span class="sub-item">Program Division</span>
                   </a>
                 </li>
