@@ -84,13 +84,12 @@ class SectionController extends Controller
      */
     public function edit($id)
     {
-        {
             $result = Section::with([])->find($id);
             $programs = Program::getProgramData();
             $statuses = _getGlobalStatus();
             
             return view('admin.masters.sections.edit',compact('result','statuses', 'programs'));
-        }
+        
     }
 
     /**

@@ -1,96 +1,105 @@
 @extends('admin.layouts.layout')
-@section('title', 'Edit Facility Type')
+@section('title', 'Edit Scheme')
 @section('content')
-<div class="page-wrapper">
-   <div class="container-fluid">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Edit Facility Type</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('facilitytypes.index')}}">Facility Type</a></li>
+<div class="container" style="margin-top: 90px;">
+    <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+        <div class="d-flex justify-content-between align-items-center"
+            style="padding-left: 20px; padding-right: 20px;">
+            <h5 class="mb-0">Scheme</h5>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Scheme</li>
                 </ol>
-            </div>
+            </nav>
         </div>
     </div>
-      <div class="row">
-    <div class="col-md-12">
-        <div class="card card-body">
-
+    <div class="container-fluid">
+        <div class="page-inner">
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <form action="{{route('facilitytypes.update',$result->id)}}" enctype="multipart/form-data" method="post">
-                        {{csrf_field()}}
-                        @method('PUT')
-
-                        <div class="row pt-3">
-                            <div class="form-group col-sm-4 col-xs-4">
-                                <label for="name" class="required">Name</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{old('name',$result->name)}}">
-                            </div>
-                            
-                             <div class="form-group col-sm-4 col-xs-4">
-                                <label for="phc_id" class="required">PHC</label>
-                                <select name="phc_id" id="section" class="form-control">
-                                    <option value="" >-- Select PHC -- </option>
-                                    @foreach($phc as $key => $value)
-                                    <option value="{{$value->id}}" {{SELECT($value->id,old('phc_id',$result->phc_id))}}>{{$value->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-
-                               <div class="form-group col-sm-4 col-xs-4">
-                                 <label for="facilitytype_image" class="">Image </label>
-                                <input type="file" name="facilitytype_image" class="form-control" id="facilitytype_image" placeholder="Image" value="{{old('image_url',$result->image_url)}}" />
-                            </div>
-
-                        <div class="form-group col-sm-4 col-xs-4">
-                                  <label for="status" class="required">Status </label>
-                                  <select name="status" id="status" class="form-control">
-                                      @foreach($statuses as $key => $value)
-                                      <option value="{{$value}}" {{SELECT($value,old('status',$result->status))}}>{{$key}}</option>
-                                      @endforeach
-                                  </select>
-                              </div>
-                               <div class="row pt-3 col-md-12">
-                    <div class="form-group col-sm-4 col-xs-4">
-                    <label for="image_url" class="required">facility Type Image </label>
-                    @if($result->image_url)
-                        <br>
-                        <img src="{{fileLink($result->image_url)}}" height="100" width="100" />
-                    @else
-                        <br>
-                        <span>No Image Uploaded.</span>
-                    @endif
-
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                
-                        </div>
-                        <hr>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                       <a type="reset" class="btn btn-inverse waves-effect waves-light" href="{{route('facilitytypes.index')}}"> Cancel </a>
-                    </form>
+                @endif
+            <div class="container-fluid mt-2">
+                <div class="row">
+                    <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                        <!-- insert the contents Here start -->
 
+                        <div class="card-body">
+                            <!-- Heading -->
+                            <h4 class="card-title mb-4 text-primary">Edit Scheme Details</h4>
+
+                            <form action="{{ route('schemes.update', $result->id) }}" enctype="multipart/form-data"
+                                method="post">
+                                {{ csrf_field() }}
+                                @method('PUT')
+                                <div class="row mb-3 p-3">
+
+                                    <!-- Name -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Name</div>
+                                        <input type="text" class="form-control" id="schemetype" name="name" value="{{ old('name', $result->name) }}"
+                                            required>
+                                    </div>
+
+                                </div>
+                                <div class="row mb-3 p-3">
+                                <!-- program -->
+                                <div class="col-md-6">
+                                    <div class="font-weight-bold text-secondary">Program</div>
+                                    <select name="program_id" id="program_id" class="form-control">
+                                        <option value="" >-- Select Program -- </option>
+                                        @foreach($programs as $key => $value)
+                                            <option value="{{$value->id}}" {{SELECT($value->id,old('programs_id',$result->programs_id))}}>{{$value->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                </div>
+
+                                <div class="row mb-3 p-3">
+                                    <!-- short code -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Short Code</div>
+                                        <input type="text" class="form-control" id="sectiontype" name="short_code" value="{{ old('short_code', $result->short_code) }}"
+                                            required>
+                                    </div>
+
+                                </div>
+
+                                <div class="row mb-3 p-3">
+                                    <!-- Status -->
+                                    <div class="col-md-6">
+                                        <div class="font-weight-bold text-secondary">Status:</div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input " name="status" type="checkbox"
+                                                    id="toggleStatus" value="1"
+                                                    {{ CHECKBOX('status', $result->status) }}
+                                                    onchange="toggleStatusText('statusLabel', this)">
+                                                <label class="form-check-label" for="toggleStatus"
+                                                    id="statusLabel">{{ $result->status == 1 ? 'Active' : 'In-Active' }}</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="text-start mt-4">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- insert the contents Here end -->
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- page inner end-->
     </div>
-  </div>
-   </div>
-</div>
+    <!-- database table end -->
 </div>
 @endsection

@@ -328,7 +328,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="schemes_list.html">
+                  <a href="{{url('/schemes')}}">
                     <span class="sub-item">Schemes</span>
                   </a>
                 </li>
