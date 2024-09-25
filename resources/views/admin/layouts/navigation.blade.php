@@ -318,7 +318,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="section_list.html">
+                  <a href="{{url('/sections')}}">
                     <span class="sub-item">Sections</span>
                   </a>
                 </li>
@@ -328,7 +328,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="schemes_list.html">
+                  <a href="{{url('/schemes')}}">
                     <span class="sub-item">Schemes</span>
                   </a>
                 </li>

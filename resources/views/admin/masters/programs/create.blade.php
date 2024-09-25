@@ -17,6 +17,15 @@
     </div>
     <div class="container-fluid">
         <div class="page-inner">
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             <div class="container-fluid  mt-2">
                 <div class="row">
                     <!-- insert the contents Here start -->
