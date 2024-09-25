@@ -26,6 +26,8 @@ Route::middleware(['admin'])->group(function () {
 	Route::post('send-invitation','Admin\UserController@sendInvitation');
 	Route::resource('/users','Admin\UserController');
 	Route::get('/users-export','Admin\UserController@export')->name('users.export');
+	Route::resource('/programs','Admin\ProgramController');
+	Route::resource('/sections','Admin\SectionController');
 	Route::resource('/districts','Admin\DistrictController');
 	Route::resource('/designations','Admin\DesignationController');
 	Route::resource('/facilitytypes','Admin\FacilityTypeController');

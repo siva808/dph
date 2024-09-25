@@ -318,12 +318,12 @@
                   </a>
                 </li>
                 <li>
-                  <a href="section_list.html">
+                  <a href="{{url('/sections')}}">
                     <span class="sub-item">Sections</span>
                   </a>
                 </li>
                 <li>
-                  <a href="program_list.html">
+                  <a href="{{url('/programs')}}">
                     <span class="sub-item">Program Division</span>
                   </a>
                 </li>
