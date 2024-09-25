@@ -50,7 +50,19 @@ class FacilityHierarchy extends Model
         // dd('hiiii');
 
         $result = static::with([])->filter();
-        
+
+        if($hud_id = request('hud_id')) {
+            $result = $result->where('hud_id',$hud_id);
+        } 
+        if($block_id = request('block_id')) {
+            $result = $result->where('block_id',$block_id);
+        } 
+        if($phc_id = request('phc_id')) {
+            $result = $result->where('phc_id',$phc_id);
+        }
+        if($hsc_id = request('hsc_id')) {
+            $result = $result->where('hsc_id',$hsc_id);
+        }
 
         $sortfield = ($sortfield == 'name') ? 'name' : $sortfield;
 
