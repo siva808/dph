@@ -27,6 +27,7 @@ Route::middleware(['admin'])->group(function () {
 	Route::resource('/users','Admin\UserController');
 	Route::get('/users-export','Admin\UserController@export')->name('users.export');
 	Route::resource('/programs','Admin\ProgramController');
+	Route::resource('/programdetails','Admin\ProgramDetailController');
 	Route::resource('/sections','Admin\SectionController');
 	Route::resource('/schemes','Admin\SchemeController');
 	Route::resource('/districts','Admin\DistrictController');

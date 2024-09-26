@@ -112,6 +112,11 @@
                   </a>
                 </li>
                 <li>
+                  <a href="{{url('/programdetails')}}">
+                    <span class="sub-item">Program & Divisions</span>
+                  </a>
+                </li>
+                <li>
                   <a href="doc_list_welcomebanner.html">
                     <span class="sub-item">Welcome Banner</span>
                   </a>
