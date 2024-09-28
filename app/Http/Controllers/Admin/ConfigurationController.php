@@ -411,6 +411,10 @@ class ConfigurationController extends Controller
             'partners' => $configDetails->filter(function ($item) {
                 return $item->configuration_content_type_id === 3 && $item->status === 1;
             })->values(), // Partner logos
+
+            'scroller-notif' => $configDetails->filter(function ($item) {
+                return $item->configuration_content_type_id === 11 && $item->status === 1;
+            })->values(), // Scroller Notification
         ];
 
         return sendResponse($response);
