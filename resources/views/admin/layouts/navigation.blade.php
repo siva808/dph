@@ -117,11 +117,6 @@
                   </a>
                 </li>
                 <li>
-                  <a href="scrollernotification_list.html">
-                    <span class="sub-item">Scroller Notification</span>
-                  </a>
-                </li>
-                <li>
                   <a href="doc_list_govtorders.html">
                     <span class="sub-item">GO's</span>
                   </a>
@@ -229,6 +224,11 @@
                 <li>
                   <a href="childsubmenu_list.html">
                     <span class="sub-item">Child SubMenu</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{url('/scroller-notif')}}">
+                    <span class="sub-item">Scroller Notification</span>
                   </a>
                 </li>
                 <li>

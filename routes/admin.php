@@ -39,6 +39,7 @@ Route::middleware(['admin'])->group(function () {
 	Route::resource('/testimonials','Admin\TestimonialController');
 	Route::resource('/social-media','Admin\SocialMediaController');
 	Route::resource('/partner','Admin\PartnerController');
+	Route::resource('/scroller-notif','Admin\ScrollerController');
 	Route::resource('/header', 'Admin\HeaderController');
 	Route::post('/header/update-logo', 'Admin\HeaderController@updateHeaderLogo')->name('header.updatelogo');
 	Route::post('/header/store-banner', 'Admin\HeaderController@storeBanner')->name('header.storebanner');

@@ -262,7 +262,7 @@ class HeaderController extends Controller
     {
 
         $rules = array();
-        $rules['name'] = 'required|nullable';
+        $rules['name'] = 'sometimes|nullable';
         $rules['status'] = 'sometimes|boolean';
         $rules['header_banner_image'] = 'sometimes|mimes:png,jpg,jpeg|max:5120';
         $rules['header_logo_image'] = 'sometimes|mimes:png,jpg,jpeg|max:5120';
