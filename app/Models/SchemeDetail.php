@@ -21,6 +21,8 @@ class SchemeDetail extends Model
         'report_image_four',
         'report_image_five',
         'visible_to_public',
+        'status',
+        'visible_to_public'
     ];
 
     protected $casts = [
@@ -69,6 +71,6 @@ class SchemeDetail extends Model
     }
 
     public function scheme() {
-        return $this->belongsTo(Scheme::class, 'schemes_id')->select('id', 'name');
+        return $this->belongsTo(Scheme::class, 'schemes_id')->select('id', 'name', 'programs_id');
     }
 }

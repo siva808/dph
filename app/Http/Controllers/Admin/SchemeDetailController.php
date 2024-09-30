@@ -161,10 +161,10 @@ class SchemeDetailController extends Controller
     public function edit($id)
     {
         $result = SchemeDetail::findOrFail($id);
+        // dd($result->toArray());
         $statuses = _getGlobalStatus();
         $programs = Program::getProgramData();
         $schemes = Scheme::getSchemeData();
-
         return view('admin.scheme-details.edit', compact('result', 'statuses', 'schemes', 'programs'));
     }
 
@@ -177,6 +177,7 @@ class SchemeDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->toArray());
         $validator = Validator::make($request->all(), $this->rules(), $this->messages(), $this->attributes());
 
         if ($validator->fails()) {
@@ -192,6 +193,7 @@ class SchemeDetailController extends Controller
             'status' => $request->status ?? 0,
             'visible_to_public' => $request->visible_to_public ?? 0,
         ];
+        // dd($input);
 
 
         if ($request->hasFile('images.0') && $file = $request->file('images.0')) {
@@ -284,9 +286,23 @@ class SchemeDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $schemeDetail = SchemeDetail::find($id);
+    
+        if (!$schemeDetail) {
+            return response()->json(['message' => 'Scheme not found'], 404);
+        }
+        
+        $imageField = $request->input('image_field');
+        // return dd($schemeDetail->$imageField);
+        if ($schemeDetail->$imageField) {
+            $storedFile = FileService::deleteDiskFile($schemeDetail->$imageField, '/');
+            
+            $schemeDetail->$imageField = null; // Set the image field to null
+            $schemeDetail->save(); // Save changes
+        };
+        createdResponse("Image Deleted Successfully");
     }
 
     public function rules($id = "")
