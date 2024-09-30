@@ -122,6 +122,11 @@
                   </a>
                 </li>
                 <li>
+                  <a href="{{url('/schemedetails')}}">
+                    <span class="sub-item">Scheme Details</span>
+                  </a>
+                </li>
+                <li>
                   <a href="scrollernotification_list.html">
                     <span class="sub-item">Scroller Notification</span>
                   </a>

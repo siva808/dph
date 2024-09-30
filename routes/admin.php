@@ -30,6 +30,7 @@ Route::middleware(['admin'])->group(function () {
 	Route::resource('/programdetails','Admin\ProgramDetailController');
 	Route::resource('/sections','Admin\SectionController');
 	Route::resource('/schemes','Admin\SchemeController');
+	Route::resource('/schemedetails','Admin\SchemeDetailController');
 	Route::resource('/districts','Admin\DistrictController');
 	Route::resource('/designations','Admin\DesignationController');
 	Route::resource('/facilitytypes','Admin\FacilityTypeController');
