@@ -148,7 +148,7 @@
                                     <div class="col-12 col-md-5">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox"
-                                                id="toggleStatus" checked
+                                                id="toggleStatus" value="1"
                                                 onchange="toggleStatusText('statusLabel', this)">
                                             <label class="form-check-label" for="toggleStatus"
                                                 id="statusLabel">Active</label>
