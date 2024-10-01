@@ -51,7 +51,7 @@ class Designation extends Model
      	$sortfield = ($sortfield == 'name')?'name':$sortfield;
      	
 
-     	return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+     	return $result->orderBy($sortfield,$sorttype)->get();
     }
 
 
