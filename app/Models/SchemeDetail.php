@@ -4,12 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Scheme extends Model
+class SchemeDetail extends Model
 {
     protected $fillable = [
-        'name',
-        'short_code',
-        'programs_id',
+        'schemes_id',
+        'description',
+        'document_url',
+        'image_one',
+        'image_two',
+        'image_three',
+        'image_four',
+        'image_five',
+        'report_image_one',
+        'report_image_two',
+        'report_image_three',
+        'report_image_four',
+        'report_image_five',
+        'visible_to_public',
         'status',
     ];
 
@@ -54,11 +65,11 @@ class Scheme extends Model
     }
 
 
-    public static function getSchemeData() {
+    public static function getSchemedetailsData() {
         return static::where('status',_active())->orderBy('name','asc')->get();
     }
 
-    public function program() {
-        return $this->belongsTo(Program::class, 'programs_id')->select('id', 'name');
+    public function scheme() {
+        return $this->belongsTo(Scheme::class, 'schemes_id')->select('id', 'name', 'programs_id');
     }
 }

@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Scheme extends Model
+class ProgramOfficer extends Model
 {
+    protected $table = 'programofficer';
     protected $fillable = [
         'name',
-        'short_code',
+        'image',
+        'qualification',
+        'designations_id',
         'programs_id',
         'status',
+        'order_no'
     ];
 
     protected $casts = [
@@ -54,11 +58,15 @@ class Scheme extends Model
     }
 
 
-    public static function getSchemeData() {
-        return static::where('status',_active())->orderBy('name','asc')->get();
+    public static function getProgramOfficersData() {
+        return static::where('status',_active())->orderBy('id','asc')->get();
     }
 
     public function program() {
-        return $this->belongsTo(Program::class, 'programs_id')->select('id', 'name');
+        return $this->belongsTo(Program::class, 'schemes_id')->select('id', 'name');
+    }
+
+    public function designation() {
+        return $this->belongsTo(Designation::class, 'designations_id')->select('id', 'name');
     }
 }
