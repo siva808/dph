@@ -110,7 +110,7 @@ class ProgramDetailController extends Controller
                     'name' => $officerData['officer_name'],
                     'qualification' => $officerData['officer_qualification'],
                     'designations_id' => $officerData['officer_designation'],
-                    'programs_id' => $request->program_id, // Link to the created program detail
+                    'programs_id' => $request->programs_id, // Link to the created program detail
                     'status' => $officerData['officer_status'] ?? 0,
                     'order_no' => $officerData['officer_order'],
                 ];
@@ -309,7 +309,7 @@ class ProgramDetailController extends Controller
         $rules['programs_id'] = 'required|integer';
         $rules['status'] = 'nullable|boolean';
         $rules['visible_to_public'] = 'nullable|boolean';
-        $rules['images.*'] = 'sometimes|mimes:jpeg,png,jpg,gif|max:4096';
+        $rules['images.*'] = 'sometimes|mimes:jpeg,png,jpg|max:4096';
         $rules['document'] = 'nullable|mimes:pdf|max:5120';
         $rules['officers.*.officer_name'] = 'sometimes|string';
         $rules['officers.*.officer_qualification'] = 'sometimes|string';
