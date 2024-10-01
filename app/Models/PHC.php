@@ -71,7 +71,8 @@ class PHC extends Model
 
      	
 
-     	return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+     	// return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+        return $result->orderBy($sortfield,$sorttype)->get();
     }
      public static function getPhcData($block_id = NULL) {
 

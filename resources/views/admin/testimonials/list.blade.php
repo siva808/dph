@@ -12,9 +12,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title"></h4>
+                                <h4 class="card-title">Director Message</h4>
                                 <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
-                                    data-bs-target="#addRowModal" onclick="window.location.href='testimonial_create.html';">
+                                    data-bs-target="#addRowModal" onclick="window.location.href='{{route('testimonials.create')}}';">
                                     <i class="fa fa-plus"></i> Add New
                                 </button>
                             </div>

@@ -123,8 +123,7 @@
                                 <!-- Buttons -->
                                 <div class="d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="button" class="btn btn-danger"
-                                        href="{{ route('testimonials.index') }}">Cancel</button>
+                                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('testimonials.index') }}';">Cancel</button>
                                 </div>
                             </form>
 

@@ -50,6 +50,7 @@ class PhcController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
 
         if($validator->fails()) {
@@ -60,10 +61,10 @@ class PhcController extends Controller
         $input = [
                 'name' => $request->name,
                 'block_id' => $request->block_id,
-                'location_url' => $request->location_url,
-                'video_url' => $request->video_url,
-                'is_urban' => $request->is_urban,
-                'status' => $request->status
+                // 'location_url' => $request->location_url,
+                // 'video_url' => $request->video_url,
+                // 'is_urban' => $request->is_urban,
+                'status' => $request->status ?? 0
             ];
 
             
@@ -143,10 +144,10 @@ class PhcController extends Controller
         $input = [
                 'name' => $request->name,
                 'block_id' => $request->block_id,   
-                'location_url' => $request->location_url, 
-                'video_url' => $request->video_url,
-                'is_urban' => $request->is_urban,           
-                'status' => $request->status
+                // 'location_url' => $request->location_url, 
+                // 'video_url' => $request->video_url,
+                // 'is_urban' => $request->is_urban,           
+                'status' => $request->status ?? 0
             ];
 
           
@@ -209,8 +210,8 @@ class PhcController extends Controller
         $rules['phc_image'] = 'sometimes|mimes:png,jpg,jpeg|max:4096';
         $rules['location_url'] = 'sometimes|nullable|url';
         $rules['video_url'] = 'sometimes|nullable|url';
-        $rules['status'] = 'required|boolean';
-        $rules['is_urban'] = 'required';
+        // $rules['status'] = 'required|boolean';
+        // $rules['is_urban'] = 'required';
         $rules['property_document'] = 'sometimes|mimes:pdf|max:8192';
 
         return $rules;

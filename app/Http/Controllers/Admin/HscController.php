@@ -65,9 +65,9 @@ class HscController extends Controller
         $input = [
                 'name' => $request->name,
                 'phc_id' => $request->phc_id,
-                'location_url' => $request->location_url, 
-                'video_url' => $request->video_url,  
-                'is_urban' => $request->is_urban,          
+                // 'location_url' => $request->location_url, 
+                // 'video_url' => $request->video_url,  
+                // 'is_urban' => $request->is_urban,          
                 'status' => $request->status
 
             ];
@@ -137,7 +137,7 @@ class HscController extends Controller
      * @return \Illuminate\Http\Response
      */
      public function update(Request $request, $id)
-    {
+    {   
         $validator = Validator::make($request->all(),$this->rules($id),$this->messages(),$this->attributes());
 
         if($validator->fails()) {
@@ -151,10 +151,10 @@ class HscController extends Controller
         $input = [
                 'name' => $request->name,
                 'phc_id' => $request->phc_id,
-                'location_url' => $request->location_url, 
-                'video_url' => $request->video_url, 
-                'is_urban' => $request->is_urban,           
-                'status' => $request->status
+                // 'location_url' => $request->location_url, 
+                // 'video_url' => $request->video_url, 
+                // 'is_urban' => $request->is_urban,           
+                'status' => $request->status ?? 0
             ];
 
            
@@ -216,8 +216,8 @@ class HscController extends Controller
         $rules['hsc_image'] = 'sometimes|mimes:png,jpg,jpeg|max:4096';
         $rules['location_url'] = 'sometimes|nullable|url';
         $rules['video_url'] = 'sometimes|nullable|url';
-        $rules['status'] = 'required|boolean';
-        $rules['is_urban'] = 'required';
+        // $rules['status'] = 'required|boolean';
+        // $rules['is_urban'] = 'required';
         $rules['property_document'] = 'sometimes|mimes:pdf|max:8192';
 
         return $rules;
