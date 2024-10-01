@@ -183,7 +183,7 @@ class ProgramDetailController extends Controller
 
         $input = [
             'description' => $request->description,
-            'programs_id' => $request->programs_id,
+            'programs_id' => $request->program_id,
             'status' => $request->status ?? 0,
             // 'visible_to_public' => $request->visible_to_public ?? 0,
         ];

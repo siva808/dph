@@ -50,7 +50,7 @@
                                                     style="color: red;">*</span></label>
                                         </div>
                                         <div class="col-12 col-md-8">
-                                            <select name="programs_id" id="programs_id" class="form-control">
+                                            <select name="program_id" id="programs_id" class="form-control">
                                                 <option value="{{ $result->programs_id }}"
                                                     {{ SELECT($result->programs_id, old('programs_id', $result->programs_id)) }}>
                                                     {{ $result->program->name ?? 'N/A' }}</option>
