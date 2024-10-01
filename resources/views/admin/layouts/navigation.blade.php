@@ -242,6 +242,11 @@
                   </a>
                 </li>
                 <li>
+                  <a href="{{url('/scroller-notif')}}">
+                    <span class="sub-item">Scroller Notification</span>
+                  </a>
+                </li>
+                <li>
                   <a href="{{url('/social-media')}}">
                     <span class="sub-item">Social Media Update</span>
                   </a>
