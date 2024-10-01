@@ -22,7 +22,6 @@ class SchemeDetail extends Model
         'report_image_five',
         'visible_to_public',
         'status',
-        'visible_to_public'
     ];
 
     protected $casts = [

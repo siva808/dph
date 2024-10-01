@@ -1,23 +1,23 @@
 @extends('admin.layouts.layout')
-@section('title', 'Create Programs')
+@section('title', 'Create Programs Details')
 @section('content')
-<div class="container" style="margin-top: 90px;">
-    <div class="container-fluid p-2" style="background-color: #f2f2f2;">
-        <div class="d-flex justify-content-between align-items-center"
-            style="padding-left: 20px; padding-right: 20px;">
-            <h5 class="mb-0">Program Divisions</h5>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Create Program Divisions</li>
-                </ol>
-            </nav>
+    <div class="container" style="margin-top: 90px;">
+        <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+            <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
+                <h5 class="mb-0">program and Division Details</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">programmsAnddivisions Create</li>
+                    </ol>
+                </nav>
 
+            </div>
         </div>
-    </div>
-    <div class="container-fluid">
-        <div class="page-inner">
-            @if ($errors->any())
+
+        <div class="container-fluid">
+            <div class="page-inner">
+                @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -26,87 +26,340 @@
                         </ul>
                     </div>
                 @endif
-            <div class="container-fluid  mt-2">
-                <div class="row">
-                    <!-- insert the contents Here start -->
+                <!-- insert the contents Here start -->
 
-                    <div class="container mt-2">
-                        <div class="row">
-                            <div class="col-lg-8 p-5"
-                                style="background-color: #ffffff; border-radius: 10px;">
-                                <form id="contactForm" action="{{route('programs.store')}}" enctype="multipart/form-data" method="post">
-                                    {{csrf_field()}}
+                <!-- description start============================================================ -->
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+
+                            <!-- new form start =================================================== -->
+
+                            <form id="programForm" class="mb-3" action="{{ route('programdetails.store') }}"
+                                enctype="multipart/form-data" method="post">
+                                {{ csrf_field() }}
+                                <div class="container">
+                                    <h4 class="card-title mb-4 text-primary">Create Program and Divisions</h4>
+
+                                    <!-- Program & division Dropdown Row -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="mainmenu" class="form-label">Program Title<span
+                                                    style="color: red;">*</span></label>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            <select name="program_id" id="program_id" class="form-control">
+                                                <option value="">-- Select Program -- </option>
+                                                @foreach ($programs as $key => $value)
+                                                    <option value="{{ $value->id }}"
+                                                        {{ SELECT($value->id, old('program_id')) }}>
+                                                        {{ $value->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Official Details Start -->
                                     <div class="container">
-                                        <h4 class="card-title mb-4 text-primary">Create Program Divisions</h4>
-
-                                        <!-- Name Row -->
-                                        <div class="row mb-3">
-                                            <!-- Label Column with reduced width -->
-                                            <div class="col-12 col-md-3">
-                                                <label for="name" class="form-label">Name <span
-                                                        style="color: red;">*</span></label>
-                                            </div>
-                                            <!-- Input Column -->
-                                            <div class="col-12 col-md-7">
-                                                <input type="text" class="form-control" id="name"
-                                                    placeholder="Enter name" name="name" required>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h5 class="card-title text-primary my-3">Upload Officers</h5>
                                             </div>
                                         </div>
 
-                                        <!-- Short code Row -->
-                                        <div class="row mb-3">
-                                            <!-- Label Column with reduced width -->
-                                            <div class="col-12 col-md-3">
-                                                <label for="short_code" class="form-label">Short Code <span
-                                                        style="color: red;">*</span></label>
+                                        <div class="row mt-3 mb-5" id="officialButtons">
+                                            <div class="col-12 col-sm-6 col-md-2 mb-2">
+                                                <button id="addOfficial1" class="btn btn-primary w-100"
+                                                    onclick="showOfficialForm(1)">Add Officer 1</button>
                                             </div>
-                                            <!-- Input Column -->
-                                            <div class="col-12 col-md-7">
-                                                <input type="text" class="form-control" id="short_code"
-                                                    placeholder="Enter Short Code" name="short_code" required>
+                                            <div class="col-12 col-sm-6 col-md-2 mb-2">
+                                                <button id="addOfficial2" class="btn btn-primary w-100"
+                                                    onclick="showOfficialForm(2)">Add Officer 2</button>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-md-2 mb-2">
+                                                <button id="addOfficial3" class="btn btn-primary w-100"
+                                                    onclick="showOfficialForm(3)">Add Officer 3</button>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-md-2 mb-2">
+                                                <button id="addOfficial4" class="btn btn-primary w-100"
+                                                    onclick="showOfficialForm(4)">Add Officer 4</button>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-md-2 mb-2">
+                                                <button id="addOfficial5" class="btn btn-primary w-100"
+                                                    onclick="showOfficialForm(5)">Add Officer 5</button>
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <div id="officialsContainer">
+                                        <!-- Officials will be added dynamically here -->
+                                    </div>
+                                    <!-- Official Details End -->
 
-                                        <!-- Status Row -->
-                                        <div class="row mb-3">
-                                            <div class="col-12 col-md-3">
-                                                <label for="status" class="form-label">Status <span
-                                                        style="color: red;">*</span></label>
-                                            </div>
-                                            <div class="col-12 col-md-5">
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" name="status" type="checkbox"
-                                                    id="toggleStatus" value="1" {{ CHECKBOX('document_status') }}
-                                                    onchange="toggleStatusText('statusLabel', this)">
+                                    <!-- Program Description -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="description" class="form-label">Description <span
+                                                    style="color: red;">*</span></label>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            <textarea class="form-control" id="description" rows="4" placeholder="Enter description" name="description"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Multi-select Images -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="imageUploads" class="form-label">Select Image<span
+                                                    style="color: red;">*</span></label>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            <input type="file" id="imageUploads" class="form-control" accept="image/*"
+                                                multiple onchange="previewImages()" name="images[]" required>
+                                            <small class="sizeoftextred">Upload Max 5 Images, Accepted file types
+                                                .jpg/.jpeg/.png/.Doc</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image Previews for Program -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-8 offset-md-3">
+                                            <div id="imagePreviews" class="d-flex flex-wrap"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Document Upload -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="document" class="form-label">Upload Document</label>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            <input type="file" class="form-control" id="document"
+                                                accept=".pdf,.doc,.docx" name="document" required>
+                                            <small class="sizeoftextred">Accepted file types .pdf</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Program Status Row -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label class="form-label">Program Detail Status</label>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="toggleStatus"
+                                                    value="1" name="status"
+                                                    onchange="toggleStatusText('PDStatusLabel', this)">
                                                 <label class="form-check-label" for="toggleStatus"
-                                                    id="statusLabel">In-Active</label>
-                                                </div>
+                                                    id="PDStatusLabel">In-Active</label>
                                             </div>
                                         </div>
                                     </div>
 
-
-                                    <!-- Buttons -->
-                                    <div class="d-flex mt-2 pl-5">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="button" style="margin-left: 10px;"
-                                        onclick="window.location.href='{{route('programs.index')}}'" class="btn btn-danger">Cancel</button>
+                                    <!-- Visible to Public Toggle -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="visibleToPublic" class="form-label">Visible to
+                                                Public</label>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="toggleStatus"
+                                                    name="visible_to_public" value="1"
+                                                    onchange="toggleStatusText('visibleToPublicLabel', this)">
+                                                <label class="form-check-label" for="toggleStatus"
+                                                    id="visibleToPublicLabel">In-Active</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </form>
+
+                                    <!-- Submit Button -->
+                                    <div class="d-flex mt-4">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
 
 
-                            </div>
+                            <!-- new form end =================================================== -->
+
                         </div>
                     </div>
-
-                    <!-- insert the contents Here end -->
                 </div>
             </div>
 
+            <!-- insert the contents Here end -->
         </div>
         <!-- page inner end-->
     </div>
-    <!-- database table end -->
-</div>
+
+    <script>
+        let addedOfficials = new Set(); // Track added officials
+
+        function showOfficialForm(officialNumber) {
+            // Check if the official form is already added
+            if (addedOfficials.has(officialNumber)) {
+                alert(`Official ${officialNumber} is already added!`);
+                return;
+            }
+
+            // Add the official to the set
+            addedOfficials.add(officialNumber);
+
+            // Create the new official form section
+            const officialSection = document.createElement('div');
+            officialSection.classList.add('official-container', 'mb-4', 'border', 'p-3', 'position-relative');
+            officialSection.id = `official_${officialNumber}`;
+
+            // Add close button
+            const closeButton = document.createElement('button');
+            closeButton.classList.add('btn-close', 'position-absolute', 'top-0', 'end-0');
+            closeButton.onclick = function() {
+                closeOfficialForm(officialNumber);
+            };
+
+            officialSection.innerHTML = `
+            <h4>Officer #${officialNumber}</h4>
+            <div class="row mb-3">
+                <input type="hidden" name="officers[${officialNumber}][officer_order]" class="form-control" id="officialOrder_${officialNumber}" value="${officialNumber}">
+                <div class="col-12 col-md-3">
+                    <label for="officialName_${officialNumber}" class="form-label">Name</label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input type="text" name="officers[${officialNumber}][officer_name]" class="form-control" id="officialName_${officialNumber}" placeholder="Enter official name" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-3">
+                    <label for="qualification_${officialNumber}" class="form-label">Qualification</label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input type="text" class="form-control" name="officers[${officialNumber}][officer_qualification]" id="qualification_${officialNumber}" placeholder="Enter qualification" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-3">
+                    <label for="designation_${officialNumber}" class="form-label">Designation</label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <select name="officers[${officialNumber}][officer_designation]" id="designation_${officialNumber}" class="form-control">
+                        <option value="0" >-- None -- </option>
+                        @foreach ($designations as $key => $designation)
+                        <option value="{{ $designation->id }}" {{ SELECT($designation, old('status')) }}>{{ $designation->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-3">
+                    <label for="image_${officialNumber}" class="form-label">Upload Image</label>
+                </div>
+                <div class="col-12 col-md-8">
+                    <input type="file" class="form-control"name="officers[${officialNumber}][officer_image]" id="image_${officialNumber}" accept="image/*" onchange="previewOfficialImage(${officialNumber})">
+                    <img id="imagePreview_${officialNumber}" style="max-width: 150px; display: none; margin-top: 10px;" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12 col-md-3">
+                    <label class="form-label">Status</label>
+                </div>
+                <div class="col-12 col-md-5">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="officers[${officialNumber}][officer_status]" id="status_${officialNumber}" value="1" onchange="toggleStatusText('statusLabel_${officialNumber}', this)">
+                        <label class="form-check-label" id="statusLabel_${officialNumber}">In-Active</label>
+                    </div>
+                </div>
+            </div>
+        `;
+
+            // Append the close button and the official form to the container
+            officialSection.appendChild(closeButton);
+            document.getElementById('officialsContainer').appendChild(officialSection);
+
+            // Disable the button for the added official
+            document.getElementById(`addOfficial${officialNumber}`).disabled = true;
+        }
+
+        function closeOfficialForm(officialNumber) {
+            const officialSection = document.getElementById(`official_${officialNumber}`);
+            if (officialSection) {
+                officialSection.remove(); // Remove the section
+                addedOfficials.delete(officialNumber); // Remove from the set
+                document.getElementById(`addOfficial${officialNumber}`).disabled = false; // Re-enable the button
+            }
+        }
+
+        // Preview Official Image function
+        function previewOfficialImage(id) {
+            const fileInput = document.getElementById(`image_${id}`);
+            const imagePreview = document.getElementById(`imagePreview_${id}`);
+
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    <script>
+        function previewImages() {
+            const imagePreview = document.getElementById("imagePreviews");
+            const files = document.getElementById("imageUploads").files;
+
+            // Get the current number of previewed images
+            const currentImageCount = imagePreview.childElementCount;
+
+            // Check if the total number of images (current + new) exceeds 5
+            if (currentImageCount + files.length > 5) {
+                alert("You can upload a maximum of 5 images.");
+                return; // Prevent further execution if limit exceeded
+            }
+
+            // Loop through all selected files
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Create a wrapper div for image and close button
+                    const previewWrapper = document.createElement("div");
+                    previewWrapper.classList.add("position-relative", "m-2");
+                    previewWrapper.style.width = "150px";
+                    previewWrapper.style.height = "150px";
+
+                    // Create the image element
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.classList.add("img-thumbnail");
+                    img.style.width = "100%";
+                    img.style.height = "100%";
+
+                    // Create the close button
+                    const closeButton = document.createElement("span");
+                    closeButton.innerHTML = "&times;";
+                    closeButton.classList.add("remove-button");
+
+                    // Add event listener to remove the image on clicking the close button
+                    closeButton.onclick = function() {
+                        imagePreview.removeChild(previewWrapper);
+                    };
+
+                    // Append the image and close button to the wrapper div
+                    previewWrapper.appendChild(img);
+                    previewWrapper.appendChild(closeButton);
+
+                    // Append the wrapper div to the image preview container
+                    imagePreview.appendChild(previewWrapper);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 @endsection

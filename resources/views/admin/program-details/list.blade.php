@@ -40,7 +40,6 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Program Title</th>
-                                            <th>Uploaded Document Name</th>
                                             <th>Status</th>
                                             <th class="text-center" style="width: 10%">Action</th>
                                         </tr>
@@ -50,7 +49,7 @@
                                             <!-- Example Row -->
                                             <tr>
                                                 <td>{{ $result->id ?? '' }}</td>
-                                                <td>{{ $result->programs->name ?? '' }}</td>
+                                                <td>{{ $result->program->name ?? '' }}</td>
                                                 <td style="font-weight: bold;">
                                                     @if (isset($result->status) && $result->status == 1)
                                                         <span class="text-success">Active</span>
@@ -66,7 +65,7 @@
                                                             <i class="fa fa-edit" title="Edit"></i>
                                                         </button>
                                                         <button type="button" class="btn btn-link btn-danger"
-                                                            onclick="window.location.href='{{ route('programdetails.view', $result->id) }}';"
+                                                            onclick="window.location.href='{{ route('programdetails.show', $result->id) }}';"
                                                             data-bs-toggle="tooltip" title="View">
                                                             <i class="fa fa-eye" title="View"></i>
                                                         </button>
@@ -91,7 +90,7 @@
 
 
         <!-- officials start -->
-        <div class="container-fluid">
+        {{-- <div class="container-fluid">
             <div class="page-inner mt-2">
                 <!-- Officers Table and Add Button -->
                 <div class="col-md-12 col-lg-12">
@@ -124,13 +123,13 @@
                                             <tr>
                                                 <td>{{ $result->name ?? '' }}</td>
                                                 <td>{{ $result->qualification ?? '' }}</td>
-                                                <td>{{ $result->designation ?? '' }}</td>
+                                                <td>{{ $result->designation->name ?? '' }}</td>
                                                 <td class="text-center">
                                                     <!-- Image Preview Button -->
                                                     <button type="button" class="btn btn-link btn-primary"
                                                         data-bs-toggle="modal" data-bs-target="#imagePreviewModal"
                                                         onclick="showImagePreview('{{ fileLink($result->image) }}')">
-                                                        <img src="{{ fileLink($result->imagel) }}" alt="Official Image"
+                                                        <img src="{{ fileLink($result->image) }}" alt="Official Image"
                                                             style="max-width: 100px;" />
                                                     </button>
                                                 </td>
@@ -146,12 +145,13 @@
                                                     <div class="form-button-action">
                                                         <button type="button" class="btn btn-link btn-primary"
                                                             data-bs-toggle="modal" data-bs-target="#editOfficialModal"
-                                                            onclick="editOfficer('{{ $important_link->id }}', '{{ $important_link->name }}', '{{ $important_link->link }}', '{{ $important_link->status }}')">
+                                                            onclick="editOfficer('{{ $result->id }}', '{{ $result->name }}', '{{ $result->link }}', '{{ $result->status }}')">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -159,7 +159,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- officials end -->
 
