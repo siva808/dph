@@ -49,7 +49,14 @@
       <script type="text/javascript" src="{{asset('packa/theme/dist/js/pages/toastr.js')}}"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
       <link href="{{asset('packa/theme/dist/css/toastr.css')}}" rel="stylesheet" type="text/css" />
-      
+
+       <!-- Datatables -->
+       <script src="{{asset('packa/theme/dist/js/pages/datatables.min.js')}}"></script>
+       
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+      <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
 
    </head>
    <body>
@@ -109,6 +116,7 @@
       <script src="{{asset('packa/custom/status-text.js')}}"></script>
       <script src="{{asset('packa/custom/custom.js')}}"></script>
       <script src="{{asset('packa/custom/datatable.js')}}"></script>
+  
       <script type="text/javascript" src="{{asset('packa/theme/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
       <!-- jQuery Scrollbar -->
       <script src="{{asset('packa/theme/dist/js/pages/jquery.scrollbar.min.js')}}"></script>
@@ -116,8 +124,7 @@
       <script src="{{asset('packa/theme/assets/node_modules/Chart.js/Chart.min.js')}}"></script>
       <!-- Chart Circle -->
       <script src="{{asset('packa/theme/dist/js/pages/circles.min.js')}}"></script>
-      <!-- Datatables -->
-      <script src="{{asset('packa/theme/dist/js/pages/datatables.min.js')}}"></script>
+     
       <!-- Bootstrap Notify -->
       <script src="{{asset('packa/theme/dist/js/pages/bootstrap-notify.min.js')}}"></script>
       <!-- Sweet Alert -->
