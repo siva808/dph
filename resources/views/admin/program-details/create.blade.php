@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="col-12 col-md-8">
                                             <input type="file" id="imageUploads" class="form-control" accept="image/*"
-                                                multiple onchange="previewImages()" name="images[]" required>
+                                                multiple onchange="previewImages()" name="images[]">
                                             <small class="sizeoftextred">Upload Max 5 Images, Accepted file types
                                                 .jpg/.jpeg/.png/.Doc</small>
                                         </div>
@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="col-12 col-md-8">
                                             <input type="file" class="form-control" id="document"
-                                                accept=".pdf,.doc,.docx" name="document" required>
+                                                accept=".pdf,.doc,.docx" name="document">
                                             <small class="sizeoftextred">Accepted file types .pdf</small>
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@
                     <label for="officialName_${officialNumber}" class="form-label">Name</label>
                 </div>
                 <div class="col-12 col-md-8">
-                    <input type="text" name="officers[${officialNumber}][officer_name]" class="form-control" id="officialName_${officialNumber}" placeholder="Enter official name" required>
+                    <input type="text" name="officers[${officialNumber}][officer_name]" class="form-control" id="officialName_${officialNumber}" placeholder="Enter official name">
                 </div>
             </div>
             <div class="row mb-3">
@@ -236,7 +236,7 @@
                     <label for="qualification_${officialNumber}" class="form-label">Qualification</label>
                 </div>
                 <div class="col-12 col-md-8">
-                    <input type="text" class="form-control" name="officers[${officialNumber}][officer_qualification]" id="qualification_${officialNumber}" placeholder="Enter qualification" required>
+                    <input type="text" class="form-control" name="officers[${officialNumber}][officer_qualification]" id="qualification_${officialNumber}" placeholder="Enter qualification">
                 </div>
             </div>
             <div class="row mb-3">
