@@ -35,7 +35,6 @@ class DesignationController extends Controller
         $statuses = _getGlobalStatus();
         $designation_types = DesignationType::getDesignationTypeData();
         return view('admin.masters.designation.create',compact('statuses','designation_types'));
-        return view('admin.masters.designation.create',compact('statuses','designation_types'));
         
      }   
 
@@ -57,7 +56,7 @@ class DesignationController extends Controller
         $input = [
                 'name' => $request->name,
                 'designation_type_id' => $request->designation_type_id,
-                'status' => $request->status
+                'status' => $request->status ?? 0
                 
             ];
              
@@ -121,7 +120,7 @@ class DesignationController extends Controller
         $input = [
                 'name' => $request->name,
                 'designation_type_id' => $request->designation_type_id,
-                'status' => $request->status
+                'status' => $request->status ?? 0
             ];
 
         $result = $designation->update($input);
@@ -154,8 +153,8 @@ class DesignationController extends Controller
         }
 
        
-        $rules['designation_type_id'] = 'required|integer|exists:designation_types,id';
-        $rules['status'] = 'required|boolean';
+        $rules['designation_type_id'] = 'sometimes|integer|exists:designation_types,id';
+        $rules['status'] = 'sometimes|boolean';
 
         return $rules;
     }

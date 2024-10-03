@@ -79,7 +79,7 @@
                                     <h4 class="card-title mb-4 text-primary">All Designation</h4>
                                     <!-- Button to add employees if needed -->
                                     <button class="btn btn-primary btn-round ms-auto"
-                                        onclick="window.location.href='designation_create.html';">
+                                        onclick="window.location.href='{{route('designations.create')}}';">
                                         <i class="fa fa-plus"></i> Add Designation
                                     </button>
 
@@ -108,20 +108,20 @@
                                                 @if(isset($result->status) && $result->status == 1)
                                                 <td class="text-success" style="font-weight: bold;">Active</td>
                                                 @else
-                                                <td class="text-danger" style="font-weight: bold;">Active</td>
+                                                <td class="text-danger" style="font-weight: bold;">In-Active</td>
                                                 @endif
                                                 <td class="text-center">
                                                     <div class="form-button-action">
                                                         <button type="button" class="btn btn-link btn-primary btn-lg"
-                                                            onclick="window.location.href='designation_edit.html'" data-bs-toggle="tooltip"
+                                                            onclick="window.location.href='{{route('designations.edit', $result->id)}}'" data-bs-toggle="tooltip"
                                                             title="Edit Designation">
                                                             <i class="fa fa-edit"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-link btn-danger"
+                                                        {{-- <button type="button" class="btn btn-link btn-danger"
                                                             onclick="window.location.href='designation_view.html'" data-bs-toggle="tooltip"
                                                             title="View Designation">
                                                             <i class="fa fa-eye"></i>
-                                                        </button>
+                                                        </button> --}}
                                                     </div>
                                                 </td>
                                             </tr> 
