@@ -11,6 +11,7 @@ class Scheme extends Model
         'short_code',
         'programs_id',
         'status',
+        'order_no'
     ];
 
     protected $casts = [

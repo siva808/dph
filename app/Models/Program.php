@@ -10,6 +10,7 @@ class Program extends Model
         'name',
         'short_code',
         'status',
+        'order_no'
     ];
 
     protected $casts = [
