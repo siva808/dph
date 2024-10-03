@@ -117,7 +117,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_welcomebanner.html">
+                  <a href="{{url('/welcome-banner')}}">
                     <span class="sub-item">Welcome Banner</span>
                   </a>
                 </li>
