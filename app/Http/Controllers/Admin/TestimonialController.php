@@ -125,9 +125,7 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->merge([
-            'status' => $request->status === 'true' ? 1 : 0
-        ]);
+        
         $validator = Validator::make($request->all(),$this->rules($id),$this->messages(),$this->attributes());
 
         if($validator->fails()) {
@@ -143,7 +141,7 @@ class TestimonialController extends Controller
                 'name' => $request->name,
                 'designation' => $request->designation,
                 'content' => $request->content,
-                'status' => $request->status
+                'status' => $request->status ?? 0
             ];
 
         if($request->hasFile('testimonial_image') && $file = $request->file('testimonial_image')) {
@@ -186,7 +184,7 @@ class TestimonialController extends Controller
         $rules['testimonial_image'] = 'sometimes|mimes:png,jpg,jpeg|max:4096';
         $rules['designation'] = 'sometimes|nullable';
         $rules['content'] = 'sometimes|nullable';  
-        $rules['status'] = 'required|boolean';
+        $rules['status'] = 'sometimes|boolean';
 
         return $rules;
     }
