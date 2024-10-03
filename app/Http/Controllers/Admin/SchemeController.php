@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Models\Scheme;
+use App\Models\Section;
 use Illuminate\Support\Facades\Validator;
 
 class SchemeController extends Controller
@@ -31,8 +32,9 @@ class SchemeController extends Controller
     public function create()
     {
         $statuses = _getGlobalStatus();
+        $sections = Section::getSectionData();
         $programs = Program::getProgramData();
-        return view('admin.masters.schemes.create', compact('statuses', 'programs'));
+        return view('admin.masters.schemes.create', compact('statuses', 'programs', 'sections'));
     }
 
     /**
@@ -54,6 +56,8 @@ class SchemeController extends Controller
             'name' => $request->name,
             'short_code' => $request->short_code,
             'programs_id' => $request->program_id,
+            'sections_id' => $request->section_id,
+            'order_no' => $request->order_no,
             'status' => $request->status ?? 0,
 
         ];
@@ -86,9 +90,10 @@ class SchemeController extends Controller
     {
         $result = Scheme::with([])->find($id);
         $programs = Program::getProgramData();
+        $sections = Section::getSectionData();
         $statuses = _getGlobalStatus();
 
-        return view('admin.masters.schemes.edit', compact('result', 'statuses', 'programs'));
+        return view('admin.masters.schemes.edit', compact('result', 'statuses', 'programs', 'sections'));
     }
 
     /**
@@ -114,6 +119,8 @@ class SchemeController extends Controller
                 'name' => $request->name,
                 'short_code' => $request->short_code,
                 'programs_id' =>$request->program_id,
+                'sections_id' =>$request->section_id,
+                'order_no' => $request->order_no,
                 'status' => $request->status ?? 0
             ];
 

@@ -18,7 +18,7 @@ class ProgramController extends Controller
     public function index()
     {
         $results = Program::getQueriedResult();
-
+        // dd($results->toArray());
         return view('admin.masters.programs.list',compact('results'));
     }
 
@@ -51,6 +51,7 @@ class ProgramController extends Controller
         $input = [
                 'name' => $request->name,
                 'short_code' => $request->short_code,
+                'order_no' => $request->order_no,
                 'status' => $request->status ?? 0,
                 
             ];
@@ -109,6 +110,7 @@ class ProgramController extends Controller
         $input = [
                 'name' => $request->name,
                 'short_code' => $request->short_code,
+                'order_no' => $request->order_no,
                 'status' => $request->status ?? 0
             ];
 
@@ -139,7 +141,8 @@ class ProgramController extends Controller
             $rules['name'] = "required|unique:districts,name|min:2|max:99";
         }
 
-        $rules['short_code'] = 'required|nullable';
+        $rules['short_code'] = 'sometimes|nullable';
+        $rules['order_no'] = 'sometimes|nullable';
         // $rules['status'] = 'required|boolean';
 
         return $rules;

@@ -67,6 +67,19 @@
                                             </div>
                                         </div>
 
+                                        <!-- Order No Row -->
+                                        <div class="row mb-3">
+                                            <!-- Label Column with reduced width -->
+                                            <div class="col-12 col-md-3">
+                                                <label for="order_no" class="form-label">Order No <span
+                                                        style="color: red;">*</span></label>
+                                            </div>
+                                            <!-- Input Column -->
+                                            <div class="col-12 col-md-7">
+                                                <input type="number" class="form-control" id="order_no"
+                                                    placeholder="Enter Order Number" name="order_no" required>
+                                            </div>
+                                        </div>
 
                                         <!-- Status Row -->
                                         <div class="row mb-3">
