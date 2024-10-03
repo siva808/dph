@@ -25,9 +25,9 @@
                             </div>
                         @endif
                         <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
-                            <form action="{{route('testimonials.update',$result->id)}}" enctype="multipart/form-data" method="post"
-                                id="myForm">
-                                {{csrf_field()}} @method('PUT')
+                            <form action="{{ route('testimonials.update', $result->id) }}" enctype="multipart/form-data"
+                                method="post" id="myForm">
+                                {{ csrf_field() }} @method('PUT')
                                 <div class="table-responsive">
                                     <table class="table table-borderless">
                                         <tbody>
@@ -78,12 +78,12 @@
                                                 <td>
                                                     <input type="file" class="form-control" name="testimonial_image"
                                                         id="profileImage" accept="image/*"
-                                                        value="{{old('image_url',$result->image_url)}}">
+                                                        value="{{ old('image_url', $result->image_url) }}">
                                                     <small style="color: red;">Accepted .jpg/.jpeg/.png format & allowed max
                                                         size is 5MB</small>
                                                 </td>
                                                 <td>
-                                                    <img src="{{fileLink($result->image_url)}}" alt="Image Preview"
+                                                    <img src="{{ fileLink($result->image_url) }}" alt="Image Preview"
                                                         class="img-fluid" height="100" width="100">
                                                 </td>
                                             </tr>
@@ -103,14 +103,16 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label for="publicVisibility" class="form-label">Visible to
-                                                        Public</label>
+                                                    <label for="publicVisibility" class="form-label">Status</label>
                                                 </td>
                                                 <td>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="status"
-                                                            id="publicVisibility" checked>
-                                                        <label class="form-check-label" for="publicVisibility">Yes</label>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input " name="status" type="checkbox"
+                                                            id="toggleStatus" value="1"
+                                                            {{ CHECKBOX('status', $result->status) }}
+                                                            onchange="toggleStatusText('statusLabel', this)">
+                                                        <label class="form-check-label" for="toggleStatus"
+                                                            id="statusLabel">{{ $result->status == 1 ? 'Active' : 'In-Active' }}</label>
                                                     </div>
                                                 </td>
                                                 <td></td>
@@ -123,7 +125,8 @@
                                 <!-- Buttons -->
                                 <div class="d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="button" class="btn btn-danger" onclick="window.location.href='{{ route('testimonials.index') }}';">Cancel</button>
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="window.location.href='{{ route('testimonials.index') }}';">Cancel</button>
                                 </div>
                             </form>
 
