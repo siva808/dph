@@ -18,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/manage-user-password/{id}','Admin\PasswordController@manageUserPassword');
 	Route::get('/dashboard','Admin\DashboardController@dashboard')->name('admin.dashboard');
 	Route::resource('/documents','Admin\DocumentController');
+	Route::resource('/new-documents','Admin\NewDocumentController');
 	Route::get('/consolidate-export','Admin\HudController@consolidateReport');
 	Route::get('/reports', 'Admin\ReportController@reportView');
 });

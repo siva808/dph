@@ -29,36 +29,47 @@ class Scheme extends Model
         return convertUTCToLocal($date);
     }
 
-	 public function scopeFilter($query) {
+    public function scopeFilter($query)
+    {
 
-         if($keyword = request('keyword')) {
-             $query->where('name','like','%'.$keyword.'%');
-            }
-         return $query;
-     }
+        if ($keyword = request('keyword')) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+        return $query;
+    }
 
-	 public static function getQueriedResult() {
+    public static function getQueriedResult()
+    {
 
-     	$page_length = getPagelength();
+        $page_length = getPagelength();
 
-     	list($sortfield,$sorttype) = getSorting();
+        list($sortfield, $sorttype) = getSorting();
 
-     	$result = static::with([])->filter();
+        $result = static::with([])->filter();
 
-     	$sortfield = ($sortfield == 'name')?'name':$sortfield;
-     	
+        $sortfield = ($sortfield == 'name') ? 'name' : $sortfield;
 
-     	return $result->orderBy($sortfield,$sorttype)->get();
-     	// return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
+
+        return $result->orderBy($sortfield, $sorttype)->get();
+        // return $result->orderBy($sortfield,$sorttype)->paginate($page_length);
 
     }
 
 
-    public static function getSchemeData() {
-        return static::where('status',_active())->orderBy('name','asc')->get();
+    public static function getSchemeData($program_id = NULL)
+    {
+        $query = static::where('status', _active());
+
+        // If a program ID is provided, filter by it
+        if ($program_id) {
+            $query->where('programs_id', $program_id); // Ensure you have this column in your database
+        }
+
+        return $query->orderBy('name', 'asc')->get();
     }
 
-    public function program() {
+    public function program()
+    {
         return $this->belongsTo(Program::class, 'programs_id')->select('id', 'name');
     }
 }

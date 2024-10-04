@@ -132,7 +132,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_govtorders.html">
+                  <a href="{{url('/new-documents?document_type=1')}}">
                     <span class="sub-item">GO's</span>
                   </a>
                 </li>

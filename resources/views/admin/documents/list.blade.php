@@ -9,8 +9,8 @@
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Documents</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            @if (request('navigation'))
-                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                            @if (request('document_type'))
+                                {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Documents' }}
                             @else
                                 All Documents
                             @endif
@@ -33,13 +33,13 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Type Of Document</label>
-                                            <select name="navigation" class="form-control searchable"
+                                            <select name="document_type" class="form-control searchable"
                                                 onchange="searchFun()">
                                                 <option value="">-- Select -- </option>
-                                                @foreach ($navigations as $navigation)
-                                                    <option value="{{ $navigation->id }}"
-                                                        {{ SELECT($navigation->id, request('navigation')) }}>
-                                                        {{ $navigation->name }}</option>
+                                                @foreach ($document_types as $document_type)
+                                                    <option value="{{ $document_type->id }}"
+                                                        {{ SELECT($document_type->id, request('document_type')) }}>
+                                                        {{ $document_type->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -121,19 +121,19 @@
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">
-                                            @if (request('navigation'))
-                                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                                            @if (request('document_type'))
+                                                {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Documents' }}
                                             @else
                                                 All Documents
                                             @endif
                                         </h4>
-                                        @if (request('navigation'))
+                                        @if (request('document_type'))
                                         <button class="btn btn-primary btn-round ms-auto"
-                                            onclick="window.location.href='{{ url('/documents/create') }}{{ request('navigation') ? '?navigation=' . request('navigation') : '' }}'">
+                                            onclick="window.location.href='{{ url('/new-documents/create') }}{{ request('document_type') ? '?document_type=' . request('document_type') : '' }}'">
                                             <i class="fa fa-plus"></i>
                                             
                                                 Add
-                                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Document' }}
+                                                {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Document' }}
                                         </button>
                                         @endif
                                     </div>
@@ -159,7 +159,7 @@
                                             <tbody>
                                                 @foreach ($results as $result)
                                                     <tr>
-                                                        <td>{{ $result->navigation->name ?? '--' }}</td>
+                                                        <td>{{ $result->document_type->name ?? '--' }}</td>
                                                         <td><a
                                                                 href="{{ fileLink($result->document_url) }}">{{ $result->display_filename }}</a>
                                                         </td>

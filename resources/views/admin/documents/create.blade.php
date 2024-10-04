@@ -1,12 +1,12 @@
 @extends('admin.layouts.layout')
 @section('title', 'Upload Document')
 @section('content')
-<style>
-    #typeofdoc.readonly {
-        pointer-events: none;
-        background-color: #e9ecef;
-    }
-</style>
+    <style>
+        #typeofdoc.readonly {
+            pointer-events: none;
+            background-color: #e9ecef;
+        }
+    </style>
     <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
@@ -14,7 +14,8 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Documents</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Create {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">Create
+                            {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Documents' }}</li>
                     </ol>
                 </nav>
 
@@ -22,52 +23,45 @@
         </div>
         <div class="container-fluid">
             <div class="page-inner">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <!-- insert the contents Here start -->
 
                 <div class="container mt-2">
                     <div class="row">
                         <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
-                            <form id="documentForm" form action="{{route('documents.store')}}" enctype="multipart/form-data" method="post" class="disable_submit">
-                                {{csrf_field()}}
+                            <form id="documentForm" form action="{{ route('new-documents.store') }}"
+                                enctype="multipart/form-data" method="post" class="disable_submit">
+                                {{ csrf_field() }}
                                 <div class="table-responsive">
                                     <h4 class="card-title mb-4 text-primary">Create
-                                        {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                                        {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Documents' }}
                                     </h4>
                                     <table class="table table-borderless">
                                         <tbody>
                                             <!-- Select Type of Document  -->
-                                            <tr>
+                                            <tr class="d-none">
                                                 <td>
                                                     <label for="typeofdoc" class="form-label">Select
                                                         Type Of Document <span style="color: red;">*</span></label>
                                                 </td>
                                                 <td>
-                                                    <select class="form-select" id="typeofdoc" name="navigation_id">
-                                                        @foreach ($navigations as $key => $value)
+                                                    <select class="form-select" id="typeofdoc" name="document_type_id">
+                                                        @foreach ($document_types as $key => $value)
                                                             <option value="{{ $value->id }}"
                                                                 data-value="{{ $value->slug_key }}"
-                                                                {{ SELECT($value->id, request('navigation')) }}>
+                                                                {{ SELECT($value->id, request('document_type')) }}>
                                                                 {{ $value->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </td>
-                                                <td></td>
-                                            </tr>
-                                            <!-- Create Document -->
-                                            <tr>
-                                                <td>
-                                                    <label for="createDocument" class="form-label">Create
-                                                        Document <span style="color: red;">*</span></label>
-                                                </td>
-                                                <td>
-                                                    <input type="file" name="document" class="form-control"
-                                                        id="createDocument" placeholder="Enter document title" required>
-                                                    <small style="color: red;">Accepted .jpg/.jpeg/.png format &
-                                                        allowed max size is
-                                                        5MB</small>
-                                                </td>
-
-
                                                 <td></td>
                                             </tr>
 
@@ -78,28 +72,85 @@
                                                         Display <span style="color: red;">*</span></label>
                                                 </td>
                                                 <td>
-                                                    <input name="display_filename" type="text" class="form-control"
+                                                    <input name="name" type="text" class="form-control"
                                                         id="fileName" placeholder="Enter file name" required>
                                                 </td>
-
-                                                <td></td>
                                             </tr>
 
-                                            <!-- Select Mapping Section -->
+                                            <!-- Add File Description -->
+                                            <tr>
+                                                <td class="col-12 col-md-3">
+                                                    <label for="fileDescription" class="form-label">Description <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td class="col-12 col-md-9">
+                                                    <textarea class="form-control" id="fileDescription" placeholder="Enter file description" required></textarea>
+                                                </td>
+                                            </tr>
+
+
+                                            <!-- Create Document -->
                                             <tr>
                                                 <td>
-                                                    <label for="mappingSection" class="form-label">Select
-                                                        Mapping Section <span style="color: red;">*</span></label>
+                                                    <label for="createDocument" class="form-label">Upload GO<span
+                                                            style="color: red;">*</span></label>
                                                 </td>
                                                 <td>
-                                                    <select name="tags" id="tags" class="form-control">
-                                                        @foreach ($tags as $key => $value)
-                                                            <option value="{{ $key }}"
-                                                                {{ SELECT($key, old('tags')) }}>{{ $value }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="file" name="document" class="form-control"
+                                                        id="createDocument" placeholder="Enter document title" required>
+                                                    <small style="color: red;">Accepted .jpg/.jpeg/.png format &
+                                                        allowed max size is
+                                                        5MB</small>
                                                 </td>
-                                                <td></td>
+                                            </tr>
+
+
+
+                                            <!-- Select Program Divisions -->
+                                            <tr>
+                                                <td class="col-12 col-md-3">
+                                                    <label for="programDivisionsInput" class="form-label">Select Program
+                                                        Divisions</label>
+                                                </td>
+                                                <td class="col-12 col-md-9">
+                                                    <div class="position-relative">
+                                                        <div class="select-wrapper">
+                                                            <select class="form-select select-dropdown"
+                                                                id="programDivisions">
+                                                                <option> -- Select --</option>
+                                                                @foreach ($programs as $key => $value)
+                                                                    <option value="{{ $key }}"
+                                                                        {{ SELECT($key, old('programs')) }}>
+                                                                        {{ $value }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Select Schemes -->
+                                            <tr>
+                                                <td class="col-12 col-md-3">
+                                                    <label for="SchemesInput" class="form-label ">Select Schemes <span
+                                                            style="color: red;">*</span></label>
+                                                </td>
+                                                <td class="col-12 col-md-9">
+                                                    <div class="position-relative">
+                                                        <div class="select-wrapper">
+                                                            <select class="form-select select-dropdown" id="schemes"
+                                                                required>
+                                                                <option> -- Select --</option>
+                                                                @foreach ($schemes as $key => $value)
+                                                                    <option value="{{ $key }}"
+                                                                        {{ SELECT($key, old('schemes')) }}>
+                                                                        {{ $value }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             </tr>
 
                                             <!-- Enter GO's/Letter/Reference Number -->
@@ -120,7 +171,7 @@
                                             <!-- Date -->
                                             <tr>
                                                 <td>
-                                                    <label for="date" class="form-label">Date <span
+                                                    <label for="date" class="form-label">Date<span
                                                             style="color: red;">*</span></label>
                                                 </td>
                                                 <td>
@@ -131,39 +182,27 @@
                                                 <td></td>
                                             </tr>
 
-
-
-                                            <!-- Link -->
+                                            <!-- Language of Document -->
                                             <tr>
-                                                <td>
-                                                    <label for="link" class="form-label">Link <span
+                                                <td class="col-12 col-md-3">
+                                                    <label for="language" class="form-label">Language of Document <span
                                                             style="color: red;">*</span></label>
                                                 </td>
-                                                <td>
-                                                    <input type="url" class="form-control" id="link"
-                                                        name="link_url" placeholder="Enter link URL" required>
+                                                <td class="col-12 col-md-9">
+                                                    <select class="form-select select-dropdown" id="language" name="language" required>
+                                                        <option value="">Select Language</option>
+                                                        <option value="1">Tamil</option>
+                                                        <option value="2">English</option>
+                                                        <option value="3">Other</option>
+                                                        <!-- Add other languages if required -->
+                                                    </select>
                                                 </td>
-
-                                                <td></td>
                                             </tr>
 
-                                            <!-- Link Title -->
-                                            <tr>
-                                                <td>
-                                                    <label for="linkTitle" class="form-label">Link Title <span
-                                                            style="color: red;">*</span></label>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control" id="linkTitle"
-                                                        name="link_title" placeholder="Enter link title" required>
-                                                </td>
-
-                                                <td></td>
-                                            </tr>
                                             <!-- Visible to public -->
                                             <tr>
                                                 <td>
-                                                    <label for="status" class="form-label">Select File Visible to
+                                                    <label for="status" class="form-label">Visible to
                                                         Public</label>
                                                 </td>
                                                 <td>
@@ -248,6 +287,7 @@
         </div>
         <!-- database table end -->
     </div>
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('.mydatepicker, #datepicker').datepicker();
@@ -278,6 +318,41 @@
             });
         });
     </script>
-    <script>document.getElementById('typeofdoc').classList.add('readonly');</script>
+
+    <script>
+        $(document).ready(function() {
+            $('#programDivisions').change(function() {
+                var programId = $(this).val();
+
+                // Clear the schemes dropdown
+                $('#schemes').empty();
+                $('#schemes').append('<option> -- Select --</option>');
+
+                // Fetch schemes based on selected program using POST request
+                if (programId) {
+                    $.ajax({
+                        url: feedBaseUrl('/api/list-scheme'), // Use the named route
+                        method: 'POST',
+                        data: {
+                            program_id: programId,
+                        },
+                        success: function(data) {
+                            // Populate the schemes dropdown with the retrieved data
+                            $.each(data.data, function(key, value) {
+                                $('#schemes').append('<option value="' + value.id + '">' +
+                                    value.name + '</option>');
+                            });
+                        },
+                        error: function(xhr) {
+                            console.error(xhr);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script>
+        document.getElementById('typeofdoc').classList.add('readonly');
+    </script>
     <script src="{{ asset('packa/custom/document.js') }}"></script>
 @endsection

@@ -58,6 +58,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
       <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
 
+      {{-- select2 --}}
+
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
    </head>
    <body>
       <!-- ============================================================== -->
@@ -131,5 +134,7 @@
       <script src="{{asset('packa/theme/dist/js/pages/sweetalert.min.js')}}"></script>
       <!-- Kaiadmin JS -->
       <script src="{{asset('packa/theme/dist/js/pages/kaiadmin.min.js')}}"></script>
+      {{-- select2 --}}
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
    </body>
 </html>
