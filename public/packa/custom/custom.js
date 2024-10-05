@@ -39,3 +39,36 @@ function callTooltip() {
   $('[data-toggle="tooltip"]').tooltip(); 
 }
 
+// schemes dropdown
+$(document).ready(function() {
+  $('#programDivisions').change(function() {
+      var programId = $(this).val();
+
+      // Clear the schemes dropdown
+      $('#schemes').empty();
+      $('#schemes').append('<option> -- Select --</option>');
+
+      // Fetch schemes based on selected program using POST request
+      if (programId) {
+          $.ajax({
+              url: feedBaseUrl('/api/list-scheme'), // Use the named route
+              method: 'POST',
+              data: {
+                  program_id: programId,
+              },
+              success: function(data) {
+                  // Populate the schemes dropdown with the retrieved data
+                  $.each(data.data, function(key, value) {
+                      $('#schemes').append('<option value="' + value.id +
+                          '">' +
+                          value.name + '</option>');
+                  });
+              },
+              error: function(xhr) {
+                  console.error(xhr);
+              }
+          });
+      }
+  });
+});
+

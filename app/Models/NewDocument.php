@@ -2,6 +2,7 @@
 
 namespace App\models;
 
+use App\Models\Scheme;
 use App\Models\Section;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +16,7 @@ class NewDocument extends Model
     /**
      * @var array
      */
-    protected $fillable = ['document_url', 'document_type_id', 'name', 'section_id', 'user_id', 'status', 'visible_to_public', 'reference_no', 'dated', 'image_url', 'description', 'scheme_id', 'link', 'publication_type_id', 'notification_type_id', 'expiry_date', 'start_date', 'end_date', 'financial_year', 'language_id'];
+    protected $fillable = ['document_url', 'document_type_id', 'name', 'section_id', 'user_id', 'status', 'visible_to_public', 'reference_no', 'dated', 'image_url', 'description', 'scheme_id', 'link','link_title', 'publication_type_id', 'notification_type_id', 'expiry_date', 'start_date', 'end_date', 'financial_year', 'language_id'];
 
 
     /**
@@ -118,11 +119,15 @@ class NewDocument extends Model
 
     public function employee()
     {
-        return $this->belongsTo(User::class, 'uploaded_by');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function section()
     {
         return $this->belongsTo(Section::class);
+    }
+    public function scheme()
+    {
+        return $this->belongsTo(Scheme::class);
     }
 }

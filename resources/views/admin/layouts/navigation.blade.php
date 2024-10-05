@@ -137,22 +137,22 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_circulars.html">
+                  <a href="{{url('/new-documents?document_type=2')}}">
                     <span class="sub-item">Circulars/Instructions</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_proceedings.html">
+                  <a href="{{url('/new-documents?document_type=3')}}">
                     <span class="sub-item">Proceedings</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_actsAndrules.html">
+                  <a href="{{url('/new-documents?document_type=4,15')}}">
                     <span class="sub-item">Acts/Rules</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_publications.html">
+                  <a href="{{url('/new-documents?document_type=5')}}">
                     <span class="sub-item">Publications</span>
                   </a>
                 </li>

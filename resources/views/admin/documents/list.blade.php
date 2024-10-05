@@ -30,6 +30,7 @@
                         <div class="card-body">
                             <form>
                                 <div class="row">
+                                    @if (!request('document_type'))
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Type Of Document</label>
@@ -43,7 +44,9 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> 
+                                    @endif
+                                    
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Mapping Section</label>
@@ -148,8 +151,8 @@
                                                 <tr>
                                                     <th>Type Of Document</th>
                                                     <th>Name Of Document</th>
-                                                    <th>Mapping Section</th>
-                                                    <th>G.O/Letter/Reference No.</th>
+                                                    <th>Mapping Scheme</th>
+                                                    <th>Reference No.</th>
                                                     <th>Dated</th>
                                                     <th>Visible to Public</th>
                                                     <th>Status</th>
@@ -161,9 +164,9 @@
                                                     <tr>
                                                         <td>{{ $result->document_type->name ?? '--' }}</td>
                                                         <td><a
-                                                                href="{{ fileLink($result->document_url) }}">{{ $result->display_filename }}</a>
+                                                                href="{{ fileLink($result->document_url) }}">{{ $result->name }}</a>
                                                         </td>
-                                                        <td>{{ $result->tag->name ?? '--' }}</td>
+                                                        <td>{{ $result->scheme->name ?? '--' }}</td>
                                                         <td>{{ $result->reference_no ?? '--' }}</td>
                                                         <td>{{ $result->dated ?? '--' }}</td>
                                                         <td class="text-success text-center" style="font-weight: bold;">
@@ -185,11 +188,11 @@
                                                                 <button type="button" data-bs-toggle="tooltip"
                                                                     title="" class="btn btn-link btn-primary btn-lg"
                                                                     data-original-title="Edit Task"
-                                                                    onclick="window.location.href='{{ route('documents.edit', $result->id) }}'">
+                                                                    onclick="window.location.href='{{ route('new-documents.edit', $result->id) }}'">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                                 <button type="button" class="btn btn-link btn-danger"
-                                                                    onclick="window.location.href='{{route('documents.show',$result->id)}}'">
+                                                                    onclick="window.location.href='{{route('new-documents.show',$result->id)}}'">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </div>

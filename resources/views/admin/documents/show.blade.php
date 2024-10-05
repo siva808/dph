@@ -29,27 +29,27 @@
                                     <!-- Type of Document -->
                                     <div class="col-md-4">
                                         <div class="font-weight-bold text-secondary">Type of Document:</div>
-                                        <div class="border p-3 rounded bg-light">[Document Type Here]</div>
+                                        <div class="border p-3 rounded bg-light">{{ $result->document_type->name }}</div>
                                     </div>
                                     <!-- Name of Document -->
                                     <div class="col-md-4">
                                         <div class="font-weight-bold text-secondary">Name of Document:</div>
                                         <div class="border p-3 rounded bg-light"><a class="text-danger"
                                                 href="{{ fileLink($result->document_url) }}" target="_blank"
-                                                download="download">{{ $result->display_filename }}</a></div>
+                                                download="download">{{ $result->name }}</a></div>
                                     </div>
                                     <!-- File Name to Display -->
                                     <div class="col-md-4">
                                         <div class="font-weight-bold text-secondary">File Name to Display:</div>
-                                        <div class="border p-3 rounded bg-light">{{ $result->display_filename }}</div>
+                                        <div class="border p-3 rounded bg-light">{{ $result->name }}</div>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 p-3">
                                     <!-- Mapping Section -->
                                     <div class="col-md-4">
-                                        <div class="font-weight-bold text-secondary">Mapping Section:</div>
-                                        <div class="border p-3 rounded bg-light">{{ $result->tag->name ?? '--' }}</div>
+                                        <div class="font-weight-bold text-secondary">Mapping Scheme:</div>
+                                        <div class="border p-3 rounded bg-light">{{ $result->scheme->name ?? '--' }}</div>
                                     </div>
                                     <!-- G.O / Letter / Reference No. -->
                                     <div class="col-md-4">
@@ -57,11 +57,11 @@
                                             No.:</div>
                                         <div class="border p-3 rounded bg-light">{{ $result->reference_no ?? '--' }}</div>
                                     </div>
-                                    <!-- Visible to Public -->
+
+                                    <!-- Description -->
                                     <div class="col-md-4">
-                                        <div class="font-weight-bold text-secondary">Visible to Public:</div>
-                                        <div class="border p-3 rounded bg-light">
-                                            {{ $result->visible_to_public == 1 ? 'Yes' : 'No' }}</div>
+                                        <div class="font-weight-bold text-secondary">Description:</div>
+                                        <div class="border p-3 rounded bg-light">{{ $result->description ?? '--' }}</div>
                                     </div>
                                 </div>
 
@@ -76,34 +76,36 @@
                                         <div class="font-weight-bold text-secondary">Uploaded By:</div>
                                         <div class="border p-3 rounded bg-light">{{ $result->employee->name }}</div>
                                     </div>
-                                    <!-- Link -->
-                                    <div class="col-md-4">
-                                        <div class="font-weight-bold text-secondary">Link:</div>
-                                        <div class="border p-3 rounded bg-light">{{ $result->link_url }}</div>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3 p-3">
-                                    <!-- Link Title -->
-                                    <div class="col-md-4">
-                                        <div class="font-weight-bold text-secondary">Link Title:</div>
-                                        <div class="border p-3 rounded bg-light">{{ $result->link_title }}</div>
-                                    </div>
-                                    <!-- Status -->
-                                    <div class="col-md-4">
-                                        <div class="font-weight-bold text-secondary">Status:</div>
-                                        <div class="border p-3 rounded bg-light">
-                                            <span class="badge bg-success text-light">
-                                                {{ findStatus($result->status) }}</span>
-                                        </div>
-                                    </div>
                                     <!-- Created At -->
                                     <div class="col-md-4">
                                         <div class="font-weight-bold text-secondary">Created At:</div>
                                         <div class="border p-3 rounded bg-light"> {{ dateOf($result->created_at) ?? '' }}
                                         </div>
                                     </div>
+
                                 </div>
+
+                                <div class="row mb-3 p-3">
+                                    <!-- Visisble to public -->
+                                    <div class="col-md-4">
+                                        <div class="font-weight-bold text-secondary">Visible to Public:</div>
+                                        <div class="border p-3 rounded bg-light"><span
+                                                class="badge {{ $result->visible_to_public == 1 ? 'bg-success' : 'bg-danger' }} text-light">
+                                                {{ $result->visible_to_public == 1 ? 'Yes' : 'No' }}</span></div>
+                                    </div>
+                                    <!-- Status -->
+                                    <div class="col-md-4">
+                                        <div class="font-weight-bold text-secondary">Status:</div>
+                                        <div class="border p-3 rounded bg-light">
+                                            <span
+                                                class="badge {{ $result->status == 1 ? 'bg-success' : 'bg-danger' }} text-light">
+                                                {{ findStatus($result->status) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Back Button -->
+                                <button type="button" onclick="window.location.href='{{route('new-documents.index')}}';"
+                                    class="btn btn-primary mt-3" style="margin-left: 13px;">Back</button>
                             </div>
                             <!-- Edit Document Layout end -->
                             <!-- Edit Document Details End -->
