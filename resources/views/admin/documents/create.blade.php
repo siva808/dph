@@ -6,6 +6,11 @@
             pointer-events: none;
             background-color: #e9ecef;
         }
+
+        .select2-container {
+            width: 100% !important;
+            /* Or set a fixed width, e.g., 300px */
+        }
     </style>
     <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
@@ -66,10 +71,105 @@
                                                     <td></td>
                                                 </tr>
                                             @endif
+                                            <!-- Select RTI type -->
+                                            @if (in_array(request('document_type'), [7]))
+                                                <tr>
+                                                    <td>
+                                                        <label class="form-label">Select Option <span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="selectionOption" value="section" id="sectionOption"
+                                                                required>
+                                                            <label class="form-check-label"
+                                                                for="sectionOption">Section</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="selectionOption" value="scheme" id="schemeOption"
+                                                                checked required>
+                                                            <label class="form-check-label"
+                                                                for="schemeOption">Scheme</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr id="sectionRow" style="display: none">
+                                                    <td class="col-12 col-md-3">
+                                                        <label for="sectionInput" class="form-label">Select Sections</label>
+                                                    </td>
+                                                    <td class="col-12 col-md-9">
+                                                        <div class="position-relative">
+                                                            <div class="select-wrapper">
+                                                                <select class="form-select select-dropdown"
+                                                                    id="sectionDropdown" name="section_id">
+                                                                    <option value=""> -- Select --</option>
+                                                                    @foreach ($sections as $key => $value)
+                                                                        <option value="{{ $key }}"
+                                                                            {{ SELECT($key, old('scetions')) }}>
+                                                                            {{ $value }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr id="programDivisionsRow" style="display: none;">
+                                                    <td class="col-12 col-md-3">
+                                                        <label for="programDivisionsInput" class="form-label">Select Program
+                                                            Divisions</label>
+                                                    </td>
+                                                    <td class="col-12 col-md-9">
+                                                        <div class="position-relative">
+                                                            <div class="select-wrapper">
+                                                                <select class="form-select select-dropdown"
+                                                                    id="programDivisions">
+                                                                    <option> -- Select --</option>
+                                                                    @foreach ($programs as $key => $value)
+                                                                        <option value="{{ $key }}"
+                                                                            {{ SELECT($key, old('programs')) }}>
+                                                                            {{ $value }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Select Schemes -->
+                                                <tr id="schemesRow" style="display: none;">
+                                                    <td class="col-12 col-md-3">
+                                                        <label for="SchemesInput" class="form-label ">Select Schemes <span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td class="col-12 col-md-9">
+                                                        <div class="position-relative">
+                                                            <div class="select-wrapper">
+                                                                <select class="form-select select-dropdown" id="schemes"
+                                                                    name="scheme_id" required>
+                                                                    <option> -- Select --</option>
+                                                                    @foreach ($schemes as $key => $value)
+                                                                        <option value="{{ $key }}"
+                                                                            {{ SELECT($key, old('schemes')) }}>
+                                                                            {{ $value }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+
+
 
                                             <!-- Select Program Divisions -->
 
-                                            @if (!in_array(request('document_type'), [4, 15]))
+                                            @if (!in_array(request('document_type'), [4, 15, 7, 8, 9, 10, 11, 12]))
+
+
                                                 <tr>
                                                     <td class="col-12 col-md-3">
                                                         <label for="programDivisionsInput" class="form-label">Select Program
@@ -116,6 +216,55 @@
                                                     </td>
                                                 </tr>
                                             @endif
+
+                                            @if (in_array(request('document_type'), [5]))
+                                                <tr>
+                                                    <td class="col-12 col-md-3">
+                                                        <label for="publicationType" class="form-label">Select Publication
+                                                            Type</label>
+                                                    </td>
+                                                    <td class="col-12 col-md-9">
+                                                        <div class="position-relative">
+                                                            <div class="select-wrapper">
+                                                                <select class="form-select select-dropdown"
+                                                                    id="publicationType" name="publication_type_id">
+                                                                    <option> -- Select --</option>
+                                                                    @foreach ($publications as $key => $value)
+                                                                        <option value="{{ $key }}"
+                                                                            {{ SELECT($key, old('publications')) }}>
+                                                                            {{ $value }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+
+                                            @if (in_array(request('document_type'), [12]))
+                                                <tr>
+                                                    <td class="col-12 col-md-3">
+                                                        <label for="notificationType" class="form-label">Select Notification Type</label>
+                                                    </td>
+                                                    <td class="col-12 col-md-9">
+                                                        <div class="position-relative">
+                                                            <div class="select-wrapper">
+                                                                <select class="form-select select-dropdown"
+                                                                    id="notificationType" name="notification_type_id">
+                                                                    <option value=""> -- Select --</option>
+                                                                    @foreach ($notifications as $key => $value)
+                                                                        <option value="{{ $key }}"
+                                                                            {{ SELECT($key, old('notifications')) }}>
+                                                                            {{ $value }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+
+                                            <!-- Select Acts or Rules -->
                                             @if (in_array(request('document_type'), [4, 15]))
                                                 <tr>
                                                     <td>
@@ -138,7 +287,6 @@
                                                     </td>
                                                 </tr>
                                             @endif
-                                            <!-- Select Acts or Rules -->
 
 
 
@@ -149,40 +297,85 @@
                                                             style="color: red;">*</span></label>
                                                 </td>
                                                 <td>
-                                                    <input name="name" type="text" class="form-control" id="fileName"
-                                                        placeholder="Enter file name" required>
+                                                    <input name="name" type="text" class="form-control"
+                                                        id="fileName" placeholder="Enter file name" required>
                                                 </td>
                                             </tr>
 
+                                            <!-- Enter Financial Year -->
+                                            @if (in_array(request('document_type'), [8, 9]))
+                                                <tr>
+                                                    <td>
+                                                        <label for="fileName" class="form-label">Financial Year<span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="yearInput"
+                                                                placeholder="Enter Financial Year" name="financial_year"
+                                                                required>
+                                                            <span id="formattedYear" class="input-group-text"
+                                                                style="display: none; color: black;"></span>
+                                                            <input type="hidden" name="financial_year"
+                                                                id="financialYearHidden">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                             <!-- Add File Description -->
-                                            <tr>
-                                                <td class="col-12 col-md-3">
-                                                    <label for="fileDescription" class="form-label">Description <span
-                                                            style="color: red;">*</span></label>
-                                                </td>
-                                                <td class="col-12 col-md-9">
-                                                    <textarea class="form-control" id="fileDescription" placeholder="Enter file description" name="description" required></textarea>
-                                                </td>
-                                            </tr>
+                                            @if (!in_array(request('document_type'), [8, 9]))
+                                                <tr>
+                                                    <td class="col-12 col-md-3">
+                                                        <label for="fileDescription" class="form-label">Description</label>
+                                                    </td>
+                                                    <td class="col-12 col-md-9">
+                                                        <textarea class="form-control" id="fileDescription" placeholder="Enter file description" name="description"></textarea>
+                                                    </td>
+                                                </tr>
+                                            @endif
 
 
+                                            <!-- Create Image -->
+                                            @if (in_array(request('document_type'), [12]))
+                                                <tr>
+                                                    <td>
+                                                        <label for="createImage" class="form-label">Upload Image</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="file" name="image" accept="image/*"
+                                                            class="form-control" id="createImage">
+                                                        <small style="color: red;">Accepted .jpg .jpeg .png format &
+                                                            allowed max size is
+                                                            5MB</small>
+                                                    </td>
+                                                    <td >
+                                                        <img id="imagePreview" src="#" alt="Image Preview"
+                                                            class="img-fluid"
+                                                            style="max-width: 100px; display: none; border: 1px solid #ccc; border-radius: 10px; padding: 5px; cursor: pointer;">
+                                                    </td>
+                                                </tr>
+                                            @endif
                                             <!-- Create Document -->
-                                            <tr>
-                                                <td>
-                                                    <label for="createDocument" class="form-label">Upload File<span
-                                                            style="color: red;">*</span></label>
-                                                </td>
-                                                <td>
-                                                    <input type="file" name="document" class="form-control"
-                                                        id="createDocument" placeholder="Enter document title" required>
-                                                    <small style="color: red;">Accepted .pdf format &
-                                                        allowed max size is
-                                                        5MB</small>
-                                                </td>
-                                            </tr>
-
-                                            <!-- Language of Document -->
                                             @if (!in_array(request('document_type'), [4, 15]))
+                                                <tr>
+                                                    <td>
+                                                        <label for="createDocument" class="form-label">Upload File<span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="file" name="document" class="form-control"
+                                                            id="createDocument" placeholder="Enter document title"
+                                                            required>
+                                                        <small style="color: red;">Accepted .pdf format &
+                                                            allowed max size is
+                                                            5MB</small>
+                                                    </td>
+                                                </tr>
+
+
+
+                                                <!-- Language of Document -->
+
                                                 <tr>
                                                     <td class="col-12 col-md-3">
                                                         <label for="language" class="form-label">Language of Document
@@ -206,20 +399,22 @@
 
 
                                             <!-- Enter GO's/Letter/Reference Number -->
-                                            <tr>
-                                                <td>
-                                                    <label for="referenceNumber" class="form-label">Reference Number <span
-                                                            style="color: red;">*</span></label>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control" id="referenceNumber"
-                                                        name="reference_no" placeholder="Enter reference number">
-                                                </td>
+                                            @if (!in_array(request('document_type'), [8, 9, 10, 11, 12]))
+                                                <tr>
+                                                    <td>
+                                                        <label for="referenceNumber" class="form-label">Reference Number
+                                                            <span style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" id="referenceNumber"
+                                                            name="reference_no" placeholder="Enter reference number">
+                                                    </td>
 
-                                                <td></td>
-                                            </tr>
+                                                    <td></td>
+                                                </tr>
+                                            @endif
 
-                                            @if (in_array(request('document_type'), [5]))
+                                            @if (in_array(request('document_type'), [5, 11]))
                                                 <!-- Link -->
                                                 <tr>
                                                     <td>
@@ -244,16 +439,32 @@
                                                 </tr>
                                             @endif
                                             <!-- Date -->
-                                            <tr>
-                                                <td>
-                                                    <label for="date" class="form-label">Date<span
-                                                            style="color: red;">*</span></label>
-                                                </td>
-                                                <td>
-                                                    <input type="date" class="form-control" name="dated"
-                                                        id="date">
-                                                </td>
-                                            </tr>
+                                            @if (!in_array(request('document_type'), [8, 9]))
+                                                <tr>
+                                                    <td>
+                                                        <label for="date" class="form-label">Date<span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control" name="dated"
+                                                            id="date">
+                                                    </td>
+                                                </tr>
+                                            @endif
+
+                                            <!-- Date -->
+                                            @if (in_array(request('document_type'), [12]))
+                                                <tr>
+                                                    <td>
+                                                        <label for="date" class="form-label">Expiry Date<span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control" name="expiry_date"
+                                                            id="date">
+                                                    </td>
+                                                </tr>
+                                            @endif
 
 
 
@@ -297,7 +508,7 @@
                                 </div>
                                 <!-- Buttons -->
                                 <div class="d-flex mt-2">
-                                    <button type="submit" class="btn btn-primary"
+                                    <button type="submit" id="submitBtn" class="btn btn-primary"
                                         onclick="validateForm()">Submit</button>
                                     <button type="button" style="margin-left: 10px;"
                                         class="btn btn-danger">Cancel</button>
@@ -342,7 +553,41 @@
         </div>
         <!-- database table end -->
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the radio buttons
+            const sectionOption = document.getElementById('sectionOption');
+            const schemeOption = document.getElementById('schemeOption');
 
+            // Get the rows to show/hide
+            const sectionRow = document.getElementById('sectionRow');
+            const programDivisionsRow = document.getElementById('programDivisionsRow');
+            const schemesRow = document.getElementById('schemesRow');
+
+            // Function to toggle visibility
+            function toggleVisibility() {
+                // Make sure the elements exist before changing styles
+                if (sectionOption && sectionOption.checked) {
+                    if (sectionRow) sectionRow.style.display = ''; // Show section
+                    if (programDivisionsRow) programDivisionsRow.style.display = 'none'; // Hide program divisions
+                    if (schemesRow) schemesRow.style.display = 'none'; // Hide schemes
+                } else if (schemeOption && schemeOption.checked) {
+                    if (sectionRow) sectionRow.style.display = 'none'; // Hide section
+                    if (programDivisionsRow) programDivisionsRow.style.display = ''; // Show program divisions
+                    if (schemesRow) schemesRow.style.display = ''; // Show schemes
+                }
+            }
+
+            // Attach event listeners to radio buttons if they exist
+            if (sectionOption && schemeOption) {
+                sectionOption.addEventListener('change', toggleVisibility);
+                schemeOption.addEventListener('change', toggleVisibility);
+
+                // Initial call to set the correct visibility based on current selection
+                toggleVisibility();
+            }
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('.mydatepicker, #datepicker').datepicker();
@@ -373,7 +618,58 @@
             });
         });
     </script>
+    <script>
+        document.getElementById('yearInput').addEventListener('input', function() {
+            // Allow only numeric input
+            this.value = this.value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
 
+            // Limit input to four digits
+            if (this.value.length > 4) {
+                this.value = this.value.slice(0, 4); // Trim to the first four characters
+            }
+
+            const inputYear = this.value;
+            const year = parseInt(inputYear);
+            const formattedYearSpan = document.getElementById('formattedYear');
+            const hiddenYearInput = document.getElementById('financialYearHidden'); // Hidden input for final value
+
+            // Only proceed if input is a valid year
+            if (!isNaN(year) && year >= 1800 && year <= 2099) { // Adjust range as necessary
+                const nextYear = year + 1;
+                const formattedFinancialYear = `${year}-${nextYear}`;
+                formattedYearSpan.style.display = 'inline'; // Show the formatted year span
+                formattedYearSpan.innerHTML = `${year} - <span style="color:black;">${nextYear}</span>`;
+
+                // Update hidden input with the financial year value
+                hiddenYearInput.value = formattedFinancialYear;
+            } else if (inputYear === '') {
+                formattedYearSpan.style.display = 'none'; // Hide if input is empty
+                hiddenYearInput.value = ''; // Clear hidden input
+            } else {
+                formattedYearSpan.style.display = 'none'; // Hide on invalid input
+                hiddenYearInput.value = ''; // Clear hidden input
+            }
+        });
+
+        // Optionally, ensure the financial year is set before form submission
+        document.getElementById('submitBtn').addEventListener('click', function(e) {
+            const hiddenYearInput = document.getElementById('financialYearHidden').value;
+            if (!hiddenYearInput) {
+                alert('Please enter a valid financial year.');
+                e.preventDefault(); // Prevent form submission if no valid financial year is set
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('createImage').addEventListener('change', function(event) {
+            const [file] = event.target.files;
+            if (file) {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = URL.createObjectURL(file);
+                imagePreview.style.display = 'block';
+            }
+        });
+    </script>
     <script>
         document.getElementById('typeofdoc').classList.add('readonly');
     </script>

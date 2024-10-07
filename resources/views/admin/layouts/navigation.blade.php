@@ -157,37 +157,37 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_rti.html">
+                  <a href="{{url('/new-documents?document_type=7')}}">
                     <span class="sub-item">RTI</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_policynote.html">
+                  <a href="{{url('/new-documents?document_type=8')}}">
                     <span class="sub-item">Policy Note</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_performancebudget.html">
+                  <a href="{{url('/new-documents?document_type=9')}}">
                     <span class="sub-item">Performance Budget</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_reports.html">
+                  <a href="{{url('/new-documents?document_type=10')}}">
                     <span class="sub-item">Reports</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_others.html">
+                  <a href="{{url('/new-documents?document_type=11')}}">
                     <span class="sub-item">Other Documents</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_newsAndnitification.html">
-                    <span class="sub-item">News & Notification</span>
+                  <a href="{{url('/new-documents?document_type=12')}}">
+                    <span class="sub-item">Notification</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_events.html">
+                  <a href="{{url('/new-documents?document_type=13')}}">
                     <span class="sub-item">Events</span>
                   </a>
                 </li>

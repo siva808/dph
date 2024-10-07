@@ -50,10 +50,12 @@ class NewDocumentController extends Controller
         $document_types = DocumentType::where('status', _active())->orderBy('order_no')->get();
         $programs = Program::where('status', _active())->orderBy('name')->pluck('name', 'id');
         $sections = Section::where('status', _active())->orderBy('name')->pluck('name', 'id');
+        $publications = Master::getPublicationsData();
+        $notifications = Master::getNotifacationsData();
         $schemes = Scheme::where('status', _active())->orderBy('name')->pluck('name', 'id');
 
 
-        return view('admin.documents.create', compact('statuses', 'document_types', 'sections', 'programs', 'schemes', 'languages'));
+        return view('admin.documents.create', compact('statuses', 'document_types', 'sections', 'programs', 'schemes', 'languages', 'publications', 'notifications'));
     }
 
     /**
@@ -76,12 +78,17 @@ class NewDocumentController extends Controller
             'document_type_id' => $request->document_type_id,
             'name' => $request->name,
             'scheme_id' => $request->scheme_id,
+            'section_id' => $request->section_id,
             'status' => $request->status ?? 0,
             'reference_no' => $request->reference_no,
             'description' => $request->description,
+            'financial_year' => $request->financial_year,
             'link' => $request->link,
             'link_title' => $request->link_title,
+            'notification_type_id' => $request->notification_type_id,
+            'expiry_date' => $request->expiry_date,
             'visible_to_public' => $request->visible_to_public ?? 0,
+            'publication_type_id' => $request->publication_type_id,
             'dated' => dateOf($request->dated, 'Y-m-d h:i:s'),
             'user_id' => Auth::user()->id,
             'language_id' => $request->language,
@@ -96,7 +103,7 @@ class NewDocumentController extends Controller
             }
         }
 
-        if ($request->hasFile('document_image') && $file = $request->file('document_image')) {
+        if ($request->hasFile('image') && $file = $request->file('image')) {
 
             if ($file->isValid()) {
                 $storedFileArray = FileService::storeFile($file);
@@ -139,9 +146,12 @@ class NewDocumentController extends Controller
         $statuses = _getGlobalStatus();
         $programs = Program::where('status', _active())->orderBy('name')->pluck('name', 'id');
         $languages = Master::getLanguagesData();
+        $publications = Master::getPublicationsData();
+        $notifications = Master::getNotifacationsData();
+        $sections = Section::where('status', _active())->orderBy('name')->pluck('name', 'id');
         $documents_type = DocumentType::where('status', _active())->orderBy('order_no')->get();
         $schemes = Scheme::where('status', _active())->orderBy('name')->pluck('name', 'id');
-        return view('admin.documents.edit', compact('result', 'statuses', 'documents_type', 'schemes', 'programs', 'languages'));
+        return view('admin.documents.edit', compact('result', 'statuses', 'documents_type', 'schemes', 'programs', 'languages', 'publications', 'sections', 'notifications'));
     }
 
     /**
@@ -168,10 +178,15 @@ class NewDocumentController extends Controller
             'scheme_id' => $request->scheme_id,
             'status' => $request->status ?? 0,
             'reference_no' => $request->reference_no,
+            'section_id' => $request->section_id,
             'description' => $request->description,
+            'financial_year' => $request->financial_year,
             'link' => $request->link,
             'link_title' => $request->link_title,
+            'notification_type_id' => $request->notification_type_id,
+            'expiry_date' => $request->expiry_date,
             'visible_to_public' => $request->visible_to_public ?? 0,
+            'publication_type_id' => $request->publication_type_id,
             'dated' => dateOf($request->dated, 'Y-m-d h:i:s'),
             'user_id' => Auth::user()->id,
             'language_id' => $request->language,
@@ -225,10 +240,10 @@ class NewDocumentController extends Controller
 
 
         $rules['name'] = "sometimes|nullable|min:2|max:300";
-        $rules['image'] = 'required_if:document_type_id,12|mimes:png,jpg,jpeg|max:2048';
-        $rules['scheme_id'] = "required_if:document_type_id,1,2,3,5,6,7,11";
+        $rules['image'] = 'sometimes|mimes:png,jpg,jpeg|max:2048';
+        $rules['scheme_id'] = "required_if:document_type_id,1,2,3,5,6,7";
         $rules['status'] = "sometimes";
-        $rules['reference_no'] = "required_if:document_type_id,1,2,3,5,6,7,11";
+        $rules['reference_no'] = "required_if:document_type_id,1,2,3,5,6,7";
         $rules['visible_to_public'] = "sometimes";
         $rules['dated'] = "required_if:document_type_id,1,2,3,5,6,7,11";
         $rules['description'] = 'sometimes|nullable';

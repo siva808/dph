@@ -14,8 +14,11 @@ class Master extends Model
     public static function getLanguagesData() {
         return static::where('status',_active())->where('master_type_id', 1)->pluck('name', 'id');
     }
-    public static function getPublicationData() {
-        return static::where('status',_active())->get();
+    public static function getPublicationsData() {
+        return static::where('status',_active())->where('master_type_id', 2)->pluck('name', 'id');
+    }
+    public static function getNotifacationsData() {
+        return static::where('status',_active())->where('master_type_id', 3)->pluck('name', 'id');
     }
 
 
