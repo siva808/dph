@@ -192,8 +192,8 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_announcements.html">
-                    <span class="sub-item">Announcements</span>
+                  <a href="{{url('/new-documents?document_type=14')}}">
+                    <span class="sub-item">Important Link</span>
                   </a>
                 </li>
                 <li>

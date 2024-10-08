@@ -135,7 +135,7 @@
                                             </div>
 
                                         @endif
-                                        @if (!in_array($result->document_type_id, [4, 15, 7, 8, 9, 10, 11, 12]))
+                                        @if (!in_array($result->document_type_id, [4, 15, 7, 8, 9, 10, 11, 12, 14]))
 
                                             <!-- Program Divisions -->
                                             <div>
@@ -227,6 +227,7 @@
                                             </div>
                                         </div>
                                         @endif
+
                                         <!-- Description -->
                                         @if (!in_array($result->document_type_id, [8, 9]))
                                             <div>
@@ -235,8 +236,9 @@
                                                     required>{{ $result->description }}</textarea>
                                             </div>
                                         @endif
+
                                             {{-- Image Upload --}}
-                                        @if (in_array($result->document_type_id, [12]))
+                                        @if (in_array($result->document_type_id, [12, 13, 14]))
                                             <div>
                                                 <div class="font-weight-bold text-secondary">Image Upload</div>
                                                 <div class="input-group">
@@ -258,7 +260,7 @@
                                         @endif
 
                                         <!-- File Upload -->
-                                        @if (!in_array($result->document_type_id, [4, 15]))
+                                        @if (!in_array($result->document_type_id, [4, 15, 14]))
                                             <div>
                                                 <div class="font-weight-bold text-secondary">File Upload</div>
                                                 <div class="input-group">
@@ -284,7 +286,7 @@
 
 
                                         <!-- Language of Document -->
-                                        @if (!in_array($result->document_type_id, [4, 15]))
+                                        @if (!in_array($result->document_type_id, [4, 15, 14]))
                                             <div>
                                                 <div class="font-weight-bold text-secondary">Language of Document</div>
                                                 <select class="form-select select-dropdown" id="language"
@@ -301,7 +303,7 @@
                                         @endif
 
                                         <!-- Reference Number -->
-                                        @if (!in_array($result->document_type_id, [8, 9, 10, 11, 12]))
+                                        @if (!in_array($result->document_type_id, [8, 9, 10, 11, 12, 13, 14]))
                                             <div>
                                                 <div class="font-weight-bold text-secondary">Reference Number</div>
                                                 <input type="text" class="form-control" id="referenceNumber"
@@ -309,7 +311,8 @@
                                                     placeholder="Enter reference number" required>
                                             </div>
                                         @endif
-                                        @if (in_array($result->document_type_id, [5, 11, 12]))
+
+                                        @if (in_array($result->document_type_id, [5, 11, 12, 13, 14]))
                                             {{-- Link --}}
                                             <div>
                                                 <div class="font-weight-bold text-secondary">Link</div>
@@ -335,10 +338,8 @@
                                                 <input type="date" class="form-control" name="start_date" id="startDate"
                                                     value="{{ $result->start_date }}" required>
                                             </div>
-                                        @endif
 
                                         <!--End Date -->
-                                        @if (in_array($result->document_type_id, [13]))
                                             <div>
                                                 <div class="font-weight-bold text-secondary">End Date
                                                 </div>
@@ -348,7 +349,7 @@
                                         @endif
 
                                         <!-- Date -->
-                                        @if (!in_array($result->document_type_id, [8, 9]))
+                                        @if (!in_array($result->document_type_id, [8, 9, 13, 14]))
                                             <div>
                                                 <div class="font-weight-bold text-secondary">Date
                                                 </div>

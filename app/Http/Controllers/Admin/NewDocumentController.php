@@ -87,6 +87,8 @@ class NewDocumentController extends Controller
             'link_title' => $request->link_title,
             'notification_type_id' => $request->notification_type_id,
             'expiry_date' => $request->expiry_date,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
             'visible_to_public' => $request->visible_to_public ?? 0,
             'publication_type_id' => $request->publication_type_id,
             'dated' => dateOf($request->dated, 'Y-m-d h:i:s'),
@@ -130,6 +132,7 @@ class NewDocumentController extends Controller
     {
         $document = new NewDocument();
         $result = $document->getDocument($id);
+        // dd($result->notification->name);
         return view('admin.documents.show', compact('result'));
     }
 
@@ -181,6 +184,8 @@ class NewDocumentController extends Controller
             'section_id' => $request->section_id,
             'description' => $request->description,
             'financial_year' => $request->financial_year,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
             'link' => $request->link,
             'link_title' => $request->link_title,
             'notification_type_id' => $request->notification_type_id,

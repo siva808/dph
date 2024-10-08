@@ -76,7 +76,7 @@ class NewDocument extends Model
     public function getDocument($id)
     {
 
-        $result = $this->with('document_type', 'employee', 'section')->find($id);
+        $result = $this->with('document_type', 'employee', 'section', 'publication', 'notification')->find($id);
         return $result;
     }
 
@@ -129,5 +129,20 @@ class NewDocument extends Model
     public function scheme()
     {
         return $this->belongsTo(Scheme::class);
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Master::class);
+    }
+
+    public function publication()
+    {
+        return $this->belongsTo(Master::class, 'publication_type_id');
+    }
+    
+    public function notification()
+    {
+        return $this->belongsTo(Master::class, 'notification_type_id');
     }
 }

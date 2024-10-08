@@ -151,8 +151,6 @@
                                                 <tr>
                                                     <th>Type Of Document</th>
                                                     <th>Name Of Document</th>
-                                                    <th>Mapping Scheme</th>
-                                                    <th>Reference No.</th>
                                                     <th>Dated</th>
                                                     <th>Visible to Public</th>
                                                     <th>Status</th>
@@ -166,21 +164,19 @@
                                                         <td><a
                                                                 href="{{ fileLink($result->document_url) }}">{{ $result->name }}</a>
                                                         </td>
-                                                        <td>{{ $result->scheme->name ?? '--' }}</td>
-                                                        <td>{{ $result->reference_no ?? '--' }}</td>
                                                         <td>{{ $result->dated ?? '--' }}</td>
-                                                        <td class="text-success text-center" style="font-weight: bold;">
+                                                        <td style="font-weight: bold;">
                                                             @if (isset($result->visible_to_public) && $result->visible_to_public == 1)
-                                                                <span>Yes</span>
+                                                                <span class="text-success">Yes</span>
                                                             @else
-                                                                <span>NO</span>
+                                                                <span class="text-danger">NO</span>
                                                             @endif
                                                         </td>
-                                                        <td class="text-success" style="font-weight: bold;">
+                                                        <td style="font-weight: bold;">
                                                             @if (isset($result->status) && $result->status == 1)
-                                                                <span>Active</span>
+                                                                <span class="text-success">Active</span>
                                                             @else
-                                                                <span>In-Active</span>
+                                                                <span class="text-danger">In-Active</span>
                                                             @endif
                                                         </td>
                                                         <td>
@@ -245,7 +241,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            setPageUrl('/documents?');
+            setPageUrl('/new-documents?');
         });
     </script>
 @endsection

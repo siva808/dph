@@ -167,7 +167,7 @@
 
                                             <!-- Select Program Divisions -->
 
-                                            @if (!in_array(request('document_type'), [4, 15, 7, 8, 9, 10, 11, 12]))
+                                            @if (!in_array(request('document_type'), [4, 15, 7, 8, 9, 10, 11, 12, 14]))
 
 
                                                 <tr>
@@ -334,9 +334,35 @@
                                                 </tr>
                                             @endif
 
+                                            <!-- Start Date -->
+                                            @if (in_array(request('document_type'), [13]))
+                                                <tr>
+                                                    <td>
+                                                        <label for="date" class="form-label">Start Date<span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control" name="start_date"
+                                                            id="startDate" required>
+                                                    </td>
+                                                </tr>
+
+                                            <!-- End Date -->
+                                                <tr>
+                                                    <td>
+                                                        <label for="date" class="form-label">End Date<span
+                                                                style="color: red;">*</span></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control" name="end_date"
+                                                            id="endDate" required>
+                                                    </td>
+                                                </tr>
+                                            @endif
+
 
                                             <!-- Create Image -->
-                                            @if (in_array(request('document_type'), [12]))
+                                            @if (in_array(request('document_type'), [12, 13, 14]))
                                                 <tr>
                                                     <td>
                                                         <label for="createImage" class="form-label">Upload Image</label>
@@ -356,7 +382,7 @@
                                                 </tr>
                                             @endif
                                             <!-- Create Document -->
-                                            @if (!in_array(request('document_type'), [4, 15]))
+                                            @if (!in_array(request('document_type'), [4, 15, 14]))
                                                 <tr>
                                                     <td>
                                                         <label for="createDocument" class="form-label">Upload File<span
@@ -399,7 +425,7 @@
 
 
                                             <!-- Enter GO's/Letter/Reference Number -->
-                                            @if (!in_array(request('document_type'), [8, 9, 10, 11, 12]))
+                                            @if (!in_array(request('document_type'), [8, 9, 10, 11, 12, 13, 14]))
                                                 <tr>
                                                     <td>
                                                         <label for="referenceNumber" class="form-label">Reference Number
@@ -414,12 +440,11 @@
                                                 </tr>
                                             @endif
 
-                                            @if (in_array(request('document_type'), [5, 11]))
+                                            @if (in_array(request('document_type'), [5, 11, 13, 14]))
                                                 <!-- Link -->
                                                 <tr>
                                                     <td>
-                                                        <label for="link" class="form-label">Link<span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="link" class="form-label">Link</label>
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" id="link"
@@ -429,8 +454,7 @@
                                                 <!-- Link Title -->
                                                 <tr>
                                                     <td>
-                                                        <label for="linkTitle" class="form-label">Link Title<span
-                                                                style="color: red;">*</span></label>
+                                                        <label for="linkTitle" class="form-label">Link Title</label>
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" id="linkTitle"
@@ -439,7 +463,7 @@
                                                 </tr>
                                             @endif
                                             <!-- Date -->
-                                            @if (!in_array(request('document_type'), [8, 9]))
+                                            @if (!in_array(request('document_type'), [8, 9, 13, 14]))
                                                 <tr>
                                                     <td>
                                                         <label for="date" class="form-label">Date<span
