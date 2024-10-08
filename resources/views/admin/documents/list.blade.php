@@ -9,8 +9,8 @@
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Documents</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            @if (request('navigation'))
-                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                            @if (request('document_type'))
+                                {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Documents' }}
                             @else
                                 All Documents
                             @endif
@@ -30,20 +30,23 @@
                         <div class="card-body">
                             <form>
                                 <div class="row">
+                                    @if (!request('document_type'))
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label>Type Of Document</label>
-                                            <select name="navigation" class="form-control searchable"
+                                            <select name="document_type" class="form-control searchable"
                                                 onchange="searchFun()">
                                                 <option value="">-- Select -- </option>
-                                                @foreach ($navigations as $navigation)
-                                                    <option value="{{ $navigation->id }}"
-                                                        {{ SELECT($navigation->id, request('navigation')) }}>
-                                                        {{ $navigation->name }}</option>
+                                                @foreach ($document_types as $document_type)
+                                                    <option value="{{ $document_type->id }}"
+                                                        {{ SELECT($document_type->id, request('document_type')) }}>
+                                                        {{ $document_type->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> 
+                                    @endif
+                                    
                                     <div class="col">
                                         <div class="form-group">
                                             <label>Mapping Section</label>
@@ -121,19 +124,19 @@
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <h4 class="card-title">
-                                            @if (request('navigation'))
-                                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Documents' }}
+                                            @if (request('document_type'))
+                                                {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Documents' }}
                                             @else
                                                 All Documents
                                             @endif
                                         </h4>
-                                        @if (request('navigation'))
+                                        @if (request('document_type'))
                                         <button class="btn btn-primary btn-round ms-auto"
-                                            onclick="window.location.href='{{ url('/documents/create') }}{{ request('navigation') ? '?navigation=' . request('navigation') : '' }}'">
+                                            onclick="window.location.href='{{ url('/new-documents/create') }}{{ request('document_type') ? '?document_type=' . request('document_type') : '' }}'">
                                             <i class="fa fa-plus"></i>
                                             
                                                 Add
-                                                {{ $navigations->firstWhere('id', request('navigation'))->name ?? 'Document' }}
+                                                {{ $document_types->firstWhere('id', request('document_type'))->name ?? 'Document' }}
                                         </button>
                                         @endif
                                     </div>
@@ -148,8 +151,6 @@
                                                 <tr>
                                                     <th>Type Of Document</th>
                                                     <th>Name Of Document</th>
-                                                    <th>Mapping Section</th>
-                                                    <th>G.O/Letter/Reference No.</th>
                                                     <th>Dated</th>
                                                     <th>Visible to Public</th>
                                                     <th>Status</th>
@@ -159,25 +160,23 @@
                                             <tbody>
                                                 @foreach ($results as $result)
                                                     <tr>
-                                                        <td>{{ $result->navigation->name ?? '--' }}</td>
+                                                        <td>{{ $result->document_type->name ?? '--' }}</td>
                                                         <td><a
-                                                                href="{{ fileLink($result->document_url) }}">{{ $result->display_filename }}</a>
+                                                                href="{{ fileLink($result->document_url) }}">{{ $result->name }}</a>
                                                         </td>
-                                                        <td>{{ $result->tag->name ?? '--' }}</td>
-                                                        <td>{{ $result->reference_no ?? '--' }}</td>
                                                         <td>{{ $result->dated ?? '--' }}</td>
-                                                        <td class="text-success text-center" style="font-weight: bold;">
+                                                        <td style="font-weight: bold;">
                                                             @if (isset($result->visible_to_public) && $result->visible_to_public == 1)
-                                                                <span>Yes</span>
+                                                                <span class="text-success">Yes</span>
                                                             @else
-                                                                <span>NO</span>
+                                                                <span class="text-danger">NO</span>
                                                             @endif
                                                         </td>
-                                                        <td class="text-success" style="font-weight: bold;">
+                                                        <td style="font-weight: bold;">
                                                             @if (isset($result->status) && $result->status == 1)
-                                                                <span>Active</span>
+                                                                <span class="text-success">Active</span>
                                                             @else
-                                                                <span>In-Active</span>
+                                                                <span class="text-danger">In-Active</span>
                                                             @endif
                                                         </td>
                                                         <td>
@@ -185,11 +184,11 @@
                                                                 <button type="button" data-bs-toggle="tooltip"
                                                                     title="" class="btn btn-link btn-primary btn-lg"
                                                                     data-original-title="Edit Task"
-                                                                    onclick="window.location.href='{{ route('documents.edit', $result->id) }}'">
+                                                                    onclick="window.location.href='{{ route('new-documents.edit', $result->id) }}'">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                                 <button type="button" class="btn btn-link btn-danger"
-                                                                    onclick="window.location.href='{{route('documents.show',$result->id)}}'">
+                                                                    onclick="window.location.href='{{route('new-documents.show',$result->id)}}'">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </div>
@@ -242,7 +241,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            setPageUrl('/documents?');
+            setPageUrl('/new-documents?');
         });
     </script>
 @endsection
