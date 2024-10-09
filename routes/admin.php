@@ -34,6 +34,7 @@ Route::middleware(['admin'])->group(function () {
 	Route::resource('/schemedetails','Admin\SchemeDetailController');
 	Route::resource('/districts','Admin\DistrictController');
 	Route::resource('/designations','Admin\DesignationController');
+	Route::resource('/welcome-banner','Admin\WelcomeBannerController');
 	Route::resource('/facilitytypes','Admin\FacilityTypeController');
 	Route::resource('/masters','Admin\MasterController');
 	Route::get('/huds-export','Admin\HudController@export')->name('huds.export');
