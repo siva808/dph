@@ -347,6 +347,21 @@
                     <span class="sub-item">Schemes</span>
                   </a>
                 </li>
+                <li>
+                  <a href="{{url('/masters?master_type=1')}}">
+                    <span class="sub-item">Language</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{url('/masters?master_type=2')}}">
+                    <span class="sub-item">Publication</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{url('/masters?master_type=3')}}">
+                    <span class="sub-item">Notification</span>
+                  </a>
+                </li>
               </ul>
             </div>
           </li>
