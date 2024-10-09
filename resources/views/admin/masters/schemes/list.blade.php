@@ -54,6 +54,7 @@
                                                     <th>Program</th>
                                                     <th>Name</th>
                                                     <th>Short Code</th>
+                                                    <th>order No</th>
                                                     <th>Status</th>
                                                     <th class="text-center" style="width: 10%">Action</th>
                                                 </tr>
@@ -65,6 +66,7 @@
                                                         <td>{{ $result->program->name ?? '' }}</td>
                                                         <td>{{ $result->name ?? '' }}</td>
                                                         <td>{{ $result->short_code ?? '' }}</td>
+                                                        <td>{{ $result->order_no ?? '' }}</td>
                                                         <td style="font-weight: bold;">
                                                             @if (isset($result->status) && $result->status == 1)
                                                                 <span class="text-success">Active</span>

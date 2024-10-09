@@ -62,6 +62,18 @@
                                     </div>
 
                                     <div class="row mb-3 p-3">
+
+                                        <!-- Short Code -->
+                                        <div class="col-md-6">
+                                           <div class="font-weight-bold text-secondary">Order No</div>
+                                           <input type="number" class="form-control" id="order_no"
+                                               value="{{ old('order_no', $result->order_no) }}"
+                                               name="order_no">
+                                       </div>
+
+                                   </div>
+
+                                    <div class="row mb-3 p-3">
                                         <!-- Status -->
                                         <div class="col-md-6">
                                             <div class="font-weight-bold text-secondary">Status:</div>

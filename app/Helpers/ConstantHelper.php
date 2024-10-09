@@ -45,6 +45,7 @@
 		// if(strlen($left) == 1 && ($right == 0 || $right == "0")) {
 		// 	$right = '__zero';
 		// }
+		// dd($left, $right);
 		if($left && $right && $left == $right) {
 			return 'selected';
 		} else {

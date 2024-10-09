@@ -16,3 +16,13 @@ function toggleVisibleText(labelId, checkbox) {
 }
 
 
+function initializeSelect2(selector) {
+    $(selector).select2();
+}
+
+$(document).ready(function () {
+    initializeSelect2('.select-dropdown');
+});
+
+
+

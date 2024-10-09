@@ -132,68 +132,68 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_govtorders.html">
+                  <a href="{{url('/new-documents?document_type=1')}}">
                     <span class="sub-item">GO's</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_circulars.html">
+                  <a href="{{url('/new-documents?document_type=2')}}">
                     <span class="sub-item">Circulars/Instructions</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_proceedings.html">
+                  <a href="{{url('/new-documents?document_type=3')}}">
                     <span class="sub-item">Proceedings</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_actsAndrules.html">
+                  <a href="{{url('/new-documents?document_type=4,15')}}">
                     <span class="sub-item">Acts/Rules</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_publications.html">
+                  <a href="{{url('/new-documents?document_type=5')}}">
                     <span class="sub-item">Publications</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_rti.html">
+                  <a href="{{url('/new-documents?document_type=7')}}">
                     <span class="sub-item">RTI</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_policynote.html">
+                  <a href="{{url('/new-documents?document_type=8')}}">
                     <span class="sub-item">Policy Note</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_performancebudget.html">
+                  <a href="{{url('/new-documents?document_type=9')}}">
                     <span class="sub-item">Performance Budget</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_reports.html">
+                  <a href="{{url('/new-documents?document_type=10')}}">
                     <span class="sub-item">Reports</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_others.html">
+                  <a href="{{url('/new-documents?document_type=11')}}">
                     <span class="sub-item">Other Documents</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_newsAndnitification.html">
-                    <span class="sub-item">News & Notification</span>
+                  <a href="{{url('/new-documents?document_type=12')}}">
+                    <span class="sub-item">Notification</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_events.html">
+                  <a href="{{url('/new-documents?document_type=13')}}">
                     <span class="sub-item">Events</span>
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_announcements.html">
-                    <span class="sub-item">Announcements</span>
+                  <a href="{{url('/new-documents?document_type=14')}}">
+                    <span class="sub-item">Important Link</span>
                   </a>
                 </li>
                 <li>

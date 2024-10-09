@@ -1,26 +1,22 @@
 @extends('admin.layouts.layout')
 @section('title', 'Create Designation')
 @section('content')
-<div class="page-wrapper">
-   <div class="container-fluid">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Create Designation</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('designations.index')}}">Designation</a></li>
-                    <li class="breadcrumb-item active">Create Designation</li>
-                </ol>
+    <div class="container" style="margin-top: 90px;">
+        <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+            <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
+                <h5 class="mb-0">Designation</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                        <li class="breadcrumb-item"><a href="#">Contacts</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create Designation</li>
+                    </ol>
+                </nav>
+
             </div>
         </div>
-    </div>
-      <div class="row">
-        <div class="col-md-12">
-            <div class="card card-body">
-            @if ($errors->any())
+        <div class="container-fluid">
+            <div class="page-inner">
+                @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -29,49 +25,73 @@
                     </ul>
                 </div>
             @endif
+                <!-- insert the contents Here start -->
 
-            <div class="row">
-                <div class="col-sm-12 col-xs-12">
-                    <form action="{{route('designations.store')}}" enctype="multipart/form-data" method="post">
-                        {{csrf_field()}}
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-lg-8 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                            <form id="contactForm" action="{{route('designations.store')}}" enctype="multipart/form-data" method="post">
+                                {{csrf_field()}}
+                                <div class="container">
+                                    <h4 class="card-title mb-4 text-primary">Create Designation</h4>
 
-                    <div class="row pt-3">
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="name" class="required">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{old('name')}}">
-                        </div>
-                         
+                                    <!-- Name Row -->
+                                    <div class="row mb-3">
+                                        <!-- Label Column with reduced width -->
+                                        <div class="col-12 col-md-3">
+                                            <label for="name" class="form-label">Name <span
+                                                    style="color: red;">*</span></label>
+                                        </div>
+                                        <!-- Input Column -->
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="name"
+                                                placeholder="Enter name" name="name" required>
+                                        </div>
+                                    </div>
 
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="designation_type_id" class="required">Designation Type</label>
-                            <select name="designation_type_id" id="designation_type_id" class="form-control">
-                                <option value="" >-- Select Designation Type-- </option>
-                                @foreach($designation_types as $key => $value)
-                                <option value="{{$value->id}}" {{SELECT($value->id,old('designation_type_id'))}}>{{$value->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                         
-                        
-                        <div class="form-group col-sm-4 col-xs-4">
-                            <label for="status" class="required">Status </label>
-                            <select name="status" id="status" class="form-control">
-                                @foreach($statuses as $key => $value)
-                                <option value="{{$value}}" {{SELECT($value,old('status'))}}>{{$key}}</option>
-                                @endforeach
-                            </select>
+
+                                    <!-- Status Row -->
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-3">
+                                            <label for="status" class="form-label">Status <span
+                                                    style="color: red;">*</span></label>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" name="status" type="checkbox"
+                                                    id="toggleStatus" value="1" {{ CHECKBOX('document_status') }}
+                                                    onchange="toggleStatusText('statusLabel', this)">
+                                                <label class="form-check-label" for="toggleStatus"
+                                                    id="statusLabel">In-Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Buttons -->
+                                <div class="d-flex mt-2 pl-5">
+                                    <button type="submiy" class="btn btn-primary">Submit</button>
+                                    <a type="button" href="{{route('designations.index')}}" style="margin-left: 10px;" class="btn btn-danger" >Cancel</a>
+                                </div>
+                            </form>
+
+
                         </div>
                     </div>
-
-                        <hr>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                         <a type="reset" class="btn btn-inverse waves-effect waves-light" href="{{route('designations.index')}}"> Cancel </a>
-                    </form>
                 </div>
+
+
+
+
+
+
+
+
+
             </div>
+            <!-- page inner end-->
         </div>
-          </div>
-        </div>
-   </div>
-</div>
+        <!-- database table end -->
+    </div>
 @endsection

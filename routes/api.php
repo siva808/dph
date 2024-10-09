@@ -39,6 +39,7 @@ Route::post('list-hud','Admin\HudController@listHUD');
 Route::post('list-block','Admin\BlockController@listBlock');
 Route::post('list-phc','Admin\PhcController@listPHC');
 Route::post('list-hsc','Admin\HscController@listHSC');
+Route::post('list-scheme','Admin\SchemeController@listScheme');
 Route::post('list-block-contacts','Admin\ContactController@listBlockContact');
 Route::post('testimonial','Admin\TestimonialController@listTestimonial');
 Route::post('configuration','Admin\ConfigurationController@getConfiguration');
