@@ -12,7 +12,6 @@ class ConfigurationDetails extends Model
         'link',
         'image_url',
         'status',
-        'footer_logo_one',
         'configuration_content_type_id'
     ];
 

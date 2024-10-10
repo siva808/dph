@@ -346,77 +346,42 @@ class ConfigurationController extends Controller
 
     public function getConfiguration()
     {
-
         $resources = Configuration::getConfigurationData();
-
         $configDetails = ConfigurationDetails::all();
-
+    
         if ($resources->isEmpty()) {
             return sendResponse([], 'Configuration not found', 404);
         }
-
-        // Organize data into a single structure
-        $response = [
-            'header' => [
-                'tamil_government_title' => $resources[2]->tamilnadu_government_title_tamil,
-                'english_government_title' => $resources[2]->tamilnadu_government_title_english,
-                'dph_full_form_tamil' => $resources[2]->dph_full_form_tamil,
-                'dph_full_form_english' => $resources[2]->dph_full_form_english,
-                'logos' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 1 && $item->status === 1;
-                })->values(),
-                'banners' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 2 && $item->status === 1;
-                })->values(),
-            ],
-            'address' => [
-                'address' => $resources[3]->dph_address,
-                'zip_code' => $resources[3]->dph_zip_code,
-                'city' => $resources[3]->dph_city,
-                'state' => $resources[3]->dph_state,
-                'phone' => $resources[3]->dph_phone,
-                'email' => $resources[3]->dph_email,
-                'dph_tamil_name' => $resources[3]->dph_full_form_tamil,
-            ],
-            'joint_director' => [
-                'email' => $resources[4]->joint_director_email,
-                'phone' => $resources[4]->joint_director_phone,
-                'designation' => $resources[4]->joint_director_designation,
-
-            ],
-            'footer' => [
-                'logos' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 4 && $item->status === 1;
-                })->values(),
-                'social_media' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 5 && $item->status === 1;
-                })->values(),
-                'impo_links' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 6 && $item->status === 1;
-                })->values(),
-                'quick_links' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 7 && $item->status === 1;
-                })->values(),
-                'publics' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 8 && $item->status === 1;
-                })->values(),
-                'resources' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 9 && $item->status === 1;
-                })->values(),
-                'contacts' => $configDetails->filter(function ($item) {
-                    return $item->configuration_content_type_id === 10 && $item->status === 1;
-                })->values(),
-            ],
-
-            'partners' => $configDetails->filter(function ($item) {
-                return $item->configuration_content_type_id === 3 && $item->status === 1;
-            })->values(), // Partner logos
-
-            'scroller-notif' => $configDetails->filter(function ($item) {
-                return $item->configuration_content_type_id === 11 && $item->status === 1;
-            })->values(), // Scroller Notification
-        ];
-
+    
+        // Build the structured response using the resource
+        $response = new ConfigurationResource((object) [
+            'tamil_government_title' => $resources[2]->tamilnadu_government_title_tamil,
+            'english_government_title' => $resources[2]->tamilnadu_government_title_english,
+            'dph_full_form_tamil' => $resources[2]->dph_full_form_tamil,
+            'dph_full_form_english' => $resources[2]->dph_full_form_english,
+            'dph_address' => $resources[3]->dph_address,
+            'dph_zip_code' => $resources[3]->dph_zip_code,
+            'dph_city' => $resources[3]->dph_city,
+            'dph_state' => $resources[3]->dph_state,
+            'dph_phone' => $resources[3]->dph_phone,
+            'dph_email' => $resources[3]->dph_email,
+            'dph_tamil_name' => $resources[3]->dph_full_form_tamil,
+            'joint_director_email' => $resources[4]->joint_director_email,
+            'joint_director_phone' => $resources[4]->joint_director_phone,
+            'joint_director_designation' => $resources[4]->joint_director_designation,
+            'logos' => $configDetails->where('configuration_content_type_id', 1)->where('status', 1)->values(),
+            'banners' => $configDetails->where('configuration_content_type_id', 2)->where('status', 1)->values(),
+            'footer_logos' => $configDetails->where('configuration_content_type_id', 4)->where('status', 1)->values(),
+            'social_media' => $configDetails->where('configuration_content_type_id', 5)->where('status', 1)->values(),
+            'impo_links' => $configDetails->where('configuration_content_type_id', 6)->where('status', 1)->values(),
+            'quick_links' => $configDetails->where('configuration_content_type_id', 7)->where('status', 1)->values(),
+            'publics' => $configDetails->where('configuration_content_type_id', 8)->where('status', 1)->values(),
+            'resources' => $configDetails->where('configuration_content_type_id', 9)->where('status', 1)->values(),
+            'contacts' => $configDetails->where('configuration_content_type_id', 10)->where('status', 1)->values(),
+            'partners' => $configDetails->where('configuration_content_type_id', 3)->where('status', 1)->values(),
+            'scroller_notif' => $configDetails->where('configuration_content_type_id', 11)->where('status', 1)->values(),
+        ]);
+    
         return sendResponse($response);
     }
 }
