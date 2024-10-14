@@ -202,7 +202,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_healthwalk.html">
+                  <a href="{{url('/health-walk')}}">
                     <span class="sub-item">HealthWalk</span>
                   </a>
                 </li>

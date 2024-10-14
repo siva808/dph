@@ -65,5 +65,10 @@ class District extends Model
         return $this->hasMany(HUD::class);
     }
 
+    public function healthWalkLocations()
+    {
+        return $this->hasMany(HealthWalkLocation::class);
+    }
+
 
 }

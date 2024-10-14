@@ -1,67 +1,110 @@
 @extends('admin.layouts.layout')
-@section('title', 'View District')
+@section('title', 'List Director Message')
 @section('content')
-<div class="page-wrapper">
-   <div class="container-fluid">
-    <div class="row page-titles">
-        <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">District</h4>
-        </div>
-        <div class="col-md-7 align-self-center text-right">
-            <div class="d-flex justify-content-end align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{route('districts.index')}}">District</a></li>
-                    <li class="breadcrumb-item active">View District</li>
-                </ol>
-            </div>
-        </div>
+<div class="container" id="maincontent">
+  <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+    <div class="d-flex justify-content-between align-items-center"
+      style="padding-left: 20px; padding-right: 20px;">
+      <h5 class="mb-0">View PartnerLogos</h5>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">View PartnerLogos</li>
+        </ol>
+      </nav>
+
     </div>
-      <div class="row">
-         <div class="col-lg-12 card">
-            <div class="card-body">
-         <div class="row">
-             
-            <div class="col-md-3 col-xs-6 b-r">
-               <strong>Name</strong>
-               <br>
-               {{$result->name}}
-            </div>
-             
-            <div class="col-md-3 col-xs-6 b-r">
-               <strong>Image</strong>
-               <br>
-               <p><a class="text-danger" href="{{fileLink($result->image_url)}}" target="_blank" download="download">{{$result->image_url}}</a></p>
-            </div>
-            
-            <div class="col-md-3 showSpace col-xs-6 b-r">
-               <strong>Map Location </strong>
-               <br>
-               
-                @if($result->location_url)
-                  <a href="{{$result->location_url}}" _target="blank">Click Here to View</a>
-                @else
+  </div>
 
-                <span> -- </span>
+  <div class="container-fluid">
+    <div class="page-inner">
+      <div class="container mt-2">
+        <!-- insert the contents Here start -->
 
-                @endif
-            </div>
-            <div class="col-md-3 col-xs-6 b-r">
-               <strong>Status</strong>
-               <br>
-               {{findStatus($result->status)}}
-            </div>
-           
-            <div class="col-md-3 col-xs-6 b-r">
-               <strong>Created At</strong>
-               <br>
-              {{dateOf($result->created_at) ?? ''}}
-            </div>
-         </div>
-         <hr>
+        <div class="col-md-12 col-lg-12 p-3">
+          <div class="card border-primary shadow-sm">
+              <div class="card-body">
+                  <!-- Heading -->
+                  <h4 class="card-title mb-4 text-primary">View Partner Details</h4>
+      
+                  <!-- Row for Title -->
+                  <div class="row mb-3 p-3">
+                      <div class="col-md-2 font-weight-bold text-secondary">Title:</div>
+                      <div class="col-md-8 border p-3 rounded bg-light">
+                          WHO
+                      </div>
+                  </div>
+      
+                  <!-- Row for Link -->
+                  <div class="row mb-3 p-3">
+                      <div class="col-md-2 font-weight-bold text-secondary">Link:</div>
+                      <div class="col-md-8 border p-3 rounded bg-light">
+                          <a href="https://example.com" target="_blank" class="text-primary">https://example.com</a>
+                      </div>
+                  </div>
+      
+                  <!-- Row for Logo -->
+                  <div class="row mb-5 p-3">
+                      <div class="col-md-2 font-weight-bold text-secondary">Logo:</div>
+                      <div class="col-md-8 d-flex align-items-center">
+                          <img src="./assets/img/dphadmin/DPH_LOGO (1).png" alt="Logo" class="img-fluid rounded"
+                              style="max-height: 150px; max-width: 150px; object-fit: cover;">
+                      </div>
+                  </div>
+      
+                  <!-- Row for Status -->
+                  <div class="row mb-3 p-3">
+                      <div class="col-md-2 font-weight-bold text-secondary">Status:</div>
+                      <div class="col-md-8">
+                          <span class="badge bg-success text-light">Active</span>
+                      </div>
+                  </div>
+      
+                  <!-- Row for Back Button -->
+                  <button type="button" class="btn btn-primary px-5 py-2 mt-5"
+                      onclick="window.location.href='partnerlogos_list.html'">Back</button>
+      
+              </div>
+          </div>
       </div>
-         </div>
+      
+
+
+
+
+
+
+
+
+
+        <!-- insert the contents Here end -->
       </div>
-   </div>
+      <!-- page inner end-->
+    </div>
+    <!-- database table end -->
+  </div>
+
+  <!-- content end here -->
+
+
+
+
+
+
+
+  <footer class="footer">
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+      <div class="copyright">
+        <p> Copyright © 2024 <a target="_blank" href="http://tansam.org/">TANSAM</a>. All Rights Reserved.Created
+          By
+          TANSAM IT DEPARTMENT </p>
+      </div>
+      <!-- <div>
+        Distributed by
+        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+      </div> -->
+    </div>
+  </footer>
+  <!-- main panel end -->
 </div>
 @endsection

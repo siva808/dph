@@ -1,94 +1,132 @@
 @extends('admin.layouts.layout')
-@section('title', 'Health Walk')
+@section('title', 'List HEalth Walk')
 @section('content')
-<style type="text/css">
-.small-input {
-    width: 150px; /* Adjust the width as needed */
-}
-
-.medium-input {
-    width: 300px; /* Adjust the width as needed */
-}
-
-.large-input {
-    width: 600px; /* Adjust the width as needed */
-}
-</style>
-<div class="page-wrapper">
-    <div class="container-fluid">
-        <div class="row page-titles">
-            <div class="col-md-5 align-self-center">
-                <h4 class="text-themecolor">Health Walk</h4>
-            </div>
-            <div class="col-md-7 align-self-center text-right">
-                <div class="d-flex justify-content-end align-items-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Health Walk</li>
+    <div class="container" style="margin-top: 90px;">
+        <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+            <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
+                <h5 class="mb-0">Documents</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create HealthWalk</li>
                     </ol>
-                </div>
+                </nav>
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <!-- Table Html -->
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive m-t-40">
-                            <form id="bulkSubmitForm" method="POST" action="{{ url('hw-location-submit') }}">
-                                @csrf
-                                <div id="myTable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>District</th>
-                                                        <th>8km Health Walk Area
-(Start/End Point)</th>
-                                                        <th>Contact</th>
-                                                        <th>Location of the venue - Google Map Link</th>
-                                                        
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if(!empty($locationData) && $locationData->count())
-                                                    @foreach($locationData as $result)
-                                                    <tr>
-                                                        <td>{{$result->district_name ?? ''}}</td>
-                                                        <td>
-                                                            <input type="text" name="address[{{$result->district_id}}]" id="address_{{$result->district_id}}" class="form-control large-input" value="{{$result->address}}"/>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" name="contact_number[{{$result->district_id}}]" id="contact_number_{{$result->district_id}}" class="form-control small-input" value="{{$result->contact_number}}"/>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" name="location_url[{{$result->district_id}}]" id="location_url_{{$result->district_id}}" class="form-control medium-input" value="{{$result->location_url}}"/>
-                                                        </td>          
-                                                    </tr>
-                                                    @endforeach
-                                                    @else
-                                                    <tr>
-                                                        <td collspan="6">No Records Found..</td>
-                                                    </tr>
-                                                    @endif
-                                                </tbody>
-                                            </table>
-                                        </div>
+        <div class="container-fluid">
+            <div class="page-inner">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="container-fluid mt-2">
+                    <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                        <form id="healthwalkForm" action="{{ route('health-walk.store') }}" enctype="multipart/form-data"
+                            method="post" id="myForm">
+                            {{ csrf_field() }}
+                            <h4 class="card-title mb-4 text-primary">Create Health Walk</h4>
+
+                            <!-- All Fields in One Div using d-grid -->
+                            <div class="d-grid gap-4 mb-3 grid-3 grid-2 grid-1">
+                                {{-- <div>
+                                    <label for="district" class="form-label">District <span
+                                            style="color: red;">*</span></label>
+                                    <select name="district_id" id="district_id" class="form-control">
+                                        <option value="">-- Select District -- </option>
+                                        @foreach ($districts as $key => $value)
+                                            <option value="{{ $value->id }}"
+                                                {{ SELECT($value->id, old('district_id')) }}>{{ $value->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div> --}}
+                                <div>
+                                    <label for="hud" class="form-label">HUD <span style="color: red;">*</span></label>
+                                    <select name="hud_id" id="hud_id" class="form-control">
+                                        <option value="">-- Select HUD -- </option>
+                                        @foreach ($huds as $key => $value)
+                                            <option value="{{ $value->id }}" {{ SELECT($value->id, old('hud_id')) }}>
+                                                {{ $value->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="eventDescription" class="form-label">Description <span
+                                            style="color: red;">*</span></label>
+                                    <textarea class="form-control" id="eventDescription" placeholder="Enter description" name="description" required></textarea>
+                                </div>
+                                <div>
+                                    <label for="location" class="form-label">Health Walk Location Area <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="location"
+                                        placeholder="Enter location area" name="area" required>
+                                </div>
+                                <div>
+                                    <label for="startingPoint" class="form-label">Starting Point <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="startingPoint"
+                                        placeholder="Enter starting point" name="start_point" required>
+                                </div>
+                                <div>
+                                    <label for="endingPoint" class="form-label">Ending Point <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="endingPoint"
+                                        placeholder="Enter ending point" name="end_point" required>
+                                </div>
+                                <div>
+                                    <label for="contact" class="form-label">Contact Number <span
+                                            style="color: red;">*</span></label>
+                                    <input type="tel" class="form-control" id="contact"
+                                        placeholder="Enter contact number" name="contact" required>
+                                </div>
+                                <div>
+                                    <label for="googleMapLink" class="form-label">Google Map Link</label>
+                                    <input type="url" class="form-control" id="googleMapLink"
+                                        placeholder="Enter Google Map link" name="link" required>
+                                </div>
+                                <div>
+                                    <label for="status" class="form-label">Status</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" name="status" type="checkbox" id="toggleStatus"
+                                            value="1" {{ CHECKBOX('document_status') }}
+                                            onchange="toggleStatusText('statusLabel', this)">
+                                        <label class="form-check-label" for="toggleStatus"
+                                            id="statusLabel">In-Active</label>
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit All</button>
+                                <div>
+                                    <label for="visibleToPublic" class="form-label">Visible to Public</label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" name="visible_to_public" type="checkbox"
+                                            id="toggleVisibleToPublic" value="1"
+                                            {{ CHECKBOX('document_visible_to_public') }}
+                                            onchange="toggleVisibleText('visibleToPublicLabel', this)">
+                                        <label class="form-check-label" for="toggleVisibleToPublic"
+                                            id="visibleToPublicLabel">No</label>
+                                    </div>
                                 </div>
-                                <br>
-                            </form>
-                        </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="d-flex mt-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="button" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <!-- Table Html -->
             </div>
         </div>
+
+
+
+        <!-- database table end -->
     </div>
-</div>
-</html>
 @endsection

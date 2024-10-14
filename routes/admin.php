@@ -82,6 +82,7 @@ Route::middleware(['privilege'])->group(function () {
 
 	Route::get('/hw-location','Admin\HealthWalkLocationController@index');
 	Route::post('/hw-location-submit','Admin\HealthWalkLocationController@store');
+	Route::resource('/health-walk','Admin\HealthWalkController');
 });
 
 
