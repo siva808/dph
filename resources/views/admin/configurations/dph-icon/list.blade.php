@@ -4,11 +4,11 @@
     <div class="container" style="margin-top: 90px;">
         <div class="container-fluid p-2" style="background-color: #f2f2f2;">
             <div class="d-flex justify-content-between align-items-center" style="padding-left: 20px; padding-right: 20px;">
-                <h5 class="mb-0">List of scroller Notifications</h5>
+                <h5 class="mb-0">List of DPH Icons</h5>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">List scroller Notifications</li>
+                        <li class="breadcrumb-item active" aria-current="page">List DPH Icons</li>
                     </ol>
                 </nav>
 
@@ -21,11 +21,11 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">scroller Notifications</h4>
+                                <h4 class="card-title">DPH Icon</h4>
                                 <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
                                     data-bs-target="#addRowModal"
-                                    onclick="window.location.href='{{ route('scroller-notif.create') }}';">
-                                    <i class="fa fa-plus"></i> Add scroller Notifications
+                                    onclick="window.location.href='{{ route('dph-icon.create') }}';">
+                                    <i class="fa fa-plus"></i> Add DPH Icon
                                 </button>
                             </div>
                         </div>
@@ -34,7 +34,8 @@
                                 <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Scroller Notification</th>
+                                            <th>Name</th>
+                                            <th>Link</th>
                                             <th>Status</th>
                                             <th class="text-center" style="width: 10%">Action</th>
                                         </tr>
@@ -49,6 +50,11 @@
                                                         <p>{{ $result->name ?? '' }}</p>
                                                     </div>
                                                 </td>
+                                                <td>
+                                                    <div>
+                                                        <p><a href="{{ $result->link ?? '' }}" _target="blank">{{ $result->link ?? '' }}</a> </p>
+                                                    </div>
+                                                </td>
                                                 <td class="text-success" style="font-weight: bold;">
                                                     @if (isset($result->status) && $result->status == 1)
                                                         <span class="text-success">Active</span>
@@ -59,7 +65,7 @@
                                                 <td>
                                                     <div class="form-button-action">
                                                         <button type="button" class="btn btn-link btn-primary btn-lg"
-                                                            onclick="window.location.href='{{ route('scroller-notif.edit', $result->id) }}';"
+                                                            onclick="window.location.href='{{ route('dph-icon.edit', $result->id) }}';"
                                                             data-bs-toggle="tooltip" title="Edit Scroller Notification">
                                                             <i class="fa fa-edit"></i>
                                                         </button>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ConfigurationDetails;
+use Illuminate\Support\Facades\Validator;
 
 class DphiconController extends Controller
 {
@@ -27,7 +28,8 @@ class DphiconController extends Controller
      */
     public function create()
     {
-        //
+        $statuses = _getGlobalStatus();
+        return view('admin.configurations.dph-icon.create', compact('statuses'));
     }
 
     /**
@@ -38,7 +40,25 @@ class DphiconController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),$this->rules(),$this->messages(),$this->attributes());
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)
+                        ->withInput();
+        }
+        
+        $input = [
+                'name' => $request->name,
+                'link' => $request->link,
+                'configuration_content_type_id' => 13,           // 13 - DPH icon
+                'status' => $request->status ?? 0
+            ];
+
+        $result = ConfigurationDetails::create($input);
+
+        createdResponse("DPH Icon Created Successfully");
+
+        return redirect()->route('dph-icon.index');
     }
 
     /**
@@ -60,7 +80,9 @@ class DphiconController extends Controller
      */
     public function edit($id)
     {
-        //
+        $result = ConfigurationDetails::find($id);
+        $statuses = _getGlobalStatus();
+        return view('admin.configurations.dph-icon.edit',compact('result', 'statuses'));
     }
 
     /**
@@ -72,7 +94,24 @@ class DphiconController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),$this->rules($id),$this->messages(),$this->attributes());
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)
+                        ->withInput();
+        }
+        $partner = ConfigurationDetails::find($id);
+        $input = [
+                'name' => $request->name,
+                'link' => $request->link,
+                'status' => $request->status ?? 0
+            ];
+
+        $result = $partner->update($input);
+
+        createdResponse("DPH Icon Updated Successfully");
+
+        return redirect()->route('dph-icon.index');
     }
 
     /**
@@ -84,5 +123,27 @@ class DphiconController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function rules($id = "")
+    {
+
+        $rules = array();
+
+        $rules['name'] = 'required';
+        $rules['link'] = 'sometimes|nullable';
+        $rules['status'] = 'sometimes|boolean';
+
+        return $rules;
+    }
+
+    public function messages()
+    {
+        return [];
+    }
+
+    public function attributes()
+    {
+        return [];
     }
 }
