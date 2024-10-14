@@ -207,7 +207,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="doc_list_dphicon.html">
+                  <a href="{{url('/dph-icon')}}">
                     <span class="sub-item">DPH ICON</span>
                   </a>
                 </li>
