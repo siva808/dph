@@ -48,7 +48,7 @@
                                             style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>District</th>
+                                                    <th>HUD</th>
                                                     <th>8km Health Walk Area</th>
                                                     <th>Contact</th>
                                                     <th>Location of the Venue - Google Map Link</th>
@@ -60,7 +60,7 @@
                                             <tbody>
                                                 @foreach ($results as $result)
                                                     <tr>
-                                                        <td>{{ $result->district->name ?? '' }}</td>
+                                                        <td>{{ $result->hud->name ?? '' }}</td>
                                                         <td>{{ $result->area ?? '' }}</td>
                                                         <td>{{ $result->contact ?? '' }}</td>
                                                         <td><a href="{{ $result->location_url ?? '' }}" target="_blank">View

@@ -53,8 +53,12 @@ class HealthWalkController extends Controller
 
         $input = [
                 'hud_id' => $request->hud_id,
-                'des' => $request->short_code,
-                'order_no' => $request->order_no,
+                'description' => $request->description,
+                'start_point' => $request->start_point,
+                'end_point' => $request->end_point,
+                'area' => $request->area,
+                'location_url' => $request->location_url,
+                'visible_to_public' => $request->visible_to_public ?? 0,
                 'status' => $request->status ?? 0,
                 
             ];
@@ -74,7 +78,8 @@ class HealthWalkController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = HealthWalkLocation::with(['district', 'hud'])->find($id);
+        return view('admin.health-walk.show',compact('result'));
     }
 
     /**
@@ -85,7 +90,10 @@ class HealthWalkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $result = HealthWalkLocation::with(['district', 'hud'])->find($id);
+        $districts = District::getDistrictData();
+        $huds = HUD::getHudData();
+        return view('admin.health-walk.edit',compact('districts', 'huds', 'result'));
     }
 
     /**
@@ -97,7 +105,32 @@ class HealthWalkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),$this->rules($id),$this->messages(),$this->attributes());
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator)
+                        ->withInput();
+        }
+
+        $healthwalk = HealthWalkLocation::find($id);
+
+        $input = array();
+        $input = [
+                'hud_id' => $request->hud_id,
+                'description' => $request->description,
+                'start_point' => $request->start_point,
+                'end_point' => $request->end_point,
+                'area' => $request->area,
+                'location_url' => $request->location_url,
+                'visible_to_public' => $request->visible_to_public ?? 0,
+                'status' => $request->status ?? 0,
+            ];
+
+        $result = $healthwalk->update($input);
+
+        updatedResponse("Health Walk Updated Successfully");
+
+        return redirect()->route('health-walk.index');
     }
 
     /**
@@ -109,5 +142,29 @@ class HealthWalkController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function rules($id="") {
+
+        $rules = array();
+
+        $rules['hud_id'] = 'required';
+        $rules['location_url'] = 'sometimes|nullable|url';
+        $rules['start_point'] = 'sometimes|nullable';
+        $rules['end_point'] = 'sometimes|nullable';
+        $rules['description'] = 'sometimes|nullable';
+        $rules['contact_number'] = 'sometimes|nullable';
+        $rules['area'] = 'sometimes|nullable';
+        // $rules['status'] = 'required|boolean';
+
+        return $rules;
+    }
+
+    public function messages() {
+        return [];
+    }
+
+    public function attributes() {
+        return [];
     }
 }

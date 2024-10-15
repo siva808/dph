@@ -1,110 +1,123 @@
 @extends('admin.layouts.layout')
-@section('title', 'List Director Message')
+@section('title', 'View Health Walk')
 @section('content')
-<div class="container" id="maincontent">
+<div class="container" style="margin-top: 90px;">
   <div class="container-fluid p-2" style="background-color: #f2f2f2;">
-    <div class="d-flex justify-content-between align-items-center"
-      style="padding-left: 20px; padding-right: 20px;">
-      <h5 class="mb-0">View PartnerLogos</h5>
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
-          <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-          <li class="breadcrumb-item active" aria-current="page">View PartnerLogos</li>
-        </ol>
-      </nav>
+      <div class="d-flex justify-content-between align-items-center"
+          style="padding-left: 20px; padding-right: 20px;">
+          <h5 class="mb-0">Documents</h5>
+          <nav aria-label="breadcrumb">
+              <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">View HealthWalk</li>
+              </ol>
+          </nav>
 
-    </div>
+      </div>
   </div>
-
   <div class="container-fluid">
-    <div class="page-inner">
-      <div class="container mt-2">
-        <!-- insert the contents Here start -->
+      <div class="page-inner">
+          <div class="container-fluid mt-2">
+              <div class="row">
+                  <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                      <!-- insert the contents Here start -->
 
-        <div class="col-md-12 col-lg-12 p-3">
-          <div class="card border-primary shadow-sm">
-              <div class="card-body">
-                  <!-- Heading -->
-                  <h4 class="card-title mb-4 text-primary">View Partner Details</h4>
-      
-                  <!-- Row for Title -->
-                  <div class="row mb-3 p-3">
-                      <div class="col-md-2 font-weight-bold text-secondary">Title:</div>
-                      <div class="col-md-8 border p-3 rounded bg-light">
-                          WHO
+                      <div class="card-body">
+                          <!-- Heading -->
+                          <h4 class="card-title mb-4 text-primary">View HealthWalk Details</h4>
+
+                          <div class="row mb-3 p-3">
+                              <!-- District -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">District:</div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->district->name ?? '' }}</div>
+                              </div>
+
+                              <!-- HUD -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">HUD:</div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->hud->name ?? '' }}</div>
+                              </div>
+
+                              <!-- Description -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Description:</div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->description ?? '' }}</div>
+                              </div>
+                          </div>
+
+                          <div class="row mb-3 p-3">
+                              <!-- Health Walk Location Area -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Health Walk Location Area:
+                                  </div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->area ?? '' }}</div>
+                              </div>
+
+                              <!-- Starting Point -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Starting Point:</div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->strati_point ?? '' }}</div>
+                              </div>
+
+                              <!-- Ending Point -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Ending Point:</div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->end_point ?? '' }}</div>
+                              </div>
+                          </div>
+
+                          <div class="row mb-3 p-3">
+                              <!-- Contact -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Contact Number:</div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->contact ?? '' }}</div>
+                              </div>
+
+                              <!-- Google map link -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Google Map Link:</div>
+                                  <div class="border p-3 rounded bg-light"><a href="{{ $result->location_url ?? '' }}">{{ $result->location_url ?? '' }}</a></div>
+                              </div>
+
+                              
+
+                              <!-- Status -->
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Status:</div>
+                                  <div class="border p-3 rounded bg-light">
+                                      <span class="badge {{ $result->status == 1 ? 'bg-success' : 'bg-danger' }} text-light">{{ findStatus($result->status) }}</span>
+                                  </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                  <!-- Placeholder to align items -->
+                              </div>
+                          </div>
+
+                          <!-- Visible to Public -->
+                          <div class="row mb-3 p-3">
+                              <div class="col-md-4">
+                                  <div class="font-weight-bold text-secondary">Visible to Public:</div>
+                                  <div class="border p-3 rounded bg-light">{{ $result->visible_to_public == 1 ? 'Yes' : 'No' }}</div>
+                              </div>
+                          </div>
+
+                          <!-- Back Button -->
+                          <button type="button" onclick="window.location.href='{{ route('health-walk.index') }}';"
+                              class="btn btn-primary mt-3" style="margin-left: 13px;">Back</button>
                       </div>
+
+                      <!-- Edit Document Layout end -->
+                      <!-- Edit Document Details End -->
+                      <!-- insert the contents Here end -->
                   </div>
-      
-                  <!-- Row for Link -->
-                  <div class="row mb-3 p-3">
-                      <div class="col-md-2 font-weight-bold text-secondary">Link:</div>
-                      <div class="col-md-8 border p-3 rounded bg-light">
-                          <a href="https://example.com" target="_blank" class="text-primary">https://example.com</a>
-                      </div>
-                  </div>
-      
-                  <!-- Row for Logo -->
-                  <div class="row mb-5 p-3">
-                      <div class="col-md-2 font-weight-bold text-secondary">Logo:</div>
-                      <div class="col-md-8 d-flex align-items-center">
-                          <img src="./assets/img/dphadmin/DPH_LOGO (1).png" alt="Logo" class="img-fluid rounded"
-                              style="max-height: 150px; max-width: 150px; object-fit: cover;">
-                      </div>
-                  </div>
-      
-                  <!-- Row for Status -->
-                  <div class="row mb-3 p-3">
-                      <div class="col-md-2 font-weight-bold text-secondary">Status:</div>
-                      <div class="col-md-8">
-                          <span class="badge bg-success text-light">Active</span>
-                      </div>
-                  </div>
-      
-                  <!-- Row for Back Button -->
-                  <button type="button" class="btn btn-primary px-5 py-2 mt-5"
-                      onclick="window.location.href='partnerlogos_list.html'">Back</button>
-      
               </div>
           </div>
       </div>
-      
-
-
-
-
-
-
-
-
-
-        <!-- insert the contents Here end -->
-      </div>
       <!-- page inner end-->
-    </div>
-    <!-- database table end -->
   </div>
 
-  <!-- content end here -->
-
-
-
-
-
-
-
-  <footer class="footer">
-    <div class="container-fluid d-flex justify-content-center align-items-center">
-      <div class="copyright">
-        <p> Copyright © 2024 <a target="_blank" href="http://tansam.org/">TANSAM</a>. All Rights Reserved.Created
-          By
-          TANSAM IT DEPARTMENT </p>
-      </div>
-      <!-- <div>
-        Distributed by
-        <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
-      </div> -->
-    </div>
-  </footer>
-  <!-- main panel end -->
+  <!-- database table end -->
 </div>
 @endsection
