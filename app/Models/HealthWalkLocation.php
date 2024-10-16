@@ -10,19 +10,37 @@ class HealthWalkLocation extends Model
     /**
      * @var array
      */
-    protected $fillable = ['district_id', 'contact_number', 'address', 'location_url','status'];
+    protected $fillable = ['district_id', 'contact_number', 'address', 'location_url', 'status', 'hud_id', 'area', 'description', 'start_point', 'end_point', 'visible_to_public'];
 
-    public static function getLocationData($isActive = false) {
 
-        $data =  District::select('districts.id as district_id','districts.name as district_name','health_walk_locations.id as hw_id','health_walk_locations.contact_number','health_walk_locations.address','health_walk_locations.location_url','health_walk_locations.status')
-            ->leftjoin('health_walk_locations','health_walk_locations.district_id','=','districts.id')
-            ->where('districts.status',_active())
-            ->orderBy('districts.name');
+    public function scopeFilter($query) {
 
-        if($isActive) {
-            $data->where('health_walk_locations.status',_active());
-        }
+        if($keyword = request('keyword')) {
+            $query->where('name','like','%'.$keyword.'%');
+           }
+        return $query;
+    }
 
-        return $data->get();
+    public static function getQueriedResult() {
+
+        list($sortfield,$sorttype) = getSorting();
+
+        $result = static::with([])->filter();
+
+        $sortfield = ($sortfield == 'name')?'name':$sortfield;
+        
+
+        return $result->orderBy($sortfield,$sorttype)->get();
+   }
+
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
+
+    public function hud()
+    {
+        return $this->belongsTo(HUD::class, 'hud_id');
     }
 }
