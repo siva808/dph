@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>DPH-ADMIN</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="./assets/img/dphadmin/DPH_LOGO (1).png" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <!-- <script src="assets/js/plugin/webfont/webfont.min.js"></script> -->
+  <script src="./assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+
+  <style>
+    .notification-badge {
+      background-color: rgb(100, 118, 255);
+      /* Default background color */
+      color: white;
+      /* Default text color */
+      padding: 4px 8px;
+      /* Padding around the text */
+      border-radius: 12px;
+      /* Rounded corners */
+      font-size: 14px;
+      /* Font size */
+      font-weight: bold;
+      /* Bold text for emphasis */
+      display: inline-flex;
+      /* Aligns text and badge together */
+      align-items: center;
+      /* Centers text vertically */
+      justify-content: center;
+      /* Centers text horizontally */
+      height: 22px;
+      /* Fixed height */
+      min-width: 22px;
+      /* Ensures the badge is wide enough */
+      text-align: center;
+      /* Centers text inside the badge */
+      line-height: 1;
+      /* Aligns text properly */
+    }
+
+    /* Styling for the badge when its parent nav-link is active */
+    .nav-link.active .notification-badge {
+      background-color: white;
+      /* Background color when active */
+      color: rgb(100, 118, 255);
+      /* Text color matching the nav-link active color */
+    }
+
+
+
+    /* style for the confirm popup start */
+    /* Modal Styling */
+    /* Modal Styling */
+    .modal-content {
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-header {
+      border-bottom: none;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border-radius: 15px 15px 0 0;
+      position: relative;
+    }
+
+    .modal-title {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .modal-body {
+      padding: 30px 20px;
+    }
+
+    .confirmation-icon {
+      color: #28a745;
+    }
+
+    .modal-body p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 0;
+    }
+
+    .modal-footer {
+      padding: 20px;
+      border-top: none;
+      background-color: #f9f9f9;
+      border-radius: 0 0 15px 15px;
+    }
+
+    .btn-outline-secondary {
+      border-color: #7d6f6c;
+      color: #6c757d;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline-secondary:hover {
+      background-color: #6c757d;
+      color: #fff;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+      box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+    }
+
+    .btn-close {
+      background-color: transparent;
+      border: none;
+    }
+
+
+    /* style for the confirm popup end */
+
+    #maincontent {
+      margin-top: 95px;
+    }
+
+    .sizeoftextred {
+      color: red;
+    }
+
+
+    .img-thumbnail {
+      max-width: 150px;
+      max-height: 150px;
+      margin-right: 10px;
+    }
+
+    .position-relative {
+      position: relative;
+    }
+
+    .remove-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: #dc3545;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+
+    /* css for content width in director message list start */
+    @media (max-width: 1280px) {
+      .arrow {
+        right: 15px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      #maincontent {
+        margin-top: 120px;
+      }
+
+      .arrow {
+        right: 15px;
+      }
+    }
+
+    /* Custom styles to control the grid layout */
+    @media (min-width: 992px) {
+
+      /* Large devices */
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 991px) {
+
+      /* Medium devices */
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* css for content width in director message list start */
+    @media (max-width: 768px) {
+
+      #maincontent {
+        margin-top: 70px;
+      }
+
+      .arrow {
+        right: 15px;
+        /* Slightly adjust for smaller screens */
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+
+      /* Small devices */
+      .grid-1 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+
+
+
+    /* css for content width in director message list end */
+  </style>
+
+
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/css/plugins.min.css" />
+  <link rel="stylesheet" href="./assets/css/dphadmin.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+
+
+
+</head>
+
+<body>
+  <!-- wrapper end -->
+  <div class="wrapper">
+    <!-- Sidebar start-->
+    <div class="sidebar" data-background-color="white">
+      <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="white">
+          <a href="index.html" class="logo">
+            <img src="./assets/img/dphadmin/DPH_LOGO (1).png" alt="navbar brand" class="navbar-brand" height="60" />
+          </a>
+          <div class="nav-toggle">
+            <button class="btn btn-toggle toggle-sidebar">
+              <i style="color: black;" class="gg-menu-right"></i>
+            </button>
+            <button class="btn btn-toggle sidenav-toggler">
+              <i style="color: black;" class="gg-menu-left"></i>
+            </button>
+          </div>
+          <button class="topbar-toggler more">
+            <i style="color: black;" class="gg-more-vertical-alt"></i>
+          </button>
+        </div>
+        <!-- End Logo Header -->
+      </div>
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <ul class="nav nav-secondary">
+            <li class="nav-section">
+              <h4 class="text-section">Menus</h4>
+            </li>
+
+
+
+
+            <!-- dashboard------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#dashboard">
+                <i class="bi bi-house"></i>
+                <p>Dashboard</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="dashboard">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="index.html">
+                      <span class="sub-item">Admin</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Reports------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#reports">
+                <i class="bi bi-bookmarks"></i>
+                <p>Reports</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="reports">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="reports.html">
+                      <span class="sub-item">Downloads</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Approval Management------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#appmanage">
+                <i class="bi bi-grid"></i>
+                <p>Approval Management</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="appmanage">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="manage_documents.html">
+                      <span class="sub-item">Uploads</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Upload Management------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#uploadmanage">
+                <i class="bi bi-upload"></i>
+                <p>Upload Management</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="uploadmanage">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="all_documents.html">
+                      <span class="sub-item">All Documents</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Content Upload ------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#contentupload">
+                <i class="bi bi-cloud-upload"></i>
+                <p>Content Upload</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="contentupload">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="testimonial_list.html">
+                      <span class="sub-item">Director Message</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_welcomebanner.html">
+                      <span class="sub-item">Welcome Banner</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="scrollernotification_list.html">
+                      <span class="sub-item">Scroller Notification</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_govtorders.html">
+                      <span class="sub-item">GO's</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_circulars.html">
+                      <span class="sub-item">Circulars/Instructions</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_proceedings.html">
+                      <span class="sub-item">Proceedings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_actsAndrules.html">
+                      <span class="sub-item">Acts/Rules</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_publications.html">
+                      <span class="sub-item">Publications</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_rti.html">
+                      <span class="sub-item">RTI</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_policynote.html">
+                      <span class="sub-item">Policy Note</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_performancebudget.html">
+                      <span class="sub-item">Performance Budget</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_reports.html">
+                      <span class="sub-item">Reports</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_others.html">
+                      <span class="sub-item">Other Documents</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_newsAndnitification.html">
+                      <span class="sub-item">News & Notification</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_events.html">
+                      <span class="sub-item">Events</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_announcements.html">
+                      <span class="sub-item">Announcements</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="contact_list.html">
+                      <span class="sub-item">Contacts</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_healthwalk.html">
+                      <span class="sub-item">HealthWalk</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="doc_list_dphicon.html">
+                      <span class="sub-item">DPH ICON</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Website Management------------------ -->
+            <!-- <li class="nav-section">
+                  <h4 class="text-section"></h4>
+                </li> -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#webmanage">
+                <i class="bi bi-gear"></i>
+                <p>Website Management</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="webmanage">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="mainmenu_list.html">
+                      <span class="sub-item">Main Menu</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="parentsubmenu_list.html">
+                      <span class="sub-item">Parent SubMenu</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="childsubmenu_list.html">
+                      <span class="sub-item">Child SubMenu</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="socialmedia_list.html">
+                      <span class="sub-item">Social Media Update</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="nearbyphc_list.html">
+                      <span class="sub-item">Nearby PHC</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="Partnerlogos_list.html">
+                      <span class="sub-item">Partner Logos</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="configuration_header_edit.html">
+                      <span class="sub-item">Header</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="configuration_footer_edit.html">
+                      <span class="sub-item">Footer</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- USER Management------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#usermgmt">
+                <i class="bi bi-people"></i>
+                <p>User Management</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="usermgmt">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="users_list.html">
+                      <span class="sub-item">Create</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Health Facility------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#healthfac">
+                <i class="bi bi-shield-plus"></i>
+                <p>Health Facility</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="healthfac">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="facilitymaster_list.html">
+                      <span class="sub-item">Facility Master</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <span class="sub-item">Facility Profile</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Reference Tables------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#reftable">
+                <i class="bi bi-table"></i>
+                <p>Reference Tables</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="reftable">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="userrole_list.html">
+                      <span class="sub-item">User Roles</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="designation_list.html">
+                      <span class="sub-item">Designations</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="section_list.html">
+                      <span class="sub-item">Sections</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="program_list.html">
+                      <span class="sub-item">Program Division</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="schemes_list.html">
+                      <span class="sub-item">Schemes</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!--  Hierarchy Levels ------------------ -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#hierarchylvl">
+                <i class="bi bi-diagram-2"></i>
+                <p>Hierarchy Levels</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="hierarchylvl">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="district_list.html">
+                      <span class="sub-item">District</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="hud_list.html">
+                      <span class="sub-item">HUD</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="block_list.html">
+                      <span class="sub-item">Block</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="phc_list.html">
+                      <span class="sub-item">PHC</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="hsc_list.html">
+                      <span class="sub-item">HSC</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <!-- main panel start -->
+    <div class="main-panel">
+      <!-- main panel start -->
+      <div class="main-header">
+        <div class="main-header-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="white">
+            <a href="index.html" class="logo">
+              <img src="assets/img/dphadmin/DPH_LOGO (1).png" alt="navbar brand" class="navbar-brand" height="20" />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+
+
+
+        <!-- Navbar Header -->
+        <nav
+          class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom d-flex align-items-center sticky-top">
+          <!-- navbar header start -->
+          <div class="container-fluid">
+            <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search  d-none d-lg-flex">
+              <div class="container">
+                <div class="row align-items-center">
+                  <div class="col col-lg-12 align-items-center">
+                    <h2>தமிழ்நாடு அரசு</h2>
+                    <h5>பொது சுகாதாரம் மற்றும் நோய்த் தடுப்பு மருந்துத்துறை.</h5>
+                  </div>
+                </div>
+              </div>
+
+            </nav>
+            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+              <li class="nav-item topbar-user dropdown hidden-caret">
+                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                  <div class="avatar-sm">
+                    <img src="assets/img/dphadmin/DPH_LOGO (1).png" alt="..." class="avatar-img rounded-circle" />
+                  </div>
+                  <span class="profile-username">
+                    <!-- <span class="op-7">Hi,</span> -->
+                    <span class="fw-bold">Super Admin</span>
+                  </span>
+                </a>
+                <ul class="dropdown-menu dropdown-user animated fadeIn">
+                  <div class="dropdown-user-scroll scrollbar-outer">
+                    <li>
+                      <div class="user-box">
+                        <div class="avatar-lg">
+                          <img src="assets/img/dphadmin/DPH_LOGO (1).png" alt="image profile"
+                            class="avatar-img rounded" />
+                        </div>
+                        <div class="u-text">
+                          <h4>Super Admin</h4>
+                          <p class="text-muted">hello@example.com</p>
+                          <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
+                            Profile</a>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider PY-3"></div>
+                      <a class="dropdown-item PY-3" href="#">My Profile</a>
+                      <!-- <a class="dropdown-item" href="#">My Balance</a>
+                        <a class="dropdown-item" href="#">Inbox</a> -->
+                      <!-- <div class="dropdown-divider"></div> -->
+                      <!-- <a class="dropdown-item" href="#">Account Setting</a> -->
+                      <!-- <div class="dropdown-divider"></div> -->
+                      <a class="dropdown-item PY-3" href="#">Logout</a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+            <!-- navbar header end -->
+          </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <!-- main header end -->
+      </div>
+
+      <!-- content start here -->
+
+      <div class="container" id="maincontent">
+        <div class="container-fluid p-2" style="background-color: #f2f2f2;">
+          <div class="d-flex justify-content-between align-items-center"
+            style="padding-left: 20px; padding-right: 20px;">
+            <h5 class="mb-0">Documents</h5>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb mb-0" style="background-color: #f2f2f2;">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page"> Scientific Advisory Committee</li>
+              </ol>
+            </nav>
+
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="page-inner">
+            <div class="container-fluid mt-2">
+              <div class="col-lg-12 p-5" style="background-color: #ffffff; border-radius: 10px;">
+                <!-- <form id="eventForm"> -->
+                <h4 class="card-title mb-4 text-primary">Scientific Advisory Committee</h4>
+
+                <!-- Form Structure -->
+                <div class="mt-3 mb-3 p-3" style="background-color: #f7f7f7;">
+                  <form id="ethicscommitteeform" class="mb-3">
+
+                    <div class="row mb-3">
+                      <!-- Title-->
+                      <div class="col-lg-6">
+                        <label for="Title" class="form-label">Title<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="Title" placeholder="Enter Title">
+                      </div>
+
+                      <div class="col-lg-6">
+                        <label for="eventDescription" class="form-label">Description <span
+                            style="color: red;">*</span></label>
+                        <textarea class="form-control" id="eventDescription" placeholder="Enter description"></textarea>
+                      </div>
+                    </div>
+
+                
+                    <!-- Submit Button -->
+                    <div class="d-flex justify-content-end">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+
+
+                <!-- Image Upload for Banners -->
+                <!-- banner image start=======================================================================================================-->
+                <div class="container-fluid mt-3">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="d-flex align-items-center">
+                        <h4 class="card-title">Scientific Advisory Committee Banner Images</h4>
+                        <!-- Add Banner Button -->
+                        <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
+                          data-bs-target="#addBannerModal">
+                          <i class="fa fa-plus"></i> Add
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <!-- Table Layout -->
+                        <div class="table-responsive">
+                          <table class="table table-striped table-hover">
+                            <thead>
+                              <tr>
+                                <th style="width: 10%;">Order ID</th>
+                                <th style="width: 20%;">Banner Title</th>
+                                <th style="width: 20%;">Input</th>
+                                <th style="width: 20%;">Last Update</th>
+                                <th style="width: 8%;">Status</th>
+                                <th style="width: 10%;" class="text-center">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- Banner 1 start -->
+                              <tr>
+                                <td>1</td>
+                                <td>Banner Title Name</td>
+                                <td>
+                                  <img src="assets/img/dphadmin/DPH_LOGO (1).png" alt="Logo" style="max-width: 100px;">
+                                </td>
+                                <td>09/12/2024</td>
+                                <td class="text-success" style="font-weight: bold;">Active</td>
+                                <td class="text-center">
+                                  <!-- Actions with icons -->
+                                  <div class="form-button-action">
+                                    <button type="button" class="btn btn-link btn-primary text-center"
+                                      data-bs-toggle="modal" data-bs-target="#editBannerModal"
+                                      onclick="editBanner('Banner Title 1', 'assets/img/banners/banner1.png', true)">
+                                      <i class="fa fa-edit"></i>
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                              <!-- Banner 1 end -->
+                              <!-- Repeat similar rows for additional banners -->
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- banner image end=====================================================================================================-->
+
+                <!-- modal for adding banner start -->
+                <!-- Modal Popup for Adding Banner -->
+                <div class="modal fade" id="addBannerModal" tabindex="-1" aria-labelledby="addBannerModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="addBannerModalLabel">Add New Banner</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="addBannerForm">
+
+                          <!-- Order Field -->
+                          <div class="mb-3">
+                            <label for="orderid" class="form-label">Order ID</label>
+                            <input type="number" class="form-control" id="orderid" placeholder="Enter Order Id"
+                              required>
+                          </div>
+
+                          <!-- Banner Title Field -->
+                          <div class="mb-3">
+                            <label for="bannerTitle" class="form-label">Banner Title</label>
+                            <input type="text" class="form-control" id="bannerTitle" placeholder="Enter banner title"
+                              required>
+                          </div>
+
+                          <!-- Select Image Field with Preview -->
+                          <div class="mb-3">
+                            <label for="bannerImage" class="form-label">Select Banner Image</label>
+                            <input type="file" class="form-control" id="bannerImage" accept="image/*" required
+                              onchange="previewBannerImage(event)">
+                            <small class="form-text text-danger">Accepted formats: .jpg, .jpeg, .png, max size:
+                              5MB</small>
+                          </div>
+
+                          <!-- Image Preview -->
+                          <div class="mb-3 text-center">
+                            <img id="bannerPreview" src="" alt="Image Preview"
+                              style="display:none; max-width: 100px; margin-top: 10px;" />
+                          </div>
+
+                          <!-- Status Toggle -->
+                          <div class="mb-3">
+                            <label for="bannerStatus" class="form-label">Status</label>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="bannerStatus" checked
+                                onchange="toggleStatusText('bannerStatusText', this)">
+                              <label class="form-check-label" for="bannerStatus" id="bannerStatusText">Active</label>
+                            </div>
+                          </div>
+
+                          <!-- Submit Button -->
+                          <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 10px;" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- modal for adding banner end -->
+
+                <!-- model for edit banner start -->
+                <!-- Edit Banner Modal -->
+                <div class="modal fade" id="editBannerModal" tabindex="-1" aria-labelledby="editBannerModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editBannerModalLabel">Edit Banner</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="editBannerForm">
+
+                           <!-- Order Field -->
+                           <div class="mb-3">
+                            <label for="orderid" class="form-label">Order ID</label>
+                            <input type="number" class="form-control" id="orderid" placeholder="Enter Order Id"
+                              required>
+                          </div>
+
+
+                          <!-- Banner Title -->
+                          <div class="mb-3">
+                            <label for="editBannerTitle" class="form-label">Banner Title</label>
+                            <input type="text" class="form-control" id="editBannerTitle"
+                              placeholder="Enter banner title">
+                          </div>
+
+                          <!-- Current Banner Preview -->
+                          <div class="mb-3">
+                            <label class="form-label">Current Banner</label>
+                            <img id="currentBannerPreview" src="" alt="Current Banner" style="max-width: 100px;"
+                              class="d-block mb-2">
+                          </div>
+
+                          <!-- New Banner Image Preview -->
+                          <div class="mb-3">
+                            <label for="editBannerImage" class="form-label">New Banner Image</label>
+                            <input type="file" class="form-control" id="editBannerImage"
+                              onchange="previewNewBannerImage()">
+                            <small class="text-muted">Select a new image to update.</small>
+                            <img id="newBannerPreview" src="" alt="New Banner Preview"
+                              style="max-width: 100px; display: none;" class="d-block mt-2">
+                          </div>
+
+                          <!-- Status Toggle -->
+                          <div class="mb-3">
+                            <label for="editBannerStatus" class="form-label">Status</label>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="editBannerStatus"
+                                onchange="toggleStatusText('editBannerStatusLabel', this)">
+                              <label class="form-check-label" for="editBannerStatus"
+                                id="editBannerStatusLabel">Active</label>
+                            </div>
+                          </div>
+
+                          <!-- Submit Button -->
+                          <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 10px;" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- model for edit banner end -->
+
+                <!-- member list start ============================================================================================================================ -->
+                <div class="container-fluid mt-3">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="d-flex align-items-center">
+                        <h4 class="card-title">Displayed Member</h4>
+                        <!-- Add Member Button -->
+                        <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
+                          data-bs-target="#addMemberModal">
+                          <i class="fa fa-plus"></i> Add
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <!-- Table Layout -->
+                        <div class="table-responsive">
+                          <table class="table table-striped table-hover">
+                            <thead>
+                              <tr>
+                                <th style="width: 10%;">Order ID</th>
+                                <th style="width: 20%;">Name</th>
+                                <th style="width: 20%;">Qualification</th>
+                                <th style="width: 15%;">Designation</th>
+                                <th style="width: 15%;">Status</th>
+                                <th style="width: 10%;" class="text-center">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- Member Row start -->
+                              <tr>
+                                <td>1</td>
+                                <td>Dr. T.S. Selvavinayagam</td>
+                                <td>Director of Public Health and Preventive Medicine</td>
+                                <td>Chairperson</td>
+                                <td class="text-success" style="font-weight: bold;">Active</td>
+                                <td class="text-center">
+                                  <!-- Actions with icons -->
+                                  <div class="form-button-action">
+                                    <button type="button" class="btn btn-link btn-primary text-center"
+                                      data-bs-toggle="modal" data-bs-target="#editMemberModal"
+                                      onclick="editMember('John Doe', 'M.Sc Computer Science', 'Harvard University', 'Professor', 'IEEE', true)">
+                                      <i class="fa fa-edit"></i>
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                              <!-- Member Row end -->
+                              <!-- Repeat similar rows for additional members -->
+                            </tbody>
+                          </table>
+                        </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- member list end =========================================================================================================================== -->
+
+                <!-- modal for adding member start -->
+                <div class="modal fade" id="addMemberModal" tabindex="-1" aria-labelledby="addMemberModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="addMemberModalLabel">Add New Member</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="addMemberForm">
+
+                          <!-- Order Field -->
+                          <div class="mb-3">
+                            <label for="orderid" class="form-label">Order ID</label>
+                            <input type="number" class="form-control" id="orderid" placeholder="Enter Order Id"
+                              required>
+                          </div>
+
+                          <!-- Name Field -->
+                          <div class="mb-3">
+                            <label for="memberName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="memberName" placeholder="Enter member name"
+                              required>
+                          </div>
+
+                          <!-- Qualification Field -->
+                          <div class="mb-3">
+                            <label for="memberQualification" class="form-label">Qualification</label>
+                            <input type="text" class="form-control" id="memberQualification"
+                              placeholder="Enter qualification" required>
+                          </div>
+
+
+
+                          <!-- Designation Field -->
+                          <div class="mb-3">
+                            <label for="memberDesignation" class="form-label">Designation</label>
+                            <input type="text" class="form-control" id="memberDesignation"
+                              placeholder="Enter designation" required>
+                          </div>
+
+
+
+                          <!-- Status Toggle -->
+                          <div class="mb-3">
+                            <label for="memberStatus" class="form-label">Status</label>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="memberStatus" checked
+                                onchange="toggleStatusText('memberStatusLabel', this)">
+                              <label class="form-check-label" for="memberStatus" id="memberStatusLabel">Active</label>
+                            </div>
+                          </div>
+
+                          <!-- Submit Button -->
+                          <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 10px;" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- modal for adding member end -->
+
+                <!-- modal for edit member start -->
+                <div class="modal fade" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editMemberModalLabel">Edit Member</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="editMemberForm">
+
+                          <!-- Order Field -->
+                          <div class="mb-3">
+                            <label for="orderid" class="form-label">Order ID</label>
+                            <input type="number" class="form-control" id="orderid" placeholder="Enter Order Id"
+                              required>
+                          </div>
+
+                          <!-- Name Field -->
+                          <div class="mb-3">
+                            <label for="editMemberName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editMemberName" placeholder="Enter member name">
+                          </div>
+
+                          <!-- Qualification Field -->
+                          <div class="mb-3">
+                            <label for="editMemberQualification" class="form-label">Qualification</label>
+                            <input type="text" class="form-control" id="editMemberQualification"
+                              placeholder="Enter qualification">
+                          </div>
+
+
+
+                          <!-- Designation Field -->
+                          <div class="mb-3">
+                            <label for="editMemberDesignation" class="form-label">Designation</label>
+                            <input type="text" class="form-control" id="editMemberDesignation"
+                              placeholder="Enter designation">
+                          </div>
+
+
+                          <!-- Status Toggle -->
+                          <div class="mb-3">
+                            <label for="editMemberStatus" class="form-label">Status</label>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="editMemberStatus"
+                                onchange="toggleStatusText('editMemberStatusLabel', this)">
+                              <label class="form-check-label" for="editMemberStatus"
+                                id="editMemberStatusLabel">Active</label>
+                            </div>
+                          </div>
+
+                          <!-- Submit Button -->
+                          <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 10px;" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- modal for edit member end -->
+
+                <!-- Member List Upload start ========================================================================================================= -->
+                <div class="container-fluid mt-3">
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="d-flex align-items-center">
+                        <h4 class="card-title">Member List</h4>
+                        <!-- Add Member Button -->
+                        <button class="btn btn-primary btn-round ms-auto" data-bs-toggle="modal"
+                          data-bs-target="#addMemberModal">
+                          <i class="fa fa-plus"></i> Add 
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <!-- Table Layout -->
+                        <div class="table-responsive">
+                          <table class="table table-striped table-hover">
+                            <thead>
+                              <tr>
+                                <th style="width: 10%;">Order ID</th>
+                                <th style="width: 20%;">Name</th>
+                                <th style="width: 20%;">Designation</th>
+                                <th style="width: 15%;">Status</th>
+                                <th style="width: 10%;" class="text-center">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- Member Row start -->
+                              <tr>
+                                <td>1</td>
+                                <td>Dr. A. Somasundaram</td>
+                                <td>Additional Director of Public Health and Preventive Medicine</td>
+                                <td class="text-success" style="font-weight: bold;">Active</td>
+                                <td class="text-center">
+                                  <!-- Actions with icons -->
+                                  <div class="form-button-action">
+                                    <button type="button" class="btn btn-link btn-primary text-center"
+                                      data-bs-toggle="modal" data-bs-target="#editMemberModal"
+                                      onclick="editMember('12345', 'John Doe', 'Senior Engineer', 'B.Tech IT', true)">
+                                      <i class="fa fa-edit"></i>
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                              <!-- Member Row end -->
+                            </tbody>
+                          </table>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- Modal for Adding Member -->
+                <div class="modal fade" id="addMemberModal" tabindex="-1" aria-labelledby="addMemberModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="addMemberModalLabel">Add New Member</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="addMemberForm">
+                          <!-- Order ID -->
+                          <div class="mb-3">
+                            <label for="orderId" class="form-label">Order ID</label>
+                            <input type="text" class="form-control" id="orderId" placeholder="Enter order ID" required>
+                          </div>
+
+                          <!-- Name -->
+                          <div class="mb-3">
+                            <label for="memberName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="memberName" placeholder="Enter member name"
+                              required>
+                          </div>
+
+                          <!-- Designation -->
+                          <div class="mb-3">
+                            <label for="memberDesignation" class="form-label">Designation</label>
+                            <input type="text" class="form-control" id="memberDesignation"
+                              placeholder="Enter designation" required>
+                          </div>
+
+                          <!-- Qualification -->
+                          <div class="mb-3">
+                            <label for="memberQualification" class="form-label">Qualification</label>
+                            <input type="text" class="form-control" id="memberQualification"
+                              placeholder="Enter qualification" required>
+                          </div>
+
+                          <!-- Status Toggle -->
+                          <div class="mb-3">
+                            <label for="memberStatus" class="form-label">Status</label>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="memberStatus" checked
+                                onchange="toggleStatusText('memberStatusLabel', this)">
+                              <label class="form-check-label" for="memberStatus" id="memberStatusLabel">Active</label>
+                            </div>
+                          </div>
+
+                          <!-- Submit Button -->
+                          <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 10px;" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal for Editing Member -->
+                <div class="modal fade" id="editMemberModal" tabindex="-1" aria-labelledby="editMemberModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editMemberModalLabel">Edit Member</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="editMemberForm">
+                          <!-- Order ID -->
+                          <div class="mb-3">
+                            <label for="editOrderId" class="form-label">Order ID</label>
+                            <input type="text" class="form-control" id="editOrderId" placeholder="Enter order ID">
+                          </div>
+
+                          <!-- Name -->
+                          <div class="mb-3">
+                            <label for="editMemberName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editMemberName" placeholder="Enter member name">
+                          </div>
+
+                          <!-- Designation -->
+                          <div class="mb-3">
+                            <label for="editMemberDesignation" class="form-label">Designation</label>
+                            <input type="text" class="form-control" id="editMemberDesignation"
+                              placeholder="Enter designation">
+                          </div>
+
+                          <!-- Qualification -->
+                          <div class="mb-3">
+                            <label for="editMemberQualification" class="form-label">Qualification</label>
+                            <input type="text" class="form-control" id="editMemberQualification"
+                              placeholder="Enter qualification">
+                          </div>
+
+                          <!-- Status Toggle -->
+                          <div class="mb-3">
+                            <label for="editMemberStatus" class="form-label">Status</label>
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" id="editMemberStatus"
+                                onchange="toggleStatusText('editMemberStatusLabel', this)">
+                              <label class="form-check-label" for="editMemberStatus"
+                                id="editMemberStatusLabel">Active</label>
+                            </div>
+                          </div>
+
+                          <!-- Submit Button -->
+                          <button type="submit" class="btn btn-primary">Save Changes</button>
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Buttons -->
+                <!-- <div class="d-flex mt-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-danger" style="margin-left: 10px;">Cancel</button>
+                  </div> -->
+                <!-- </form> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- database table end -->
+      </div>
+
+      <!-- content end here -->
+
+
+
+      <footer class="footer">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+          <div class="copyright">
+            <p> Copyright © 2024 <a target="_blank" href="http://tansam.org/">TANSAM</a>. All Rights
+              Reserved.Created By
+              TANSAM IT DEPARTMENT </p>
+          </div>
+
+        </div>
+      </footer>
+      <!-- main panel end -->
+    </div>
+    <!-- wrapper end -->
+  </div>
+  <!-- End Custom template -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+
+
+
+
+  <!-- Sparkline -->
+
+  <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+  <!-- jQuery Scrollbar -->
+  <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+  <!-- Chart JS -->
+  <script src="assets/js/plugin/chart.js/chart.min.js"></script>
+
+  <!-- jQuery Sparkline -->
+  <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+  <!-- Chart Circle -->
+  <script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+
+  <!-- Datatables -->
+  <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+  <!-- Bootstrap Notify -->
+  <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+  <!-- jQuery Vector Maps -->
+  <script src="assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+  <script src="assets/js/plugin/jsvectormap/world.js"></script>
+
+  <!-- Sweet Alert -->
+  <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+  <!-- DPHadmin JS -->
+  <script src="assets/js/kaiadmin.min.js"></script>
+
+  <!-- JavaScript Functions for status active and in active start-->
+  <script>
+    function toggleStatusText(labelId, checkbox) {
+      const label = document.getElementById(labelId);
+      if (checkbox.checked) {
+        label.textContent = 'Active';
+      } else {
+        label.textContent = 'Inactive';
+      }
+    }
+  </script>
+  <!-- JavaScript Functions for status active and in active start-->
+  <!-- JavaScript Function for Visible to Public Toggle start-->
+  <script>
+    function toggleVisibilityText(labelId, checkbox) {
+      const label = document.getElementById(labelId);
+      if (checkbox.checked) {
+        label.textContent = 'Yes';
+      } else {
+        label.textContent = 'No';
+      }
+    }
+  </script>
+  <!-- JavaScript Function for Visible to Public Toggle End-->
+
+  <!-- JavaScript Function for Affiliation -->
+  <script>
+    function toggleAffiliationText(labelId, checkbox) {
+      const label = document.getElementById(labelId);
+      if (checkbox.checked) {
+        label.textContent = 'Affiliated';
+      } else {
+        label.textContent = 'No Affiliation';
+      }
+    }
+  </script>
+
+
+
+
+
+</body>
+
+</html>

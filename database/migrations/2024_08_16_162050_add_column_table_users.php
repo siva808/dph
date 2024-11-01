@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnTableUsers extends Migration
+class AddColumnTableUsers  extends Migration
 {
     /**
      * Run the migrations.
@@ -31,4 +31,4 @@ class AddColumnTableUsers extends Migration
             $table->dropColumn(['user_role_id']);
         });
     }
-} 
+}

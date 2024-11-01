@@ -31,7 +31,7 @@ Route::middleware(['cors','websiteApi'])->group(function () {
     Route::post('hsc','Website\HomePageController@getHSC');
     Route::post('contacts','Website\HomePageController@getContacts');
     Route::post('divisions','Website\DivisionController@getDivisions');
-    Route::post('programs','Website\HomePageController@getPrograms');     
+    Route::post('programs','Website\HomePageController@getPrograms');
 });
 
 Route::post('contact-designations','Admin\DesignationController@listDesignations');

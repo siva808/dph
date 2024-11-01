@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\NotificationController;
 
 Auth::routes();
 Route::get('register',function(){
@@ -12,8 +13,10 @@ Route::get('password/reset',function(){
 	return redirect('/login');
 })->name('password.request');
 
+
+
 Route::middleware(['auth'])->group(function () {
-	Route::get('/change-password','Admin\PasswordController@managePassword')->name('password.manage');	
+	Route::get('/change-password','Admin\PasswordController@managePassword')->name('password.manage');
 	Route::post('/update-password','Admin\PasswordController@updatePassword')->name('password.update');
 	Route::get('/manage-user-password/{id}','Admin\PasswordController@manageUserPassword');
 	Route::get('/dashboard','Admin\DashboardController@dashboard')->name('admin.dashboard');
@@ -39,7 +42,36 @@ Route::middleware(['admin'])->group(function () {
 	Route::resource('/masters','Admin\MasterController');
 	Route::get('/huds-export','Admin\HudController@export')->name('huds.export');
 	Route::resource('/divisions', 'Admin\DivisionController');
-	
+
+   // Notifications Routes
+
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('notifications', [NotificationController::class, 'store'])->name('notifications.store');
+    Route::get('notifications/{id}/edit', [NotificationController::class, 'edit'])->name('notifications.edit');
+    Route::put('notifications/{id}', [NotificationController::class, 'update'])->name('notifications.update');
+    Route::delete('notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+
+    // Banners Routes
+    Route::get('banners', [NotificationController::class, 'index'])->name('banners.index');
+    Route::post('banners', [NotificationController::class, 'store'])->name('banners.store');
+    Route::get('banners/{id}/edit', [NotificationController::class, 'edit'])->name('banners.edit');
+    Route::put('banners/{id}', [NotificationController::class, 'update'])->name('banners.update');
+    Route::delete('banners/{id}', [NotificationController::class, 'destroy'])->name('banners.destroy');
+
+    // Members Routes
+    Route::get('members', [NotificationController::class, 'index'])->name('members.index');
+    Route::post('members', [NotificationController::class, 'store'])->name('members.store');
+    Route::get('members/{id}/edit', [NotificationController::class, 'edit'])->name('members.edit');
+    Route::put('members/{id}', [NotificationController::class, 'update'])->name('members.update');
+    Route::delete('members/{id}', [NotificationController::class, 'destroy'])->name('members.destroy');
+
+    // Certificates Routes
+    Route::get('certificates', [NotificationController::class, 'index'])->name('certificates.index');
+    Route::post('certificates', [NotificationController::class, 'store'])->name('certificates.store');
+    Route::get('certificates/{id}/edit', [NotificationController::class, 'edit'])->name('certificates.edit');
+    Route::put('certificates/{id}', [NotificationController::class, 'update'])->name('certificates.update');
+    Route::delete('certificates/{id}', [NotificationController::class, 'destroy'])->name('certificates.destroy');
+
 	Route::resource('/bulk-mailers','Admin\BulkMailerController');
 	Route::resource('/testimonials','Admin\TestimonialController');
 	Route::resource('/social-media','Admin\SocialMediaController');

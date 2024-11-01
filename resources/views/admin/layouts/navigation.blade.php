@@ -26,8 +26,8 @@
             <h4 class="text-section">Menus</h4>
           </li>
 
-          
-      
+
+
 
           <!-- dashboard------------------ -->
           <li class="nav-item">
@@ -211,6 +211,13 @@
                     <span class="sub-item">DPH ICON</span>
                   </a>
                 </li>
+                <li>
+                  <a href="{{url('/notifications')}}">
+                    <span class="sub-item">Ethics Committes
+                    </span>
+                  </a>
+                </li>
+
               </ul>
             </div>
           </li>
@@ -368,7 +375,7 @@
           <!--  Hierarchy Levels ------------------ -->
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#hierarchylvl">
-              <i class="bi bi-diagram-2"></i> 
+              <i class="bi bi-diagram-2"></i>
               <p>Hierarchy Levels</p>
               <span class="caret"></span>
             </a>
@@ -402,7 +409,7 @@
               </ul>
             </div>
           </li>
-          
+
         </ul>
       </div>
     </div>
